@@ -1,14 +1,21 @@
 package com.example.shopgroc.fragment;
 
+
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+
+import com.example.shopgroc.DashboardFragment;
 import com.example.shopgroc.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 /**
@@ -25,6 +32,8 @@ public class homeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    BottomNavigationView bottomNavigationView;
+    NavController navigationController;
 
     public homeFragment() {
         // Required empty public constructor
@@ -47,7 +56,6 @@ public class homeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +64,53 @@ public class homeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initUI(view);
+    }
+
+    private void initUI(View view) {
+        bottomNavigationView = view.findViewById(R.id.bottomNavigation);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_dashboard).setChecked(true);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        openFragment(DashboardFragment.newInstance("",""));
+    }
+    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+
+                        case R.id.navigation_search:
+                            openFragment(SearchFragment.newInstance("",""));
+                            return true;
+                        case R.id.navigation_cart:
+                            openFragment(CartFragment.newInstance("",""));
+                            return true;
+                        case R.id.navigation_dashboard:
+                            openFragment(DashboardFragment.newInstance("",""));
+                            return true;
+                        case R.id.navigation_notification:
+                            openFragment(NotificationFragment.newInstance("",""));
+                            return true;
+                        case R.id.navigation_profile:
+                            openFragment(ProfileFragment.newInstance("",""));
+                            return true;
+                    }
+                    return false;
+                }
+            };
+    public void openFragment(Fragment fragment) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }
