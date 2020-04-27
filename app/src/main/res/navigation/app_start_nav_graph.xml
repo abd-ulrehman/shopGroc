@@ -69,7 +69,8 @@
             android:id="@+id/navigation_cart"
             android:name="com.example.shopgroc.fragment.CartFragment"
             android:label="fragment_cart"
-            tools:layout="@layout/fragment_cart" />
+            tools:layout="@layout/fragment_cart">
+        </fragment>
         <fragment
             android:id="@+id/navigation_search"
             android:name="com.example.shopgroc.fragment.SearchFragment"

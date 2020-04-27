@@ -27,6 +27,24 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
         navController= Navigation.findNavController(this,R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigation, navController);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        hideBottomNavigation();
+    }
+
+    private void hideBottomNavigation() {
+        if(navController.getCurrentDestination().getId() == R.id.registrationFragment ||
+                navController.getCurrentDestination().getId() == R.id.loginFragment ||
+                navController.getCurrentDestination().getId() == R.id.landingFragment){
+            bottomNavigation.setVisibility(GONE);
+        }
+        else{
+            bottomNavigation.setVisibility(VISIBLE);
+        }
+    }
+
     @Override
     public void hideBottomNav(boolean hide) {
         bottomNavigation.setVisibility(hide? GONE:VISIBLE);

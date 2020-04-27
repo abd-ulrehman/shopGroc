@@ -20,7 +20,7 @@ import com.example.shopgroc.interfaces.ChildToParentCallback;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LandingFragment extends Fragment implements View.OnClickListener {
+public class LandingFragment extends Fragment implements View.OnClickListener, ChildToParentCallback {
 
     Button buttonSignup,buttonLogin;
     NavController navigationController;
@@ -64,5 +64,10 @@ public class LandingFragment extends Fragment implements View.OnClickListener {
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(true);
+    }
+
+    @Override
+    public void hideBottomNav(boolean hide) {
+        hideBottomNav(true);
     }
 }
