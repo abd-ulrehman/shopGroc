@@ -1,13 +1,16 @@
 package com.example.shopgroc.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.shopgroc.R;
+import com.example.shopgroc.interfaces.ChildToParentCallback;
 
 
 /**
@@ -24,6 +27,7 @@ public class SearchFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ChildToParentCallback varChildToParentCallback;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -61,5 +65,10 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
+    }
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        varChildToParentCallback = (ChildToParentCallback)context;
+        varChildToParentCallback.hideBottomNav(false);
     }
 }
