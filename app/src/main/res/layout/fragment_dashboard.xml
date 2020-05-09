@@ -1,99 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.DashboardFragment">
-    <androidx.core.widget.NestedScrollView
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <RelativeLayout
             android:id="@+id/headerView"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/colorPrimaryDark"/>
+                android:background="@color/colorPrimaryDark" />
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@android:color/white"
-                android:textSize="30dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginRight="16dp"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white"
+                android:textSize="30dp" />
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title"
-                android:paddingTop="15dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:paddingTop="15dp"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:drawableStart="@drawable/ic_search_black_24dp"
+                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/colorWhite"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
                     android:text="search what you want"
-                    android:textSize="20dp"
                     android:textColor="@color/colorWhite"
-                    android:gravity="center_vertical"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
-                    android:drawableStart="@drawable/ic_search_black_24dp"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/colorWhite"/>
+                    android:textSize="20dp" />
             </androidx.cardview.widget.CardView>
+
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerHeader"
-                android:foregroundGravity="bottom"
-                android:clipToPadding="false"
-                android:layout_below="@+id/cardSearch"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"/>
+                android:layout_height="150dp"
+                android:layout_below="@+id/cardSearch"
+                android:clipToPadding="false"
+                android:foregroundGravity="bottom" />
 
-            <include android:id="@+id/shimmerMeal"
+            <include
+                android:id="@+id/shimmerMeal"
                 layout="@layout/item_view_pager_header_shimmer" />
 
-            <TextView
-                android:id="@+id/titleCategory"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Beverages"
-                android:layout_marginTop="5dp"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_below="@+id/viewPagerHeader"/>
+                android:layout_below="@+id/viewPagerHeader">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="50dp"
-                android:layout_below="@+id/titleCategory"/>
-            <include android:id="@+id/shimmerCategory"
-                layout="@layout/item_recycler_category_shimmer" />
+                    <LinearLayout
+                        android:id="@+id/beverages"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Beverages"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:scrollbars="none" />
+
+                        <include
+                            android:id="@+id/shimmerCategory"
+                            layout="@layout/item_recycler_category_shimmer" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/drinks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Drinks"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:scrollbars="none" />
+
+                        <include
+                            android:id="@+id/shimmerCategory"
+                            layout="@layout/item_recycler_category_shimmer" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/fastFood"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Fast Food"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/titleCategory"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:scrollbars="none" />
+
+                        <include
+                            android:id="@+id/shimmerCategory"
+                            layout="@layout/item_recycler_category_shimmer" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
         </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-
+    </LinearLayout>
 </FrameLayout>
