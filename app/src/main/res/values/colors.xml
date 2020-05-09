@@ -6,4 +6,6 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
+    <color name="cart">#4CAF50</color>
+    <color name="red">#F44336</color>
 </resources>

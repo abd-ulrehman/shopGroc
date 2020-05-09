@@ -90,9 +90,18 @@
             android:id="@+id/navigation_dashboard"
             android:name="com.example.shopgroc.fragment.DashboardFragment"
             android:label="fragment_dashboard"
-            tools:layout="@layout/fragment_dashboard" />
-
+            tools:layout="@layout/fragment_dashboard" >
+            <action
+                android:id="@+id/action_navigation_dashboard_to_itemDisplayFragment"
+                app:destination="@id/itemDisplayFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/itemDisplayFragment"
+            android:name="com.example.shopgroc.fragment.ItemDisplayFragment"
+            android:label="fragment_item_display"
+            tools:layout="@layout/fragment_item_display" />
     </navigation>
+
 
 
 </navigation>

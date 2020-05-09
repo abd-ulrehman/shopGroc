@@ -71,7 +71,7 @@
 
             <include
                 android:id="@+id/shimmerMeal"
-                layout="@layout/item_view_pager_header_shimmer" />
+                layout="@layout/item_view_pager_header" />
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -109,7 +109,7 @@
 
                         <include
                             android:id="@+id/shimmerCategory"
-                            layout="@layout/item_recycler_category_shimmer" />
+                            layout="@layout/item_recycler" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -139,7 +139,7 @@
 
                         <include
                             android:id="@+id/shimmerCategory"
-                            layout="@layout/item_recycler_category_shimmer" />
+                            layout="@layout/item_recycler" />
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/fastFood"
@@ -169,7 +169,7 @@
 
                         <include
                             android:id="@+id/shimmerCategory"
-                            layout="@layout/item_recycler_category_shimmer" />
+                            layout="@layout/item_recycler" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
