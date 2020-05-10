@@ -1,10 +1,12 @@
 package com.example.shopgroc.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.shopgroc.R;
+import com.example.shopgroc.model.Product;
+
+import static com.example.shopgroc.utility.Constant.DataType.PRODUCT;
 
 
 /**
@@ -19,7 +24,7 @@ import com.example.shopgroc.R;
  * Use the {@link ItemDisplayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ItemDisplayFragment extends Fragment implements View.OnClickListener {
+public class ItemDisplayFragment extends BaseFragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,40 +34,13 @@ public class ItemDisplayFragment extends Fragment implements View.OnClickListene
     private String mParam1;
     private String mParam2;
 
-    Button btnPlus, btnNimus;
+    Button buttonPlus, buttonMinus;
     TextView counter;
     int itemCount, maxLength = 10 , minLength = 0;
+    Product product;
+    ImageView displayImage;
+    TextView textViewTitle,textViewPrice,textViewDescription;
 
-    public ItemDisplayFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ItemDisplayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ItemDisplayFragment newInstance(String param1, String param2) {
-        ItemDisplayFragment fragment = new ItemDisplayFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,15 +52,31 @@ public class ItemDisplayFragment extends Fragment implements View.OnClickListene
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        product = getProduct();
         InIt(view);
+
     }
 
     private void InIt(View view) {
-        btnNimus = view.findViewById(R.id.buttonMinus);
-        btnPlus = view.findViewById(R.id.buttonPlus);
+        displayImage = view.findViewById(R.id.displayImage);
+        textViewTitle = view.findViewById(R.id.textViewTitle);
+        textViewPrice = view.findViewById(R.id.textViewPrice);
+        textViewDescription = view.findViewById(R.id.textViewDescription);
+
+        buttonMinus = view.findViewById(R.id.buttonMinus);
+        buttonPlus = view.findViewById(R.id.buttonPlus);
         counter = view.findViewById(R.id.itemCount);
-        btnPlus.setOnClickListener(this);
-        btnNimus.setOnClickListener(this);
+
+        if(product == null)return;
+        Drawable drawable = view.getContext().getResources().getDrawable(product.getImage());
+
+        displayImage.setImageDrawable(drawable);
+        textViewTitle.setText(product.getTitle());
+        textViewPrice.setText(product.getPrice()+" Pkr");
+        textViewDescription.setText(product.getDescription());
+
+        buttonPlus.setOnClickListener(this);
+        buttonMinus.setOnClickListener(this);
 
     }
 
@@ -103,5 +97,8 @@ public class ItemDisplayFragment extends Fragment implements View.OnClickListene
                 counter.setText(Integer.toString(itemCount));
             }
         }
+    }
+    public Product getProduct(){
+        return (Product) getBundle().getSerializable(PRODUCT);
     }
 }

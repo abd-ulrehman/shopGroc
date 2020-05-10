@@ -27,6 +27,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:id="@+id/displayImage"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/cup_cake" />
 
@@ -38,6 +39,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/textViewTitle"
                     android:layout_marginTop="10dp"
                     android:text="Cup Cake"
                     android:textColor="@color/colorPrimaryDark"
@@ -46,16 +48,38 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/textViewPrice"
                     android:layout_marginTop="5dp"
                     android:gravity="end"
                     android:text="120 PKR"
                     android:textColor="@color/colorPrimary" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:paddingRight="4dp"
+                    android:paddingLeft="4dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Brand Name" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:id="@+id/textViewDescription"
                 android:inputType="textMultiLine"
                 android:text="Description Here, This is Cup Cake, Most Favorite Cup Cake on the earth. " />
 

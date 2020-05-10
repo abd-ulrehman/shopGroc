@@ -21,7 +21,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="160dp"
                 android:background="@color/colorPrimaryDark" />
 
             <TextView
@@ -35,37 +35,11 @@
                 android:textColor="@android:color/white"
                 android:textSize="30dp" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:paddingTop="15dp"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="0dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:drawableStart="@drawable/ic_search_black_24dp"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/colorWhite"
-                    android:gravity="center_vertical"
-                    android:padding="10dp"
-                    android:text="search what you want"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="20dp" />
-            </androidx.cardview.widget.CardView>
-
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerHeader"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_below="@+id/cardSearch"
+                android:layout_below="@+id/title"
                 android:clipToPadding="false"
                 android:foregroundGravity="bottom" />
 
@@ -103,13 +77,14 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:id="@+id/recyclerViewBeverages"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:scrollbars="none" />
 
-                        <include
-                            android:id="@+id/shimmerCategory"
-                            layout="@layout/item_recycler" />
+<!--                        <include-->
+<!--                            android:id="@+id/shimmerCategory"-->
+<!--                            layout="@layout/item_recycler" />-->
                     </LinearLayout>
 
                     <LinearLayout
