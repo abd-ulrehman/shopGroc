@@ -65,4 +65,7 @@ public class SharedUtility {
         return  null;
     }
 
+    public void logout(){
+        editor.clear().commit();
+    }
 }
