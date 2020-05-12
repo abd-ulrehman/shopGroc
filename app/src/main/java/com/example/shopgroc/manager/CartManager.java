@@ -8,6 +8,7 @@ import java.util.List;
 public class CartManager {
     private static CartManager instance = null;
     private List<CartItem> cartItemList = new ArrayList<>();
+    private CartListener cartListener=null;
 
     private CartManager(){}
     public static CartManager getInstance(){
@@ -26,6 +27,8 @@ public class CartManager {
                 break;
             }
         }
+
+        if (cartItemList.isEmpty()) cartListener.onCartEmpty();
     }
     public void updateItem(CartItem item){
         for(int i=0;i<cartItemList.size(); i++){
@@ -40,5 +43,22 @@ public class CartManager {
     }
     public int getCartItemCount(){
         return cartItemList.size();
+    }
+    public boolean hasItem(CartItem item){
+        for(int i=0;i<cartItemList.size(); i++){
+            if(item.getProduct().getId() == cartItemList.get(i).getProduct().getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setCartListener(CartListener cartListener){
+        this.cartListener=cartListener;
+    }
+
+    public interface CartListener{
+        public void onCartEmpty();
+        public void onCartHasData();
     }
 }

@@ -2,6 +2,7 @@ package com.example.shopgroc.fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,35 +12,28 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.shopgroc.R;
+import com.example.shopgroc.manager.CartManager;
+import com.example.shopgroc.model.CartItem;
 import com.example.shopgroc.model.Product;
 
 import static com.example.shopgroc.utility.Constant.DataType.PRODUCT;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link ItemDisplayFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @author  Abdul Rehman
  */
 public class ItemDisplayFragment extends BaseFragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "ItemDisplayFragment";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    Button buttonPlus, buttonMinus;
+    Button buttonPlus, buttonMinus, buttonAddToCart;
     TextView counter;
-    int itemCount, maxLength = 10 , minLength = 0;
+    int itemCount=0, maxLength = 10 , minLength = 0;
     Product product;
     ImageView displayImage;
     TextView textViewTitle,textViewPrice,textViewDescription;
+    CartManager cartManager = CartManager.getInstance();
 
 
     @Override
@@ -66,6 +60,7 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
         buttonMinus = view.findViewById(R.id.buttonMinus);
         buttonPlus = view.findViewById(R.id.buttonPlus);
         counter = view.findViewById(R.id.itemCount);
+        buttonAddToCart = view.findViewById(R.id.buttonAddToCart);
 
         if(product == null)return;
         Drawable drawable = view.getContext().getResources().getDrawable(product.getImage());
@@ -77,6 +72,7 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
 
         buttonPlus.setOnClickListener(this);
         buttonMinus.setOnClickListener(this);
+        buttonAddToCart.setOnClickListener(this);
 
     }
 
@@ -96,6 +92,13 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
                 itemCount = itemCount - 1;
                 counter.setText(Integer.toString(itemCount));
             }
+        }
+        else if(id==R.id.buttonAddToCart){
+            if(itemCount<=0)return;
+            Log.i(TAG,"Item Count is: " + itemCount);
+            CartItem item = new CartItem(product,itemCount);
+            if(cartManager.hasItem(item))cartManager.updateItem(item);
+            else cartManager.addToCart(item);
         }
     }
     public Product getProduct(){
