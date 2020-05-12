@@ -15,6 +15,12 @@ import androidx.navigation.Navigation;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
+import com.example.shopgroc.model.User;
+import com.example.shopgroc.utility.SharedUtility;
+import com.google.android.material.textfield.TextInputEditText;
+
+import static com.example.shopgroc.utility.Constant.Messege.EMPTY_EMAIL_ERROR;
+import static com.example.shopgroc.utility.Constant.Messege.EMPTY_PASSWORD_ERROR;
 
 
 /**
@@ -26,10 +32,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     NavController navigationController;
     ChildToParentCallback varChildToParentCallback;
 
-    public LoginFragment() {
-        // Required empty public constructor
-    }
-
+    TextInputEditText textViewEmail,textViewPassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initUI(View view) {
+        textViewEmail = view.findViewById(R.id.textViewEmail);
+        textViewPassword = view.findViewById(R.id.textViewPassword);
         loginButton = view.findViewById(R.id.buttonLogin);
         navigationController = Navigation.findNavController(view);
         loginButton.setOnClickListener(this);
@@ -54,6 +59,35 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if(id==R.id.buttonLogin){
+
+            String email=null;
+            String password=null;
+
+            if (textViewEmail.getText()==null){
+                textViewEmail.setError(EMPTY_EMAIL_ERROR);
+                return;
+            }
+
+            if (textViewPassword.getText()==null){
+                textViewPassword.setError(EMPTY_PASSWORD_ERROR);
+                return;
+            }
+
+            if (textViewEmail.getText().toString().isEmpty()){
+                textViewEmail.setError(EMPTY_EMAIL_ERROR);
+                return;
+            }
+
+            if (textViewPassword.getText().toString().isEmpty()){
+                textViewPassword.setError(EMPTY_PASSWORD_ERROR);
+                return;
+            }
+
+            email=textViewEmail.getText().toString();
+            password=textViewPassword.getText().toString();
+
+            SharedUtility.getInstance(v.getContext()).setUser(new User("ABdrf","Abdul Rehman",email,"+92123456789","Fortabbas"));
+
             navigationController.navigate(R.id.action_loginFragment_to_homeScreenNavigation);
         }
     }

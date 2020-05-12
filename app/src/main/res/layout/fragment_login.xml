@@ -31,7 +31,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userEmail"
+                android:id="@+id/textViewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
@@ -55,7 +55,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userPassword"
+                android:id="@+id/textViewPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"

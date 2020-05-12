@@ -38,28 +38,6 @@
             android:id="@+id/action_registrationFragment_to_homeScreenNavigation"
             app:destination="@id/homeScreenNavigation" />
     </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/homeFragment"-->
-<!--        android:name="com.example.shopgroc.fragment.homeFragment"-->
-<!--        android:label="fragment_home"-->
-<!--        tools:layout="@layout/fragment_home"-->
-<!--        app:startDestination="@id/action_homeFragment_to_dashboardFragment">-->
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_cartFragment"-->
-<!--            app:destination="@id/navigation_cart" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_searchFragment"-->
-<!--            app:destination="@id/navigation_search" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_notificationFragment"-->
-<!--            app:destination="@id/navigation_notification" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_profileFragment"-->
-<!--            app:destination="@id/navigation_profile" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_dashboardFragment"-->
-<!--            app:destination="@id/dashboardFragment" />-->
-<!--    </fragment>-->
 
     <navigation
         android:id="@+id/homeScreenNavigation"
