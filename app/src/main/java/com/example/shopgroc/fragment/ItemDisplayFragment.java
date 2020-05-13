@@ -8,16 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.manager.CartManager;
 import com.example.shopgroc.model.CartItem;
 import com.example.shopgroc.model.Product;
 
+import static com.example.shopgroc.utility.Constant.DataType.CART_ITEM;
 import static com.example.shopgroc.utility.Constant.DataType.PRODUCT;
 
 
@@ -27,13 +30,16 @@ import static com.example.shopgroc.utility.Constant.DataType.PRODUCT;
 public class ItemDisplayFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "ItemDisplayFragment";
 
-    Button buttonPlus, buttonMinus, buttonAddToCart;
+    Button buttonPlus, buttonMinus, buttonAddToCart,buttonShopNow, buttonUpdateCart;
     TextView counter;
     int itemCount=0, maxLength = 10 , minLength = 0;
     Product product;
     ImageView displayImage;
     TextView textViewTitle,textViewPrice,textViewDescription;
     CartManager cartManager = CartManager.getInstance();
+    CartItem cartItem;
+    LinearLayout cartButtonContainer;
+    boolean updateButtonVisibility=false;
 
 
     @Override
@@ -47,23 +53,39 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         product = getProduct();
+        if (product==null){
+            cartItem = getCartItem();
+            product=cartItem.getProduct();
+            updateButtonVisibility=getUpdateButtonVisibility();
+        }
         InIt(view);
 
     }
+
 
     private void InIt(View view) {
         displayImage = view.findViewById(R.id.displayImage);
         textViewTitle = view.findViewById(R.id.textViewTitle);
         textViewPrice = view.findViewById(R.id.textViewPrice);
         textViewDescription = view.findViewById(R.id.textViewDescription);
+        buttonUpdateCart = view.findViewById(R.id.buttonUpdateCart);
 
         buttonMinus = view.findViewById(R.id.buttonMinus);
         buttonPlus = view.findViewById(R.id.buttonPlus);
         counter = view.findViewById(R.id.itemCount);
         buttonAddToCart = view.findViewById(R.id.buttonAddToCart);
+        buttonShopNow = view.findViewById(R.id.btnShopNow);
+        cartButtonContainer = view.findViewById(R.id.cartDisplayButtons);
+
+        setButtonVisibility(updateButtonVisibility);
 
         if(product == null)return;
         Drawable drawable = view.getContext().getResources().getDrawable(product.getImage());
+
+        if (cartItem!=null){
+            itemCount=cartItem.getQuantity();
+            counter.setText(""+itemCount);
+        }
 
         displayImage.setImageDrawable(drawable);
         textViewTitle.setText(product.getTitle());
@@ -73,7 +95,7 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
         buttonPlus.setOnClickListener(this);
         buttonMinus.setOnClickListener(this);
         buttonAddToCart.setOnClickListener(this);
-
+        buttonUpdateCart.setOnClickListener(this);
     }
 
     @Override
@@ -100,8 +122,25 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
             if(cartManager.hasItem(item))cartManager.updateItem(item);
             else cartManager.addToCart(item);
         }
+        else if(id==R.id.buttonUpdateCart){
+            cartItem.setQuantity(itemCount);
+            cartManager.updateItem(cartItem);
+            Navigation.findNavController(v).navigate(R.id.action_itemDisplayFragment_to_navigation_cart);
+        }
     }
-    public Product getProduct(){
+    private void setButtonVisibility(boolean shouldShowUpdateButton){
+        cartButtonContainer.setVisibility(shouldShowUpdateButton?View.GONE:View.VISIBLE);
+        buttonUpdateCart.setVisibility(shouldShowUpdateButton?View.VISIBLE:View.GONE);
+    }
+
+    private Product getProduct(){
         return (Product) getBundle().getSerializable(PRODUCT);
+    }
+    private CartItem getCartItem() {
+        return (CartItem) getBundle().getSerializable(CART_ITEM);
+    }
+
+    private boolean getUpdateButtonVisibility() {
+        return getBundle().getBoolean("updateButtonVisibility",false);
     }
 }

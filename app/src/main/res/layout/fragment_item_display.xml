@@ -137,8 +137,18 @@
         android:layout_marginRight="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonUpdateCart"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:visibility="gone"
+            android:text="Update"/>
+
 
         <LinearLayout
+            android:id="@+id/cartDisplayButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"

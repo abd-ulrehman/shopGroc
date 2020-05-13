@@ -19,6 +19,8 @@ public class CartManager {
     }
     public void addToCart(CartItem item){
         cartItemList.add(item);
+
+        if (cartListener!=null) cartListener.onCartHasData();
     }
     public void removeItem(CartItem item){
         for(int i=0; i<cartItemList.size(); i++){
@@ -29,6 +31,7 @@ public class CartManager {
         }
 
         if (cartItemList.isEmpty()) cartListener.onCartEmpty();
+        else cartListener.onCartHasData();
     }
     public void updateItem(CartItem item){
         for(int i=0;i<cartItemList.size(); i++){

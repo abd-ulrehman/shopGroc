@@ -4,6 +4,7 @@ public class Constant {
     public static class DataType{
         public static final String BUNDLE = "bundle";
         public static final String PRODUCT = "product";
+        public static final String CART_ITEM = "cartItem";
     }
 
     public static class SharedPrefKey{

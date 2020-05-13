@@ -2,6 +2,7 @@ package com.example.shopgroc.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
@@ -19,16 +22,20 @@ import com.example.shopgroc.model.CartItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.shopgroc.utility.Constant.DataType.CART_ITEM;
+
 public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<CartItem> cartItemList = new ArrayList<>();
-
-
+    CartManager cartManager;
+    NavController navController;
 
     public class CartViewHolder extends RecyclerView.ViewHolder{
 
         CardView itemCardView;
         ImageView itemDisplayImage;
         TextView textViewTitle , textViewQuantity , buttonRemoveItem , buttonEditItem , textViewPrice;
+
+
 
         public CartViewHolder(@NonNull View view) {
             super(view);
@@ -67,6 +74,17 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     setCartItemList(CartManager.getInstance().getItemList());
                 }
             });
+            cartViewHolder.buttonEditItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    cartManager.updateItem(cartItem);
+//                    setCartItemList(CartManager.getInstance().getItemList());
+                    Bundle bundle=new Bundle();
+                    bundle.putBoolean("updateButtonVisibility",true);
+                    bundle.putSerializable(CART_ITEM,cartItem);
+                    Navigation.findNavController(v).navigate(R.id.action_navigation_cart_to_itemDisplayFragment,bundle);
+                }
+            });
         }
     }
     @Override
@@ -76,7 +94,6 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public List<CartItem> getCartItemList() {
         return cartItemList;
     }
-
     public void setCartItemList(List<CartItem> cartItemList) {
         this.cartItemList = cartItemList;
         notifyDataSetChanged();

@@ -48,6 +48,9 @@
             android:name="com.example.shopgroc.fragment.CartFragment"
             android:label="fragment_cart"
             tools:layout="@layout/fragment_cart">
+            <action
+                android:id="@+id/action_navigation_cart_to_itemDisplayFragment"
+                app:destination="@id/itemDisplayFragment" />
         </fragment>
         <fragment
             android:id="@+id/navigation_search"
@@ -63,7 +66,11 @@
             android:id="@+id/navigation_profile"
             android:name="com.example.shopgroc.fragment.ProfileFragment"
             android:label="fragment_profile"
-            tools:layout="@layout/fragment_profile" />
+            tools:layout="@layout/fragment_profile" >
+            <action
+                android:id="@+id/action_navigation_profile_to_LoginFragment"
+                app:destination="@+id/loginFragment" />
+        </fragment>
         <fragment
             android:id="@+id/navigation_dashboard"
             android:name="com.example.shopgroc.fragment.DashboardFragment"
@@ -77,7 +84,11 @@
             android:id="@+id/itemDisplayFragment"
             android:name="com.example.shopgroc.fragment.ItemDisplayFragment"
             android:label="fragment_item_display"
-            tools:layout="@layout/fragment_item_display" />
+            tools:layout="@layout/fragment_item_display" >
+            <action
+                android:id="@+id/action_itemDisplayFragment_to_navigation_cart"
+                app:destination="@id/navigation_cart" />
+        </fragment>
     </navigation>
 
 
