@@ -9,6 +9,7 @@ import static com.example.shopgroc.utility.Constant.SharedPrefKey.PREF_NAME;
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.USER_ADDRESS;
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.USER_EMAIL;
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.USER_ID;
+import static com.example.shopgroc.utility.Constant.SharedPrefKey.USER_IMAGE;
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.USER_NAME;
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.USER_PHONE;
 
@@ -46,6 +47,7 @@ public class SharedUtility {
         editor.putString(USER_EMAIL,user.getEmail());
         editor.putString(USER_PHONE,user.getPhone());
         editor.putString(USER_ADDRESS,user.getAddress());
+        editor.putInt(USER_IMAGE,user.getImage());
 
         editor.commit();
 
@@ -57,9 +59,10 @@ public class SharedUtility {
         String userEmail=pref.getString(USER_EMAIL,null);
         String userPhone=pref.getString(USER_PHONE,null);
         String userAddress=pref.getString(USER_ADDRESS,null);
+        int userImage=pref.getInt(USER_IMAGE,0);
 
         if (id!=null && !id.isEmpty() && userEmail!=null && !userEmail.isEmpty()){
-            return new User(id,userName,userEmail,userPhone,userAddress);
+            return new User(id,userName,userEmail,userPhone,userAddress,userImage);
         }
 
         return  null;

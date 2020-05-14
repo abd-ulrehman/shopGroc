@@ -1,20 +1,24 @@
 package com.example.shopgroc.fragment;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
+import com.example.shopgroc.model.User;
 import com.example.shopgroc.utility.SharedUtility;
 
 
@@ -23,8 +27,11 @@ import com.example.shopgroc.utility.SharedUtility;
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     ChildToParentCallback varChildToParentCallback;
-    TextView buttonLogout;
+    TextView buttonLogout, userName;
     NavController navController;
+    SharedUtility sharedUtility;
+    User user;
+    ImageView userImage;
 
 
     @Override
@@ -42,6 +49,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        sharedUtility = SharedUtility.getInstance(view.getContext());
+        user = sharedUtility.getUser();
         InIt(view);
     }
 
@@ -49,6 +58,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         buttonLogout = view.findViewById(R.id.logout);
         buttonLogout.setOnClickListener(this);
         navController = Navigation.findNavController(view);
+        userName = view.findViewById(R.id.userName);
+        userImage = view.findViewById(R.id.userImage);
+
+        userName.setText(user.getName());
+
+        if(user.getImage()!=0){
+            int drawableId = user.getImage();
+            Drawable drawable = ContextCompat.getDrawable(view.getContext(),drawableId);
+            userImage.setImageDrawable(drawable);
+        }
     }
 
     @Override

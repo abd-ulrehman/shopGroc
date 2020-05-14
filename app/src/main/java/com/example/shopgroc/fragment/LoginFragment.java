@@ -86,7 +86,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             email=textViewEmail.getText().toString();
             password=textViewPassword.getText().toString();
 
-            SharedUtility.getInstance(v.getContext()).setUser(new User("ABdrf","Abdul Rehman",email,"+92123456789","Fortabbas"));
+            SharedUtility.getInstance(v.getContext()).setUser(new User("ABdrf","Abdul Rehman",email,"+92123456789","Fortabbas",R.drawable.abdul));
 
             navigationController.navigate(R.id.action_loginFragment_to_homeScreenNavigation);
         }

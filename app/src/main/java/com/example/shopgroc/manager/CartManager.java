@@ -9,6 +9,7 @@ public class CartManager {
     private static CartManager instance = null;
     private List<CartItem> cartItemList = new ArrayList<>();
     private CartListener cartListener=null;
+    private CartItemCountListener cartItemCountListener;
 
     private CartManager(){}
     public static CartManager getInstance(){
@@ -21,6 +22,7 @@ public class CartManager {
         cartItemList.add(item);
 
         if (cartListener!=null) cartListener.onCartHasData();
+        if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
     }
     public void removeItem(CartItem item){
         for(int i=0; i<cartItemList.size(); i++){
@@ -32,6 +34,7 @@ public class CartManager {
 
         if (cartItemList.isEmpty()) cartListener.onCartEmpty();
         else cartListener.onCartHasData();
+        if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
     }
     public void updateItem(CartItem item){
         for(int i=0;i<cartItemList.size(); i++){
@@ -40,6 +43,7 @@ public class CartManager {
                 break;
             }
         }
+        if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
     }
     public List<CartItem> getItemList(){
         return cartItemList;
@@ -59,9 +63,13 @@ public class CartManager {
     public void setCartListener(CartListener cartListener){
         this.cartListener=cartListener;
     }
+    public void setCartItemCountListener(CartItemCountListener cartItemCountListener){this.cartItemCountListener = cartItemCountListener;}
 
     public interface CartListener{
         public void onCartEmpty();
         public void onCartHasData();
+    }
+    public interface CartItemCountListener{
+        public void onCountUpdate(int itemCount);
     }
 }
