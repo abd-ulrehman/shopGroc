@@ -47,7 +47,7 @@ public class SharedUtility {
         editor.putString(USER_EMAIL,user.getEmail());
         editor.putString(USER_PHONE,user.getPhone());
         editor.putString(USER_ADDRESS,user.getAddress());
-        editor.putInt(USER_IMAGE,user.getImage());
+        editor.putString(USER_IMAGE,user.getImage());
 
         editor.commit();
 
@@ -59,7 +59,7 @@ public class SharedUtility {
         String userEmail=pref.getString(USER_EMAIL,null);
         String userPhone=pref.getString(USER_PHONE,null);
         String userAddress=pref.getString(USER_ADDRESS,null);
-        int userImage=pref.getInt(USER_IMAGE,0);
+        String userImage=pref.getString(USER_IMAGE,null);
 
         if (id!=null && !id.isEmpty() && userEmail!=null && !userEmail.isEmpty()){
             return new User(id,userName,userEmail,userPhone,userAddress,userImage);

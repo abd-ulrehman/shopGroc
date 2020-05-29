@@ -1,24 +1,21 @@
-package com.example.shopgroc.fragment;
+package com.example.shopgroc.fragment.rider;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.shopgroc.R;
-import com.example.shopgroc.interfaces.ChildToParentCallback;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
+ * Use the {@link RiderSignupFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment {
+public class RiderSignupFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,9 +24,8 @@ public class SearchFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ChildToParentCallback varChildToParentCallback;
 
-    public SearchFragment() {
+    public RiderSignupFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +35,11 @@ public class SearchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
+     * @return A new instance of fragment RiderSignupFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
+    public static RiderSignupFragment newInstance(String param1, String param2) {
+        RiderSignupFragment fragment = new RiderSignupFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,11 +60,6 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
-    }
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        varChildToParentCallback = (ChildToParentCallback)context;
-        varChildToParentCallback.hideBottomNav(false);
+        return inflater.inflate(R.layout.fragment_rider_signup, container, false);
     }
 }

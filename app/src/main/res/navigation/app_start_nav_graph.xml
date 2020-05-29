@@ -16,10 +16,22 @@
         <action
             android:id="@+id/action_landingFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_landingFragment_self"
+            app:destination="@id/landingFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_storeLoginFragment2"
+            app:destination="@id/storeLoginFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_storeLoginFragment"
+            app:destination="@id/storeLoginFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_riderLoginFragment"
+            app:destination="@id/riderLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.shopgroc.fragment.LoginFragment"
+        android:name="com.example.shopgroc.fragment.user.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -31,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.shopgroc.fragment.RegistrationFragment"
+        android:name="com.example.shopgroc.fragment.user.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -45,7 +57,7 @@
 
         <fragment
             android:id="@+id/navigation_cart"
-            android:name="com.example.shopgroc.fragment.CartFragment"
+            android:name="com.example.shopgroc.fragment.user.CartFragment"
             android:label="fragment_cart"
             tools:layout="@layout/fragment_cart">
             <action
@@ -54,17 +66,17 @@
         </fragment>
         <fragment
             android:id="@+id/navigation_search"
-            android:name="com.example.shopgroc.fragment.SearchFragment"
+            android:name="com.example.shopgroc.fragment.user.SearchFragment"
             android:label="fragment_search"
             tools:layout="@layout/fragment_search" />
         <fragment
             android:id="@+id/navigation_notification"
-            android:name="com.example.shopgroc.fragment.NotificationFragment"
+            android:name="com.example.shopgroc.fragment.user.NotificationFragment"
             android:label="fragment_notification"
             tools:layout="@layout/fragment_notification" />
         <fragment
             android:id="@+id/navigation_profile"
-            android:name="com.example.shopgroc.fragment.ProfileFragment"
+            android:name="com.example.shopgroc.fragment.user.ProfileFragment"
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile" >
             <action
@@ -73,7 +85,7 @@
         </fragment>
         <fragment
             android:id="@+id/navigation_dashboard"
-            android:name="com.example.shopgroc.fragment.DashboardFragment"
+            android:name="com.example.shopgroc.fragment.user.DashboardFragment"
             android:label="fragment_dashboard"
             tools:layout="@layout/fragment_dashboard" >
             <action
@@ -82,7 +94,7 @@
         </fragment>
         <fragment
             android:id="@+id/itemDisplayFragment"
-            android:name="com.example.shopgroc.fragment.ItemDisplayFragment"
+            android:name="com.example.shopgroc.fragment.user.ItemDisplayFragment"
             android:label="fragment_item_display"
             tools:layout="@layout/fragment_item_display" >
             <action
@@ -90,7 +102,63 @@
                 app:destination="@id/navigation_cart" />
         </fragment>
     </navigation>
+    <fragment
+        android:id="@+id/storeLoginFragment"
+        android:name="com.example.shopgroc.fragment.store.storeLoginFragment"
+        android:label="fragment_store_login"
+        tools:layout="@layout/fragment_store_login" >
+        <action
+            android:id="@+id/action_storeLoginFragment_to_StoreHomeScreenNavigation"
+            app:destination="@id/StoreHomeScreenNavigation" />
+    </fragment>
+    <navigation
+        android:id="@+id/StoreHomeScreenNavigation"
+        app:startDestination="@id/storeDashboard">
+
+        <fragment
+            android:id="@+id/storeDashboard"
+            android:name="com.example.shopgroc.fragment.store.storeDashboard"
+            android:label="fragment_store_dashboard"
+            tools:layout="@layout/fragment_store_dashboard" >
+            <action
+                android:id="@+id/action_storeDashboard_to_addItemToStore"
+                app:destination="@id/addItemToStore" />
+        </fragment>
+        <fragment
+            android:id="@+id/addItemToStore"
+            android:name="com.example.shopgroc.fragment.store.addItemToStore"
+            android:label="fragment_add_item_to_store"
+            tools:layout="@layout/fragment_add_item_to_store" >
+            <action
+                android:id="@+id/action_addItemToStore_to_storeDashboard"
+                app:destination="@id/storeDashboard" />
+        </fragment>
+    </navigation>
 
 
+    <fragment
+        android:id="@+id/riderLoginFragment"
+        android:name="com.example.shopgroc.fragment.rider.RiderLoginFragment"
+        android:label="fragment_rider_login"
+        tools:layout="@layout/fragment_rider_login" >
+        <action
+            android:id="@+id/action_riderLoginFragment_to_riderSignupFragment"
+            app:destination="@id/riderSignupFragment" />
+        <action
+            android:id="@+id/action_riderLoginFragment_to_riderHomeScreenNavigation"
+            app:destination="@id/riderHomeScreenNavigation" />
+    </fragment>
+    <fragment
+        android:id="@+id/riderSignupFragment"
+        android:name="com.example.shopgroc.fragment.rider.RiderSignupFragment"
+        android:label="fragment_rider_signup"
+        tools:layout="@layout/fragment_rider_signup" >
+        <action
+            android:id="@+id/action_riderSignupFragment_to_riderHomeScreenNavigation"
+            app:destination="@id/riderHomeScreenNavigation" />
+    </fragment>
+    <navigation
+        android:id="@+id/riderHomeScreenNavigation">
 
+    </navigation>
 </navigation>

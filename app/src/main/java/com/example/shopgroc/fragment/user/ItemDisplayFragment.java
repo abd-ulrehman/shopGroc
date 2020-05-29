@@ -1,4 +1,4 @@
-package com.example.shopgroc.fragment;
+package com.example.shopgroc.fragment.user;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

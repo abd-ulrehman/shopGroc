@@ -1,4 +1,4 @@
-package com.example.shopgroc.fragment;
+package com.example.shopgroc.fragment.user;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -33,9 +33,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     LinearLayout itemCardView;
     NavController navigationController;
     ChildToParentCallback varChildToParentCallback;
-    RecyclerView recyclerViewBeverages;
-    ProductAdapter productAdapterBeverages,productAdapterHouseHolds,productAdapterGrocery;
-    LinearLayoutManager linearLayoutManagerBeverages;
+    RecyclerView recyclerViewBeverages, recyclerViewDrinks;
+    ProductAdapter productAdapterBeverages,productAdapterHouseHolds,productAdapterGrocery,productAdapterDrinks;
+    LinearLayoutManager linearLayoutManagerBeverages, linearLayoutManagerDrinks;
 //    private List<Product> productList = new ArrayList<>();
     int[] imageList = {R.drawable.cup_cake,R.drawable.drink_3,R.drawable.drink_pepsi,R.drawable.food_burger};
     String[] title = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
@@ -68,11 +68,17 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         navigationController = Navigation.findNavController(view);
         itemCardView.setOnClickListener(this);
         recyclerViewBeverages = view.findViewById(R.id.recyclerViewBeverages);
+        recyclerViewDrinks = view.findViewById(R.id.recyclerViewDrinks);
         linearLayoutManagerBeverages = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerDrinks = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         productAdapterBeverages = new ProductAdapter();
+        productAdapterDrinks = new ProductAdapter();
         productAdapterBeverages.setProductList(getProductList());
+        productAdapterDrinks.setProductList(getProductList());
         recyclerViewBeverages.setLayoutManager(linearLayoutManagerBeverages);
+        recyclerViewDrinks.setLayoutManager(linearLayoutManagerDrinks);
         recyclerViewBeverages.setAdapter(productAdapterBeverages);
+        recyclerViewDrinks.setAdapter(productAdapterDrinks);
     }
 
     private List<Product> getProductList(){
@@ -88,5 +94,4 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         navigationController.navigate(R.id.action_navigation_dashboard_to_itemDisplayFragment);
     }
-
 }

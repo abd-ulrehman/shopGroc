@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragment.user.RegistrationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.rider.RiderSignupFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +26,14 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="40dp" />
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -44,7 +51,7 @@
             app:hintTextColor="@android:color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fullName"
+                android:id="@+id/riderFullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -68,7 +75,7 @@
             app:hintTextColor="@android:color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userEmail"
+                android:id="@+id/riderEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -92,7 +99,73 @@
             app:hintTextColor="@android:color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userPhone"
+                android:id="@+id/riderPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@android:color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="CNIC e.g(3123456789012)"
+            android:textColorHint="@android:color/black"
+            app:boxStrokeColor="@color/colorPrimaryDark"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:counterTextColor="@android:color/black"
+            app:errorEnabled="true"
+            app:hintTextColor="@android:color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/riderCNIC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@android:color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="Licence"
+            android:textColorHint="@android:color/black"
+            app:boxStrokeColor="@color/colorPrimaryDark"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:counterTextColor="@android:color/black"
+            app:errorEnabled="true"
+            app:hintTextColor="@android:color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/riderLicence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@android:color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="Vehicle No"
+            android:textColorHint="@android:color/black"
+            app:boxStrokeColor="@color/colorPrimaryDark"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:counterTextColor="@android:color/black"
+            app:errorEnabled="true"
+            app:hintTextColor="@android:color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/riderVehicleNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -104,7 +177,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
             android:layout_marginRight="16dp"
             android:hint="Address"
             android:textColorHint="@android:color/black"
@@ -116,7 +188,7 @@
             app:hintTextColor="@android:color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userAddress"
+                android:id="@+id/riderAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -140,7 +212,7 @@
             app:hintTextColor="@android:color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userPassword"
+                android:id="@+id/riderPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -159,9 +231,10 @@
             android:text="Register"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+            </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 
-    <include layout="@layout/in_progress_view"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

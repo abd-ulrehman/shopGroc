@@ -1,4 +1,4 @@
-package com.example.shopgroc.fragment;
+package com.example.shopgroc.fragment.user;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -61,12 +61,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         userName = view.findViewById(R.id.userName);
         userImage = view.findViewById(R.id.userImage);
 
-        userName.setText(user.getName());
+        if (user!=null) {
+            userName.setText(user.getName());
 
-        if(user.getImage()!=0){
-            int drawableId = user.getImage();
-            Drawable drawable = ContextCompat.getDrawable(view.getContext(),drawableId);
-            userImage.setImageDrawable(drawable);
+            if (user.getImage() != null) {
+
+            }else {
+                Drawable drawable = ContextCompat.getDrawable(view.getContext(), R.drawable.abdul);
+                userImage.setImageDrawable(drawable);
+            }
         }
     }
 

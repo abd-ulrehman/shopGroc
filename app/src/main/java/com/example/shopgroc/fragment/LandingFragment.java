@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.example.shopgroc.interfaces.ChildToParentCallback;
 public class LandingFragment extends Fragment implements View.OnClickListener, ChildToParentCallback {
 
     Button buttonSignup,buttonLogin;
+    TextView btnStoreLogin ,btnRiderLogin;;
     NavController navigationController;
     ChildToParentCallback varChildToParentCallback;
 
@@ -42,22 +44,31 @@ public class LandingFragment extends Fragment implements View.OnClickListener, C
 
     private void initUI(View view) {
         navigationController=Navigation.findNavController(view);
-        buttonSignup=view.findViewById(R.id.buttonSignup);
-        buttonLogin=view.findViewById(R.id.buttonLogin);
+        buttonSignup = view.findViewById(R.id.buttonSignup);
+        buttonLogin = view.findViewById(R.id.buttonLogin);
+        btnStoreLogin =(TextView) view.findViewById(R.id.btnStoreLogin);
+        btnRiderLogin =(TextView) view.findViewById(R.id.btnRiderLogin);
+
 
         buttonSignup.setOnClickListener(this);
         buttonLogin.setOnClickListener(this);
+        btnStoreLogin.setOnClickListener(this);
+        btnRiderLogin.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        int id=v.getId();
+        int id = v.getId();
 
         if (id==R.id.buttonSignup){
             navigationController.navigate(R.id.action_landingFragment_to_registrationFragment);
         }else if(id==R.id.buttonLogin) {
             navigationController.navigate(R.id.action_landingFragment_to_loginFragment);
+        }else if(id == R.id.btnStoreLogin){
+            navigationController.navigate(R.id.action_landingFragment_to_storeLoginFragment);
+        }else if(id == R.id.btnRiderLogin){
+            navigationController.navigate(R.id.action_landingFragment_to_riderLoginFragment);
         }
     }
     public void onAttach(@NonNull Context context) {

@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.user.LoginFragment">
+    tools:context=".fragment.rider.RiderLoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -32,7 +31,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textViewEmail"
+                android:id="@+id/textViewRiderEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
@@ -56,7 +55,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textViewPassword"
+                android:id="@+id/textViewRiderPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
@@ -65,7 +64,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/buttonRiderLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Log In"
@@ -76,8 +75,24 @@
             android:padding="15dp"
             android:textSize="18sp"
             android:background="@drawable/app_default_button_background"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="click to register: "/>
+            <TextView
+                android:id="@+id/signupRider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signupRider"/>
+        </LinearLayout>
 
     </LinearLayout>
-    <include layout="@layout/in_progress_view"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

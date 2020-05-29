@@ -37,46 +37,84 @@
             android:gravity="center"
             android:text="@string/slogan"
             android:textColor="@color/colorPrimary" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp">
-
-        <Button
-            android:id="@+id/buttonSignup"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/app_default_button_background"
-            android:layout_weight="1"
-            android:padding="15dp"
-            android:text="SignUp"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"/>
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="32dp">
 
-        <Button
-            android:id="@+id/buttonLogin"
+            <Button
+                android:id="@+id/buttonSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/app_default_button_background"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:text="SignUp"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:text="LogIn"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:background="@drawable/app_default_button_background"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:padding="15dp"
-            android:text="LogIn"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:background="@drawable/app_default_button_background"/>
+            android:orientation="horizontal"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Login as store:"/>
+            <TextView
+                android:id="@+id/btnStoreLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/storeLoginButton"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textStyle="italic"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Login as rider:"/>
+            <TextView
+                android:id="@+id/btnRiderLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/riderLoginButton"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textStyle="italic"
+                />
+        </LinearLayout>
 
-    </LinearLayout>
 
+</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,9 @@ public class Constant {
     public static class Messege{
         public static final String EMPTY_EMAIL_ERROR = "Email must not be empty!";
         public static final String EMPTY_PASSWORD_ERROR = "Password must not be empty!";
+        public static final String EMPTY_NAME_ERROR = "Name must not be empty!";
+        public static final String EMPTY_PHONE_ERROR = "Phone must not be empty!";
+        public static final String EMPTY_ADDRESS_ERROR = "Address must not be empty!";
     }
 
     public static class DatabaseTableKey{

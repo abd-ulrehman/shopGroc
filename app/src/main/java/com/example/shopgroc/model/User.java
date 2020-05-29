@@ -2,11 +2,14 @@ package com.example.shopgroc.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.shopgroc.utility.Constant.DatabaseKey.USER_ADDRESS;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.USER_EMAIL;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.USER_NAME;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.USER_PHONE;
+import static com.example.shopgroc.utility.Constant.SharedPrefKey.USER_ID;
+import static com.example.shopgroc.utility.Constant.SharedPrefKey.USER_IMAGE;
 
 public class User implements Serializable {
     private String id;
@@ -14,10 +17,16 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String address;
-    private int image;
+    private String image;
 
     public User(){}
-    public User(String id, String name, String email, String phone, String address,int image) {
+    public User(String name, String email, String phone, String address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+    public User(String id, String name, String email, String phone, String address,String image) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -66,11 +75,11 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -81,28 +90,36 @@ public class User implements Serializable {
         if (email!=null && !email.isEmpty())map.put(USER_EMAIL,email);
         if (phone!=null && !phone.isEmpty())map.put(USER_PHONE,phone);
         if (address!=null && !address.isEmpty())map.put(USER_ADDRESS,address);
-//        if (image!=null && !image.isEmpty())map.put(USER_IMAGE,image);
+        if (image!=null && !image.isEmpty())map.put(USER_IMAGE,image);
 
 
         return map;
     }
 
-    public void setUserMap(HashMap<String,String> map){
+    public void setUserMap(Map<String,Object> map){
+
+        if (map.get(USER_ID)!=null){
+            id= (String) map.get(USER_ID);
+        }
 
         if (map.get(USER_NAME)!=null){
-            name=map.get(USER_NAME);
+            name= (String) map.get(USER_NAME);
         }
 
         if (map.get(USER_EMAIL)!=null){
-            name=map.get(USER_EMAIL);
+            email= (String) map.get(USER_EMAIL);
         }
 
         if (map.get(USER_PHONE)!=null){
-            name=map.get(USER_PHONE);
+            phone= (String) map.get(USER_PHONE);
         }
 
         if (map.get(USER_ADDRESS)!=null){
-            name=map.get(USER_ADDRESS);
+            address= (String) map.get(USER_ADDRESS);
+        }
+
+        if (map.get(USER_IMAGE)!=null){
+            image= (String) map.get(USER_IMAGE);
         }
 
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.DashboardFragment">
+    tools:context=".fragment.user.DashboardFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,15 +106,16 @@
                             android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewDrinks"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:scrollbars="none" />
 
-                        <include
-                            android:id="@+id/shimmerCategory"
-                            layout="@layout/item_recycler" />
+<!--                        <include-->
+<!--                            android:id="@+id/shimmerCategory"-->
+<!--                            layout="@layout/item_recycler" />-->
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/fastFood"

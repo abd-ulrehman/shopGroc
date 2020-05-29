@@ -17,7 +17,8 @@ public class SignupController {
 
     private final static String TAG="SignupController";
     private static SignupController signupController = null;
-    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
+    private SignupCallbackListener signupCallbackListener=null;
 
     private SignupController(){}
 
@@ -29,6 +30,7 @@ public class SignupController {
 
     public void signupUser(final Activity activity, final User user, String password){
 
+        mAuth=FirebaseAuth.getInstance();
 
         mAuth.createUserWithEmailAndPassword(user.getEmail(),password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
@@ -39,6 +41,7 @@ public class SignupController {
                     Log.d(TAG, "createUserWithEmail:success");
                     FirebaseUser fbUser = mAuth.getCurrentUser();
                     if (fbUser!=null){
+                        user.setId(fbUser.getUid());
                         createUser(activity,user);
                     }
                 } else {
@@ -46,6 +49,8 @@ public class SignupController {
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     Toast.makeText(activity, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
+                    if(signupCallbackListener!=null)signupCallbackListener.onFailure(true,task.getException());
+
                 }
             }
         });
@@ -56,17 +61,19 @@ public class SignupController {
         UserController.getInstance().createUser(activity, user, new UserController.UserCallbackListener() {
             @Override
             public void onSuccess(boolean isSuccess, User user) {
-
+                if (signupCallbackListener!=null)signupCallbackListener.onSuccess(isSuccess,user);
             }
 
             @Override
             public void onFailure(boolean isFailure, Exception e) {
-
+                if(signupCallbackListener!=null)signupCallbackListener.onFailure(isFailure,e);
             }
         });
     }
 
-    public set
+    public void setSignupCallbackListener(SignupCallbackListener signupCallbackListener){
+        this.signupCallbackListener=signupCallbackListener;
+    }
 
     public interface SignupCallbackListener{
         void onSuccess(boolean isSuccess,User user);
