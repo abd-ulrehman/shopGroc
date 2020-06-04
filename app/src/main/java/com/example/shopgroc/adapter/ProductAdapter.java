@@ -1,6 +1,5 @@
 package com.example.shopgroc.adapter;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +18,12 @@ import com.example.shopgroc.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.shopgroc.utility.Constant.DataType.BUNDLE;
 import static com.example.shopgroc.utility.Constant.DataType.PRODUCT;
 
 public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Product> productList = new ArrayList<>();
+
+    private ProductClickListener productClickListener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -51,8 +51,8 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if(holder instanceof MyViewHolder){
             MyViewHolder myViewHolder = (MyViewHolder) holder;
             final Product product = productList.get(position);
-            Drawable drawable = myViewHolder.displayImage.getContext().getResources().getDrawable(product.getImage());
-            myViewHolder.displayImage.setImageDrawable(drawable);
+//            Drawable drawable = myViewHolder.displayImage.getContext().getResources().getDrawable(product.getImage());
+//            myViewHolder.displayImage.setImageDrawable(drawable);
             myViewHolder.textViewTitle.setText(product.getTitle());
 
             myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -60,12 +60,21 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(PRODUCT,product);
-                    Navigation.findNavController(v).navigate(R.id.action_navigation_dashboard_to_itemDisplayFragment,bundle);
+                    if(productClickListener!=null){
+                        productClickListener.onProductClick(bundle);
+                    }
+                    else{
+                        Navigation.findNavController(v).navigate(R.id.action_navigation_dashboard_to_itemDisplayFragment,bundle);
+                    }
+
                 }
             });
         }
     }
 
+    public void setClickListener(ProductClickListener productClickListener){
+        this.productClickListener = productClickListener;
+    }
     @Override
     public int getItemCount() {
         return productList.size();
@@ -73,5 +82,9 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void setProductList(List<Product> productList){
         this.productList = productList;
         notifyDataSetChanged();
+    }
+
+    public  interface ProductClickListener{
+        void onProductClick(Bundle bundle);
     }
 }

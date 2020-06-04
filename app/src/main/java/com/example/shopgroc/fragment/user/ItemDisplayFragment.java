@@ -1,6 +1,5 @@
 package com.example.shopgroc.fragment.user;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,14 +79,14 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
         setButtonVisibility(updateButtonVisibility);
 
         if(product == null)return;
-        Drawable drawable = view.getContext().getResources().getDrawable(product.getImage());
+//        Drawable drawable = view.getContext().getResources().getDrawable(product.getImage());
 
         if (cartItem!=null){
             itemCount=cartItem.getQuantity();
             counter.setText(""+itemCount);
         }
 
-        displayImage.setImageDrawable(drawable);
+//        displayImage.setImageDrawable(drawable);
         textViewTitle.setText(product.getTitle());
         textViewPrice.setText(product.getPrice()+" Pkr");
         textViewDescription.setText(product.getDescription());

@@ -19,7 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 /**
  * @author Abdul Rehman
  */
-public class storeLoginFragment extends Fragment implements View.OnClickListener {
+public class StoreLoginFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "StoreLoginFragment";
 

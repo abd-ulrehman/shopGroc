@@ -15,18 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.adapter.ProductAdapter;
+import com.example.shopgroc.controller.ProductController;
 import com.example.shopgroc.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * @author Abdul Rehman
  */
-public class storeDashboard extends Fragment implements View.OnClickListener {
+public class StoreDashboard extends Fragment implements View.OnClickListener, ProductAdapter.ProductClickListener {
 
+
+    private static final String TAG = "storeDashbpard";
     ProductAdapter productAdapterBeverages;
     RecyclerView recyclerViewBeverages;
     LinearLayoutManager linearLayoutManagerBeverages;
@@ -38,7 +40,7 @@ public class storeDashboard extends Fragment implements View.OnClickListener {
     String[] title = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
     String[] description = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
     Float[] price = {200F,400F,120F,150F};
-
+    ProductController productController = ProductController.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,15 +61,26 @@ public class storeDashboard extends Fragment implements View.OnClickListener {
 
         linearLayoutManagerBeverages = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         productAdapterBeverages = new ProductAdapter();
-        productAdapterBeverages.setProductList(getProductList());
+        productAdapterBeverages.setClickListener(this);
         recyclerViewBeverages.setLayoutManager(linearLayoutManagerBeverages);
         recyclerViewBeverages.setAdapter(productAdapterBeverages);
-
         addItem.setOnClickListener(this);
+        getProductList();
     }
 
+    private void getProductList(){
+        ProductController.getInstance().getProduct(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productLista) {
+                productAdapterBeverages.setProductList(productLista);
+            }
 
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
 
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -76,14 +89,8 @@ public class storeDashboard extends Fragment implements View.OnClickListener {
         }
     }
 
-    private List<Product> getProductList(){
-        List<Product> list = new ArrayList<>();
-        for(int i=0; i<title.length;i++){
-            Product product = new Product(i,title[i],description[i],price[i],imageList[i]);
-            list.add(product);
-        }
-        return list;
+    @Override
+    public void onProductClick(Bundle bundle) {
+        navigationController.navigate(R.id.action_storeDashboard_to_itemDisplayFragment2,bundle);
     }
-
-
 }

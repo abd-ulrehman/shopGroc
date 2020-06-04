@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeScreenNavigation"
             app:destination="@id/homeScreenNavigation" />
+        <action
+            android:id="@+id/action_loginFragment_to_landingFragment"
+            app:destination="@id/landingFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -49,6 +52,9 @@
         <action
             android:id="@+id/action_registrationFragment_to_homeScreenNavigation"
             app:destination="@id/homeScreenNavigation" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <navigation
@@ -104,7 +110,7 @@
     </navigation>
     <fragment
         android:id="@+id/storeLoginFragment"
-        android:name="com.example.shopgroc.fragment.store.storeLoginFragment"
+        android:name="com.example.shopgroc.fragment.store.StoreLoginFragment"
         android:label="fragment_store_login"
         tools:layout="@layout/fragment_store_login" >
         <action
@@ -117,22 +123,30 @@
 
         <fragment
             android:id="@+id/storeDashboard"
-            android:name="com.example.shopgroc.fragment.store.storeDashboard"
+            android:name="com.example.shopgroc.fragment.store.StoreDashboard"
             android:label="fragment_store_dashboard"
             tools:layout="@layout/fragment_store_dashboard" >
             <action
                 android:id="@+id/action_storeDashboard_to_addItemToStore"
                 app:destination="@id/addItemToStore" />
+            <action
+                android:id="@+id/action_storeDashboard_to_itemDisplayFragment2"
+                app:destination="@id/itemDisplayFragment2" />
         </fragment>
         <fragment
             android:id="@+id/addItemToStore"
-            android:name="com.example.shopgroc.fragment.store.addItemToStore"
+            android:name="com.example.shopgroc.fragment.store.AddItemToStore"
             android:label="fragment_add_item_to_store"
             tools:layout="@layout/fragment_add_item_to_store" >
             <action
                 android:id="@+id/action_addItemToStore_to_storeDashboard"
                 app:destination="@id/storeDashboard" />
         </fragment>
+        <fragment
+            android:id="@+id/itemDisplayFragment2"
+            android:name="com.example.shopgroc.fragment.user.ItemDisplayFragment"
+            android:label="fragment_item_display"
+            tools:layout="@layout/fragment_item_display" />
     </navigation>
 
 

@@ -41,7 +41,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     LoginController loginController = LoginController.getInstance();
     TextInputEditText editTextEmail,editTextPassword;
     ConstraintLayout inProgressView;
-    TextView textViewProgress;
+    TextView textViewProgress,btnLandingPage,btnSignUp;
     FirebaseAuth mAuth;
 
 
@@ -66,6 +66,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
         navigationController = Navigation.findNavController(view);
         inProgressView = view.findViewById(R.id.inProgressView);
         textViewProgress = view.findViewById(R.id.textViewProgress);
+        btnLandingPage = view.findViewById(R.id.btnLandingPage);
+        btnSignUp = view.findViewById(R.id.btnSignUp);
+        btnLandingPage.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
         loginButton.setOnClickListener(this);
 
     }
@@ -82,6 +86,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
 
             //navigationController.navigate(R.id.action_loginFragment_to_homeScreenNavigation);
             login();
+        }
+        if(id == R.id.btnLandingPage){
+            navigationController.navigate(R.id.action_loginFragment_to_landingFragment);
+        }
+        if(id == R.id.btnSignUp){
+            navigationController.navigate(R.id.action_loginFragment_to_registrationFragment);
         }
     }
 
@@ -147,10 +157,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
                 navigationController.navigate(R.id.action_loginFragment_to_homeScreenNavigation);
         }
     }
-
     @Override
     public void onFailure(boolean isFailure, Exception e) {
-        setViewInProgress(true);
+        setViewInProgress(false);
         Log.e(TAG,"Failed to Login user: "+e.getMessage());
     }
 }

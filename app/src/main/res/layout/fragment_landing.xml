@@ -76,45 +76,35 @@
                 android:textSize="18sp"
                 android:background="@drawable/app_default_button_background"/>
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login as: "
+            android:gravity="center"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp">
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Login as store:"/>
-            <TextView
+            android:layout_marginEnd="32dp"
+            android:gravity="center">
+            <Button
                 android:id="@+id/btnStoreLogin"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/storeLoginButton"
-                android:textColor="@android:color/holo_blue_bright"
-                android:textStyle="italic"
+                android:textColor="@color/colorWhite"
+                android:layout_marginRight="3dp"
                 />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp">
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Login as rider:"/>
-            <TextView
+            <Button
                 android:id="@+id/btnRiderLogin"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/riderLoginButton"
-                android:textColor="@android:color/holo_blue_bright"
-                android:textStyle="italic"
+                android:textColor="@color/colorWhite"
+                android:layout_marginLeft="3dp"
                 />
         </LinearLayout>
-
 
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

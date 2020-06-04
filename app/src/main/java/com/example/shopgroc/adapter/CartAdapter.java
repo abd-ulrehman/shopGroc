@@ -1,7 +1,6 @@
 package com.example.shopgroc.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,8 +60,8 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             CartViewHolder cartViewHolder = (CartViewHolder) holder;
             final CartItem cartItem = cartItemList.get(position);
             Context context=cartViewHolder.itemCardView.getContext();
-            Drawable drawable = context.getResources().getDrawable(cartItem.getProduct().getImage());
-            cartViewHolder.itemDisplayImage.setImageDrawable(drawable);
+//            Drawable drawable = context.getResources().getDrawable(cartItem.getProduct().getImage());
+//            cartViewHolder.itemDisplayImage.setImageDrawable(drawable);
             cartViewHolder.textViewTitle.setText(cartItem.getProduct().getTitle());
             cartViewHolder.textViewPrice.setText(cartItem.getProduct().getPrice() + "");
             cartViewHolder.textViewQuantity.setText(""+cartItem.getQuantity());

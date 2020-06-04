@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +23,7 @@ import com.example.shopgroc.interfaces.ChildToParentCallback;
 public class LandingFragment extends Fragment implements View.OnClickListener, ChildToParentCallback {
 
     Button buttonSignup,buttonLogin;
-    TextView btnStoreLogin ,btnRiderLogin;;
+    Button btnStoreLogin ,btnRiderLogin;;
     NavController navigationController;
     ChildToParentCallback varChildToParentCallback;
 
@@ -46,8 +45,8 @@ public class LandingFragment extends Fragment implements View.OnClickListener, C
         navigationController=Navigation.findNavController(view);
         buttonSignup = view.findViewById(R.id.buttonSignup);
         buttonLogin = view.findViewById(R.id.buttonLogin);
-        btnStoreLogin =(TextView) view.findViewById(R.id.btnStoreLogin);
-        btnRiderLogin =(TextView) view.findViewById(R.id.btnRiderLogin);
+        btnStoreLogin =(Button) view.findViewById(R.id.btnStoreLogin);
+        btnRiderLogin =(Button) view.findViewById(R.id.btnRiderLogin);
 
 
         buttonSignup.setOnClickListener(this);

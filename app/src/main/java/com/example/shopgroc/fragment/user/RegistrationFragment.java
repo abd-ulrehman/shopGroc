@@ -38,7 +38,7 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
 
     Button registerButton;
     ConstraintLayout inProgressView;
-    TextView textViewProgress;
+    TextView textViewProgress,btnLogin;
     NavController navigationController;
     ChildToParentCallback varChildToParentCallback;
     SignupController signupController = SignupController.getInstance();
@@ -74,8 +74,9 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
         userPassword = view.findViewById(R.id.userPassword);
         inProgressView = view.findViewById(R.id.inProgressView);
         textViewProgress = view.findViewById(R.id.textViewProgress);
-
+        btnLogin = view.findViewById(R.id.btnLogin);
         registerButton.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
     }
 
     private void setViewInProgress(boolean isInProgress){
@@ -144,6 +145,9 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
 
         }else if(id==R.id.buttonLogin) {
             navigationController.navigate(R.id.action_registrationFragment_to_homeScreenNavigation);
+        }
+        else if(id == R.id.btnSignUp){
+            navigationController.navigate(R.id.action_registrationFragment_to_loginFragment);
         }
     }
 

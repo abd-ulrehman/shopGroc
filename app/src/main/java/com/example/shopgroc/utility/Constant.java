@@ -15,6 +15,11 @@ public class Constant {
         public static final String USER_PHONE="phone";
         public static final String USER_ADDRESS="address";
         public static final String USER_IMAGE="userImage";
+
+        public static final String PRODUCT_TITLE="productTitle";
+        public static final String PRODUCT_PRICE="productPrice";
+        public static final String PRODUCT_CATEGORY="productCategory";
+        public static final String PRODUCT_DESCRIPTION="productDescription";
     }
     public static class Messege{
         public static final String EMPTY_EMAIL_ERROR = "Email must not be empty!";
@@ -26,6 +31,7 @@ public class Constant {
 
     public static class DatabaseTableKey{
         public static final String USER_TABLE= "User";
+        public static final String PRODUCT_TABLE= "Product";
     }
 
     public static class DatabaseKey{

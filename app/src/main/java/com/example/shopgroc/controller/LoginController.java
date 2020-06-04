@@ -65,7 +65,6 @@ public class LoginController {
             }
         });
     }
-
     public void setLoginCallbackListener(LoginCallbackListener loginCallbackListener){
         this.loginCallbackListener=loginCallbackListener;
     }

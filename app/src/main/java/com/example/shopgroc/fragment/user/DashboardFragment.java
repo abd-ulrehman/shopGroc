@@ -17,17 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.adapter.ProductAdapter;
+import com.example.shopgroc.controller.ProductController;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
 import com.example.shopgroc.model.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * @author  Abdul Rehman
  */
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener,ProductAdapter.ProductClickListener {
 
 
     LinearLayout itemCardView;
@@ -41,9 +41,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     String[] title = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
     String[] description = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
     Float[] price = {200F,400F,120F,150F};
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,32 +63,45 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private void InIt(View view) {
         navigationController = Navigation.findNavController(view);
-        itemCardView.setOnClickListener(this);
+
         recyclerViewBeverages = view.findViewById(R.id.recyclerViewBeverages);
         recyclerViewDrinks = view.findViewById(R.id.recyclerViewDrinks);
         linearLayoutManagerBeverages = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         linearLayoutManagerDrinks = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         productAdapterBeverages = new ProductAdapter();
         productAdapterDrinks = new ProductAdapter();
-        productAdapterBeverages.setProductList(getProductList());
-        productAdapterDrinks.setProductList(getProductList());
+        productAdapterBeverages.setClickListener(this);
+        productAdapterDrinks.setClickListener(this);
         recyclerViewBeverages.setLayoutManager(linearLayoutManagerBeverages);
         recyclerViewDrinks.setLayoutManager(linearLayoutManagerDrinks);
         recyclerViewBeverages.setAdapter(productAdapterBeverages);
         recyclerViewDrinks.setAdapter(productAdapterDrinks);
+        itemCardView.setOnClickListener(this);
+        getProductList();
     }
 
-    private List<Product> getProductList(){
-        List<Product> list = new ArrayList<>();
-        for(int i=0; i<title.length;i++){
-            Product product = new Product(i,title[i],description[i],price[i],imageList[i]);
-            list.add(product);
-        }
-        return list;
+    private void getProductList(){
+        ProductController.getInstance().getProduct(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productLista) {
+                productAdapterBeverages.setProductList(productLista);
+                productAdapterDrinks.setProductList(productLista);
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         navigationController.navigate(R.id.action_navigation_dashboard_to_itemDisplayFragment);
+    }
+
+    @Override
+    public void onProductClick(Bundle bundle) {
+        navigationController.navigate(R.id.action_navigation_dashboard_to_itemDisplayFragment,bundle);
     }
 }

@@ -8,8 +8,8 @@
     <string name="edit"><u>Edit</u></string>
     <string name="remove"><u>Remove</u></string>
     <string name="loading">Loading...</string>
-    <string name="storeLoginButton"><u>Login</u></string>
-    <string name="riderLoginButton"><u>Login</u></string>
+    <string name="storeLoginButton">Store</string>
+    <string name="riderLoginButton">Rider</string>
     <string name="signupRider"><u>SignUp</u></string>
 
     <string-array name="category_arrays">

@@ -91,8 +91,6 @@ public class User implements Serializable {
         if (phone!=null && !phone.isEmpty())map.put(USER_PHONE,phone);
         if (address!=null && !address.isEmpty())map.put(USER_ADDRESS,address);
         if (image!=null && !image.isEmpty())map.put(USER_IMAGE,image);
-
-
         return map;
     }
 
