@@ -6,6 +6,7 @@ import java.util.Map;
 
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.PRODUCT_CATEGORY;
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.PRODUCT_DESCRIPTION;
+import static com.example.shopgroc.utility.Constant.SharedPrefKey.PRODUCT_IMAGE;
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.PRODUCT_PRICE;
 import static com.example.shopgroc.utility.Constant.SharedPrefKey.PRODUCT_TITLE;
 
@@ -15,14 +16,15 @@ public class Product implements Serializable {
     private String title;
     private String description;
     private double price;
-    private int image;
+    private String image;
     private String category;
     public Product() {}
-    public Product(String title, String description, double price, int image){
+    public Product(String title,double price, String description, String category,String image){
         this.title = title;
         this.description = description;
         this.price = price;
         this.image = image;
+        this.category = category;
     }
     public Product(String title,double price, String description, String category){
         this.title = title;
@@ -64,18 +66,18 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setCategory(int image) {
-        this.image = image;
+    public void setCategory(String category) {
+        this.category = category;
     }
-    public int getCategory() {
-        return image;
+    public String getCategory() {
+        return category;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
     public void setProductMap(Map<String,Object> map){
@@ -95,6 +97,9 @@ public class Product implements Serializable {
         if (map.get(PRODUCT_DESCRIPTION)!=null){
             description= (String) map.get(PRODUCT_DESCRIPTION);
         }
+        if (map.get(PRODUCT_IMAGE)!=null){
+            image= (String) map.get(PRODUCT_IMAGE);
+        }
 
     }
     public HashMap<String,Object> getProductMap(){
@@ -104,6 +109,7 @@ public class Product implements Serializable {
         if(price!=0F)map.put(PRODUCT_PRICE,price);
         if (category!=null && !category.isEmpty())map.put(PRODUCT_CATEGORY,category);
         if (description!=null && !description.isEmpty())map.put(PRODUCT_DESCRIPTION,description);
+        if (image!=null && !image.isEmpty())map.put(PRODUCT_IMAGE,image);
         return map;
     }
 }

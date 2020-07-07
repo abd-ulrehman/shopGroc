@@ -15,8 +15,11 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
+import com.example.shopgroc.controller.ImageController;
 import com.example.shopgroc.manager.CartManager;
 import com.example.shopgroc.model.CartItem;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,8 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<CartItem> cartItemList = new ArrayList<>();
     CartManager cartManager;
     NavController navController;
-
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
     public class CartViewHolder extends RecyclerView.ViewHolder{
 
         CardView itemCardView;
@@ -63,8 +67,11 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //            Drawable drawable = context.getResources().getDrawable(cartItem.getProduct().getImage());
 //            cartViewHolder.itemDisplayImage.setImageDrawable(drawable);
             cartViewHolder.textViewTitle.setText(cartItem.getProduct().getTitle());
-            cartViewHolder.textViewPrice.setText(cartItem.getProduct().getPrice() + "");
+            cartViewHolder.textViewPrice.setText(cartItem.getProduct().getPrice()*cartItem.getQuantity() + "");
             cartViewHolder.textViewQuantity.setText(""+cartItem.getQuantity());
+            StorageReference ref = storageReference.child("productImage/"+cartItem.getProduct().getImage());
+            ImageController.getInstance().loadImage(cartViewHolder.itemDisplayImage,ref);
+
 
             cartViewHolder.buttonRemoveItem.setOnClickListener(new View.OnClickListener() {
                 @Override

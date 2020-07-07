@@ -15,9 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
 
 import com.example.shopgroc.R;
+import com.example.shopgroc.controller.ImageController;
 import com.example.shopgroc.manager.CartManager;
 import com.example.shopgroc.model.CartItem;
 import com.example.shopgroc.model.Product;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import static com.example.shopgroc.utility.Constant.DataType.CART_ITEM;
 import static com.example.shopgroc.utility.Constant.DataType.PRODUCT;
@@ -39,6 +42,8 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
     CartItem cartItem;
     LinearLayout cartButtonContainer;
     boolean updateButtonVisibility=false;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
 
 
     @Override
@@ -90,6 +95,8 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
         textViewTitle.setText(product.getTitle());
         textViewPrice.setText(product.getPrice()+" Pkr");
         textViewDescription.setText(product.getDescription());
+        StorageReference ref = storageReference.child("productImage/"+product.getImage());
+        ImageController.getInstance().loadImage(displayImage,ref);
 
         buttonPlus.setOnClickListener(this);
         buttonMinus.setOnClickListener(this);

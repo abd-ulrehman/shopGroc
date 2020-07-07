@@ -52,7 +52,7 @@ public class LoginController {
             }
         });
     }
-    private void getUser(Activity activity, String id){
+    private void getUser(final Activity activity, String id){
         UserController.getInstance().getUser(activity,id,new UserController.UserCallbackListener(){
             @Override
             public void onSuccess(boolean isSuccess, User user) {

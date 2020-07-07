@@ -20,7 +20,6 @@ public class CartManager {
     }
     public void addToCart(CartItem item){
         cartItemList.add(item);
-
         if (cartListener!=null) cartListener.onCartHasData();
         if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
     }

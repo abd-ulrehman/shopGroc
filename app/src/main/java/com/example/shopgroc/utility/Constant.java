@@ -20,6 +20,7 @@ public class Constant {
         public static final String PRODUCT_PRICE="productPrice";
         public static final String PRODUCT_CATEGORY="productCategory";
         public static final String PRODUCT_DESCRIPTION="productDescription";
+        public static final String PRODUCT_IMAGE="productImage";
     }
     public static class Messege{
         public static final String EMPTY_EMAIL_ERROR = "Email must not be empty!";

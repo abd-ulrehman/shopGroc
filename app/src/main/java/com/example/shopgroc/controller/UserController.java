@@ -46,7 +46,6 @@ public class UserController {
         });
 
     }
-
     public void getUser(Activity activity, String userId, final UserCallbackListener userCallbackListener){
         if(userId != null){
             final DocumentReference documentReference = database.collection(USER_TABLE).document(userId);

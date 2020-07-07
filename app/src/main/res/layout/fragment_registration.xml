@@ -104,7 +104,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
             android:layout_marginRight="16dp"
             android:hint="Address"
             android:textColorHint="@android:color/black"
@@ -148,7 +147,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/buttonSignup"
+            android:id="@+id/buttonRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -160,13 +159,13 @@
             android:textColor="@android:color/white"
             android:textSize="18sp" />
         <TextView
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnLoginFromRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:text="Log In"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textColor="@color/colorPrimaryDark"
             android:gravity="center"/>
 

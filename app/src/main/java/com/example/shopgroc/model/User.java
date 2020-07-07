@@ -83,7 +83,7 @@ public class User implements Serializable {
         this.image = image;
     }
 
-    public HashMap<String,String> getUserMap(){
+    public HashMap<String, String> getUserMap(){
         HashMap<String,String> map=new HashMap<>();
 
         if (name!=null && !name.isEmpty())map.put(USER_NAME,name);

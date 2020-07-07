@@ -20,6 +20,7 @@ import com.example.shopgroc.R;
 import com.example.shopgroc.controller.LoginController;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
 import com.example.shopgroc.model.User;
+import com.example.shopgroc.utility.SharedUtility;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -154,6 +155,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     public void onSuccess(boolean isSuccess, User user) {
         setViewInProgress(false);
         if (isSuccess){
+            if(user!=null){
+                SharedUtility.getInstance(getContext()).setUser(user);
+            }
                 navigationController.navigate(R.id.action_loginFragment_to_homeScreenNavigation);
         }
     }

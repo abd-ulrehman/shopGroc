@@ -36,11 +36,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     RecyclerView recyclerViewBeverages, recyclerViewDrinks;
     ProductAdapter productAdapterBeverages,productAdapterHouseHolds,productAdapterGrocery,productAdapterDrinks;
     LinearLayoutManager linearLayoutManagerBeverages, linearLayoutManagerDrinks;
-//    private List<Product> productList = new ArrayList<>();
-    int[] imageList = {R.drawable.cup_cake,R.drawable.drink_3,R.drawable.drink_pepsi,R.drawable.food_burger};
-    String[] title = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
-    String[] description = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
-    Float[] price = {200F,400F,120F,150F};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

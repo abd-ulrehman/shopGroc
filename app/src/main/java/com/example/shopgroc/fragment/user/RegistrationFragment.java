@@ -66,7 +66,7 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
 
     private void initUI(View view) {
         navigationController=Navigation.findNavController(view);
-        registerButton =view.findViewById(R.id.buttonSignup);
+        registerButton =view.findViewById(R.id.buttonRegistration);
         fullName = view.findViewById(R.id.fullName);
         userEmail = view.findViewById(R.id.userEmail);
         userPhone = view.findViewById(R.id.userPhone);
@@ -74,7 +74,7 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
         userPassword = view.findViewById(R.id.userPassword);
         inProgressView = view.findViewById(R.id.inProgressView);
         textViewProgress = view.findViewById(R.id.textViewProgress);
-        btnLogin = view.findViewById(R.id.btnLogin);
+        btnLogin = view.findViewById(R.id.btnLoginFromRegistration);
         registerButton.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
     }
@@ -138,15 +138,12 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         int id=v.getId();
 
-        if (id==R.id.buttonSignup){
+        if (id==R.id.buttonRegistration){
             //navigationController.navigate(R.id.action_registrationFragment_to_homeScreenNavigation);
             signup();
 
 
-        }else if(id==R.id.buttonLogin) {
-            navigationController.navigate(R.id.action_registrationFragment_to_homeScreenNavigation);
-        }
-        else if(id == R.id.btnSignUp){
+        }else if(id==R.id.btnLoginFromRegistration) {
             navigationController.navigate(R.id.action_registrationFragment_to_loginFragment);
         }
     }

@@ -13,7 +13,10 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
+import com.example.shopgroc.controller.ImageController;
 import com.example.shopgroc.model.Product;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,8 @@ import static com.example.shopgroc.utility.Constant.DataType.PRODUCT;
 
 public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Product> productList = new ArrayList<>();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
 
     private ProductClickListener productClickListener;
 
@@ -51,6 +56,10 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if(holder instanceof MyViewHolder){
             MyViewHolder myViewHolder = (MyViewHolder) holder;
             final Product product = productList.get(position);
+            if(product.getImage()!=null && !product.getImage().isEmpty()){
+                StorageReference ref = storageReference.child("productImage/"+product.getImage());
+                ImageController.getInstance().loadImage(myViewHolder.displayImage,ref);
+            }
 //            Drawable drawable = myViewHolder.displayImage.getContext().getResources().getDrawable(product.getImage());
 //            myViewHolder.displayImage.setImageDrawable(drawable);
             myViewHolder.textViewTitle.setText(product.getTitle());
@@ -66,7 +75,6 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     else{
                         Navigation.findNavController(v).navigate(R.id.action_navigation_dashboard_to_itemDisplayFragment,bundle);
                     }
-
                 }
             });
         }
