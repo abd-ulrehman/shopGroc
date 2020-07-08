@@ -25,14 +25,18 @@ public class Constant {
     public static class Messege{
         public static final String EMPTY_EMAIL_ERROR = "Email must not be empty!";
         public static final String EMPTY_PASSWORD_ERROR = "Password must not be empty!";
+        public static final String PASSWORD_LENGTH_ERROR = "Password should have at least 6 characters";
         public static final String EMPTY_NAME_ERROR = "Name must not be empty!";
         public static final String EMPTY_PHONE_ERROR = "Phone must not be empty!";
+        public static final String PHONE_FORMAT_ERROR = "Incorrect Phone!";
+        public static final String PHONE_INCOMPLETE_ERROR = "Incomplete Phone!";
         public static final String EMPTY_ADDRESS_ERROR = "Address must not be empty!";
     }
 
     public static class DatabaseTableKey{
         public static final String USER_TABLE= "User";
         public static final String PRODUCT_TABLE= "Product";
+        public static final String ORDER_TABLE = "Orders";
     }
 
     public static class DatabaseKey{
@@ -41,5 +45,21 @@ public class Constant {
         public static final String USER_PHONE="phone";
         public static final String USER_ADDRESS="address";
         public static final String USER_IMAGE="image";
+
+        public static final String ORDER_PRODUCTS="products";
+        public static final String ORDER_DELIVERY_CHARGE="deliveryCharges";
+        public static final String ORDER_DELIVERY_STATUS="deliveryStatus";
+        public static final String ORDER_TIME="orderTime";
+        public static final String ORDER_ORDER="orders";
+
+
+        public static final String ORDERED_PRODUCT_ID="productId";
+        public static final String ORDERED_PRODUCT_QUANTITY="productQuantity";
+        public static final String ORDERED_PRODUCT_PRICE="productPrice";
+
+    }
+
+    public static class DeliveryStatus{
+        public static final int ORDER_PENDING=0;
     }
 }

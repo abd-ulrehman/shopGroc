@@ -108,6 +108,7 @@ public class ProductController {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         HashMap<String,Object> obj = new HashMap<>(document.getData());
                         product.setProductMap(obj);
+                        product.setId(document.getId());
                         list.add(product);
                     }
                     if (productCallbackListener!= null)productCallbackListener.onSuccess(true,list);

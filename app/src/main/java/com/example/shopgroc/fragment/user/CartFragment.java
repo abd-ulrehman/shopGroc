@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.adapter.CartAdapter;
+import com.example.shopgroc.controller.OrderController;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
 import com.example.shopgroc.manager.CartManager;
 
@@ -61,6 +62,14 @@ public class CartFragment extends BaseFragment implements CartManager.CartListen
         cartAdapter.setCartItemList(cartManager.getItemList());
         recyclerViewCart.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewCart.setAdapter(cartAdapter);
+
+        buttonOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OrderController.getInstance().placeOrder(v.getContext(),CartManager.getInstance().getOrderData());
+            }
+        });
+
     }
 
     private void setEmptyView(boolean isEmpty){

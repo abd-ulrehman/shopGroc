@@ -27,6 +27,9 @@ import static com.example.shopgroc.utility.Constant.Messege.EMPTY_ADDRESS_ERROR;
 import static com.example.shopgroc.utility.Constant.Messege.EMPTY_EMAIL_ERROR;
 import static com.example.shopgroc.utility.Constant.Messege.EMPTY_PASSWORD_ERROR;
 import static com.example.shopgroc.utility.Constant.Messege.EMPTY_PHONE_ERROR;
+import static com.example.shopgroc.utility.Constant.Messege.PASSWORD_LENGTH_ERROR;
+import static com.example.shopgroc.utility.Constant.Messege.PHONE_FORMAT_ERROR;
+import static com.example.shopgroc.utility.Constant.Messege.PHONE_INCOMPLETE_ERROR;
 
 
 /**
@@ -90,6 +93,7 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
         String  address= "";
         String password = "";
         String image = "";
+        int checkCode;
 
         if(fullName!=null && !fullName.getText().toString().isEmpty()){
             name=fullName.getText().toString();
@@ -107,10 +111,23 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
 
         if(userPhone!=null && !userPhone.getText().toString().isEmpty()){
             phone=userPhone.getText().toString();
-        }else{
+            checkCode = Integer.parseInt(phone.subSequence(0,3).toString());
+            if(phone.length()>10 || phone.length()<10){
+                userPhone.setError(PHONE_INCOMPLETE_ERROR);
+                return;
+            }else if(checkCode<300 || checkCode>349){
+                userPhone.setError(PHONE_FORMAT_ERROR);
+                return;
+            }
+        }
+        else {
             userPhone.setError(EMPTY_PHONE_ERROR);
             return;
         }
+
+
+
+
 
         if(userAddress!=null && !userAddress.getText().toString().isEmpty()){
             address=userAddress.getText().toString();
@@ -121,7 +138,10 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
 
         if(userPassword!=null && !userPassword.getText().toString().isEmpty()){
             password=userPassword.getText().toString();
-        }else{
+        }else if(password.length()<7){
+            userPassword.setError(PASSWORD_LENGTH_ERROR);
+        }
+        else{
             userPassword.setError(EMPTY_PASSWORD_ERROR);
             return;
         }

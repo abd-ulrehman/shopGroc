@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.adapter.ProductAdapter;
+import com.example.shopgroc.controller.OrderController;
 import com.example.shopgroc.controller.ProductController;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
+import com.example.shopgroc.model.Order;
 import com.example.shopgroc.model.Product;
 
 import java.util.List;
@@ -73,6 +75,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         recyclerViewDrinks.setAdapter(productAdapterDrinks);
         itemCardView.setOnClickListener(this);
         getProductList();
+        getOrders();
     }
 
     private void getProductList(){
@@ -81,6 +84,20 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             public void onSuccess(boolean isSuccess, List<Product> productLista) {
                 productAdapterBeverages.setProductList(productLista);
                 productAdapterDrinks.setProductList(productLista);
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+
+    private void getOrders(){
+        OrderController.getInstance().getUserOrders(getActivity(), new OrderController.OrderCallback() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Order> orderList) {
+
             }
 
             @Override

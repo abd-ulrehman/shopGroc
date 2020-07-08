@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class CartItem implements Serializable {
     private Product product;
     private int quantity;
-
-    public CartItem(){}
     public CartItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;

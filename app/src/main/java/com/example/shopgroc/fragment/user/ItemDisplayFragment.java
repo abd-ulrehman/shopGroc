@@ -125,6 +125,8 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
             if(itemCount<=0)return;
             Log.i(TAG,"Item Count is: " + itemCount);
             CartItem item = new CartItem(product,itemCount);
+            Log.i(TAG, "onClick: " + product.getId());
+//            Log.i(TAG, "onClick: " + item.getProduct().getId());
             if(cartManager.hasItem(item))cartManager.updateItem(item);
             else cartManager.addToCart(item);
         }
