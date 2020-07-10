@@ -131,6 +131,7 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
             else cartManager.addToCart(item);
         }
         else if(id==R.id.buttonUpdateCart){
+            CartManager.getInstance().getItemQuantity(cartItem);
             cartItem.setQuantity(itemCount);
             cartManager.updateItem(cartItem);
             Navigation.findNavController(v).navigate(R.id.action_itemDisplayFragment_to_navigation_cart);

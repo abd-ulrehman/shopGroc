@@ -1,7 +1,10 @@
 package com.example.shopgroc.fragment.user;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +70,22 @@ public class CartFragment extends BaseFragment implements CartManager.CartListen
             @Override
             public void onClick(View v) {
                 OrderController.getInstance().placeOrder(v.getContext(),CartManager.getInstance().getOrderData());
+                Log.i("TAG", "onClick: " + CartManager.getInstance().getTotalPrice());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Order Invoice");
+                builder.setMessage("Total Products : " + CartManager.getInstance().getTotalCartQuantity() + "\n" + "Amount : " + CartManager.getInstance().getTotalPrice());
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.create().show();
             }
         });
 

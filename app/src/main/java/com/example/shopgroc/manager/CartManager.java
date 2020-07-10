@@ -17,6 +17,8 @@ public class CartManager {
     private List<CartItem> cartItemList = new ArrayList<>();
     private CartListener cartListener=null;
     private CartItemCountListener cartItemCountListener;
+    private double totalPrice = 0;
+    int totalQuantity;
 
     private CartManager(){}
     public static CartManager getInstance(){
@@ -27,6 +29,7 @@ public class CartManager {
     }
     public void addToCart(CartItem item){
         cartItemList.add(item);
+        addInToTotal(item.getProduct().getPrice() * item.getQuantity());
         if (cartListener!=null) cartListener.onCartHasData();
         if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
     }
@@ -34,6 +37,7 @@ public class CartManager {
         for(int i=0; i<cartItemList.size(); i++){
             if(item.getProduct().getId().equals(cartItemList.get(i).getProduct().getId())){
                 cartItemList.remove(i);
+                removeFromTotal(item.getProduct().getPrice() * item.getQuantity());
                 break;
             }
         }
@@ -45,11 +49,21 @@ public class CartManager {
     public void updateItem(CartItem item){
         for(int i=0;i<cartItemList.size(); i++){
             if(item.getProduct().getId().equals(cartItemList.get(i).getProduct().getId())){
+                Log.i("CartManager", "updateItem: " + cartItemList.get(i).getQuantity());
                 cartItemList.get(i).setQuantity(item.getQuantity());
+                addInToTotal(item.getProduct().getPrice() * item.getQuantity());
                 break;
             }
         }
         if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
+    }
+    public void getItemQuantity(CartItem item){
+        for(int i=0;i<cartItemList.size(); i++){
+            if(item.getProduct().getId().equals(cartItemList.get(i).getProduct().getId())){
+                Log.i("CartManager", "updateItem: " + cartItemList.get(i).getQuantity());
+                updateTotal(cartItemList.get(i).getProduct().getPrice(),cartItemList.get(i).getQuantity());
+            }
+        }
     }
     public List<CartItem> getItemList(){
         return cartItemList;
@@ -73,7 +87,21 @@ public class CartManager {
         return new Order(ORDER_PENDING, 50,serverTimestamp(),orderedProductList);
 
     }
-
+    public void addInToTotal(double total){
+        totalPrice = totalPrice + total;
+    }
+    public void removeFromTotal(double total){
+        totalPrice = totalPrice - total;
+    }
+    public void updateTotal(double total, int quantity){
+        totalPrice = totalPrice - (total*quantity);
+    }
+    public double getTotalPrice(){
+        return totalPrice;
+    }
+    public int getTotalCartQuantity(){
+       return cartItemList.size();
+    }
     public List<OrderedProduct> getOrderedProductList(){
         List<OrderedProduct> list=new ArrayList<>();
 
