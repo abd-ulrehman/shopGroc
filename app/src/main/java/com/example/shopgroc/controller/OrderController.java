@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.shopgroc.model.Order;
-import com.example.shopgroc.model.OrderedProduct;
 import com.example.shopgroc.utility.SharedUtility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,15 +13,14 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_ORDER;
 import static com.example.shopgroc.utility.Constant.DatabaseTableKey.ORDER_TABLE;
-import static com.google.firebase.firestore.FieldValue.serverTimestamp;
 
 public class OrderController {
 
@@ -85,6 +83,9 @@ public class OrderController {
                         Order order=new Order();
                         HashMap<String,Object> obj = new HashMap<>(document.getData());
                         order.setOrder(obj);
+                        order.setId(document.getId());
+                        Log.i("OrderObj","order obj: "+new Gson().toJson(order));
+
                         orderList.add(order);
                     }
 
@@ -97,18 +98,16 @@ public class OrderController {
                 }
             }
         });
-
     }
+//    public Order getDummyOrder(){
+//
+//        List<OrderedProduct> orderedProductList=new ArrayList<>();
+//
+//        for (int i=0;i<5;i++)orderedProductList.add(new OrderedProduct(UUID.randomUUID().toString(),2,100));
+//
+//        return new Order(0,200, serverTimestamp(),orderedProductList);
 
-    public Order getDummyOrder(){
-
-        List<OrderedProduct> orderedProductList=new ArrayList<>();
-
-        for (int i=0;i<5;i++)orderedProductList.add(new OrderedProduct(UUID.randomUUID().toString(),2,100));
-
-        return new Order(0,200, serverTimestamp(),orderedProductList);
-
-    }
+//    }
 
     public interface OrderCallback{
         void onSuccess(boolean isSuccess,List<Order> orderList);

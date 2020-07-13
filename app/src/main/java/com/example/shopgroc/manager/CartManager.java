@@ -5,12 +5,13 @@ import android.util.Log;
 import com.example.shopgroc.model.CartItem;
 import com.example.shopgroc.model.Order;
 import com.example.shopgroc.model.OrderedProduct;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_PENDING;
-import static com.google.firebase.firestore.FieldValue.serverTimestamp;
 
 public class CartManager {
     private static CartManager instance = null;
@@ -19,6 +20,7 @@ public class CartManager {
     private CartItemCountListener cartItemCountListener;
     private double totalPrice = 0;
     int totalQuantity;
+    GeoPoint geoPoint;
 
     private CartManager(){}
     public static CartManager getInstance(){
@@ -57,6 +59,9 @@ public class CartManager {
         }
         if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
     }
+    public void setGeoPoint(GeoPoint point){
+        geoPoint = point;
+    }
     public void getItemQuantity(CartItem item){
         for(int i=0;i<cartItemList.size(); i++){
             if(item.getProduct().getId().equals(cartItemList.get(i).getProduct().getId())){
@@ -84,7 +89,7 @@ public class CartManager {
     public Order getOrderData(){
 
         List<OrderedProduct> orderedProductList=getOrderedProductList();
-        return new Order(ORDER_PENDING, 50,serverTimestamp(),orderedProductList);
+        return new Order(ORDER_PENDING, 50, Timestamp.now(),orderedProductList,geoPoint,"");
 
     }
     public void addInToTotal(double total){
@@ -109,7 +114,7 @@ public class CartManager {
 
             for (int i=0;i<getItemList().size();i++){
                 CartItem item=getItemList().get(i);
-                list.add(new OrderedProduct(item.getProduct().getId(),item.getQuantity(),item.getProduct().getPrice()));
+                list.add(new OrderedProduct(item.getProduct().getId(),item.getQuantity(),item.getProduct().getPrice(), geoPoint));
             }
 
         }

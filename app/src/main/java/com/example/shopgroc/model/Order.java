@@ -1,6 +1,10 @@
 package com.example.shopgroc.model;
 
-import com.google.firebase.firestore.FieldValue;
+
+import android.util.Log;
+
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,6 +13,9 @@ import java.util.List;
 
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_DELIVERY_CHARGE;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_DELIVERY_STATUS;
+import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_ID;
+import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_LOCATION;
+import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_NUMBER;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_PRODUCTS;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_TIME;
 
@@ -16,25 +23,33 @@ public class Order implements Serializable {
     private String id;
     private int orderStatus;
     private double orderDeliveryCharges;
-    private FieldValue orderTime;
+    private Timestamp orderTime;
     private List<OrderedProduct> orderedProductList;
+    private String orderNumber;
+    private GeoPoint geoPoint;
 
 
-    public Order(){}
+    public Order() {
+    }
+    public Order(int orderPending, double deliveryCharges, Timestamp orderTime,
+                 List<OrderedProduct> orderedProductList, GeoPoint point,String orderId){
+        this.orderStatus = orderPending;
+        this.orderDeliveryCharges = deliveryCharges;
+        this.orderTime = orderTime;
+        this.orderedProductList = orderedProductList;
+        this.geoPoint = point;
+        this.orderNumber = orderId;
+    }
 
-    public Order(String id, int orderStatus, double deliveryCharges, FieldValue orderTime,List<OrderedProduct> orderedProductList) {
-        this.id = id;
+    public Order(int orderStatus, double deliveryCharges, Timestamp orderTime,
+                 List<OrderedProduct> orderedProductList) {
         this.orderStatus = orderStatus;
         this.orderDeliveryCharges = deliveryCharges;
         this.orderTime = orderTime;
         this.orderedProductList = orderedProductList;
     }
-    public Order(int orderStatus, double deliveryCharges, FieldValue orderTime,List<OrderedProduct> orderedProductList) {
-        this.orderStatus = orderStatus;
-        this.orderDeliveryCharges = deliveryCharges;
-        this.orderTime = orderTime;
-        this.orderedProductList = orderedProductList;
-    }
+
+
 
     public int getOrderStatus() {
         return orderStatus;
@@ -55,16 +70,20 @@ public class Order implements Serializable {
     public double getDeliveryCharges() {
         return orderDeliveryCharges;
     }
+    public void setGeoPoint(GeoPoint geoPoint) { this.geoPoint = geoPoint; }
 
     public void setDeliveryCharges(double deliveryCharges) {
         this.orderDeliveryCharges = deliveryCharges;
     }
+    public GeoPoint getGeoPoint() {
+        return geoPoint;
+    }
 
-    public FieldValue getOrderTime() {
+    public Timestamp getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(FieldValue orderTime) {
+    public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -77,9 +96,27 @@ public class Order implements Serializable {
     }
 
     public void setOrder(HashMap<String,Object> orderMap){
-        if(orderMap.get(ORDER_PRODUCTS)!=null)setOrderedProductList((List<OrderedProduct>) orderMap.get(ORDER_PRODUCTS));
+        if(orderMap.get(ORDER_PRODUCTS)!=null){
+            List<OrderedProduct> orderedProductList=new ArrayList<>();
+            List<HashMap<String,Object>> list=(List<HashMap<String,Object>>) orderMap.get(ORDER_PRODUCTS);
+
+            for (HashMap<String,Object> map:list){
+                OrderedProduct orderedProduct=new OrderedProduct();
+                orderedProduct.setOrderedProduct(map);
+                orderedProductList.add(orderedProduct);
+            }
+
+            setOrderedProductList(orderedProductList);
+        }
         if(orderMap.get(ORDER_DELIVERY_CHARGE)!=null)setDeliveryCharges((Double) orderMap.get(ORDER_DELIVERY_CHARGE));
-        if(orderMap.get(ORDER_DELIVERY_STATUS)!=null)setOrderStatus(Integer.parseInt(orderMap.get(ORDER_DELIVERY_STATUS).toString()) );
+        if(orderMap.get(ORDER_DELIVERY_STATUS)!=null)setOrderStatus(Integer.parseInt(orderMap.get(ORDER_DELIVERY_STATUS).toString()));
+        if(orderMap.get(ORDER_LOCATION)!=null)setGeoPoint((GeoPoint) orderMap.get(ORDER_LOCATION));
+        if(orderMap.get(ORDER_NUMBER)!=null) setOrderNumber((String) orderMap.get(ORDER_NUMBER));
+        if(orderMap.get(ORDER_TIME)!=null) {
+            Timestamp time=(Timestamp) orderMap.get(ORDER_TIME);
+            Log.i("TimeDateAT","time: "+time.toString());
+            setOrderTime(time);
+        }
 //        if(orderMap.get(ORDER_TIME)!=null)setOrderTime((String) orderMap.get(ORDER_TIME));
     }
     public HashMap<String,Object> getOrder(){
@@ -94,6 +131,17 @@ public class Order implements Serializable {
         map.put(ORDER_DELIVERY_CHARGE,orderDeliveryCharges);
         map.put(ORDER_DELIVERY_STATUS,orderStatus);
         map.put(ORDER_TIME,orderTime);
+        map.put(ORDER_LOCATION,geoPoint);
+        map.put(ORDER_ID, orderNumber);
         return map;
+    }
+
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 }

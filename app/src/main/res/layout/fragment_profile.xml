@@ -87,6 +87,7 @@
                     android:drawablePadding="20dp"
                     android:text="Orders"
                     android:textSize="20dp"
+                    android:id="@+id/orders"
                     android:textColor="@color/colorBlack"/>
             </LinearLayout>
             <LinearLayout

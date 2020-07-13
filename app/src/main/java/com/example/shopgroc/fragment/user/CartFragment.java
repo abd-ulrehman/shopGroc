@@ -1,8 +1,6 @@
 package com.example.shopgroc.fragment.user;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,14 +11,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.adapter.CartAdapter;
-import com.example.shopgroc.controller.OrderController;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
 import com.example.shopgroc.manager.CartManager;
+import com.google.firebase.firestore.GeoPoint;
+
 
 
 /**
@@ -34,6 +34,7 @@ public class CartFragment extends BaseFragment implements CartManager.CartListen
     private ChildToParentCallback varChildToParentCallback;
     TextView textViewEmptyCart;
     Button buttonOrder;
+    GeoPoint gPoint;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +57,7 @@ public class CartFragment extends BaseFragment implements CartManager.CartListen
         InIt(view);
     }
 
-    private void InIt(View view) {
+    private void InIt(final View view) {
         textViewEmptyCart = view.findViewById(R.id.textViewEmptyCart);
         recyclerViewCart = view.findViewById(R.id.recyclerViewCart);
         buttonOrder = view.findViewById(R.id.buttonOrder);
@@ -69,27 +70,35 @@ public class CartFragment extends BaseFragment implements CartManager.CartListen
         buttonOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OrderController.getInstance().placeOrder(v.getContext(),CartManager.getInstance().getOrderData());
+                Navigation.findNavController(v).navigate(R.id.action_navigation_cart_to_map_fragment);
                 Log.i("TAG", "onClick: " + CartManager.getInstance().getTotalPrice());
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Order Invoice");
-                builder.setMessage("Total Products : " + CartManager.getInstance().getTotalCartQuantity() + "\n" + "Amount : " + CartManager.getInstance().getTotalPrice());
-                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                builder.create().show();
             }
         });
 
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode == RESULT_OK){
+//            Place place = PlacePicker.getPlace(data,getContext());
+//            StringBuilder stringBuilder = new StringBuilder();
+//            Double latitude = place.getLatLng().latitude;
+//            Double longitude = place.getLatLng().longitude;
+//            if(latitude!=null && longitude !=null){
+//                gPoint = new GeoPoint(latitude,longitude);
+//                CartManager.getInstance().setGeoPoint(gPoint);
+//                OrderController.getInstance().placeOrder(getContext(),CartManager.getInstance().getOrderData());
+//            }
+//            stringBuilder.append("Latitude :");
+//            stringBuilder.append(latitude);
+//            stringBuilder.append("Longitude");
+//            stringBuilder.append(longitude);
+//
+//
+//        }
+//    }
 
     private void setEmptyView(boolean isEmpty){
         textViewEmptyCart.setVisibility(isEmpty?View.VISIBLE:View.GONE);

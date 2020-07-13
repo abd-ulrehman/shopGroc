@@ -48,7 +48,7 @@ import java.util.UUID;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 1001 ;
     ChildToParentCallback varChildToParentCallback;
-    TextView buttonLogout, userName;
+    TextView buttonLogout, userName , buttonOrders;
     NavController navController;
     SharedUtility sharedUtility;
     User user;
@@ -83,8 +83,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         navController = Navigation.findNavController(view);
         userName = view.findViewById(R.id.userName);
         userImage = view.findViewById(R.id.userImage);
+        buttonOrders = view.findViewById(R.id.orders);
         buttonLogout.setOnClickListener(this);
         userImage.setOnClickListener(this);
+        buttonOrders.setOnClickListener(this);
 
         if (user!=null) {
             userName.setText(user.getName());
@@ -103,6 +105,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         else if(id == R.id.userImage){
             chooseImage();
 
+        }
+        else if(id == R.id.orders){
+            navController.navigate(R.id.action_navigation_profile_to_order_History);
         }
     }
     private void chooseImage() {

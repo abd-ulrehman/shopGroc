@@ -119,11 +119,21 @@ public class ProductController {
             }
         });
     }
+
+
+    public void getProductDetail(String productId,Product product){
+
+    }
+
     public void setProductCallbackListener(ProductCallbackListener productCallbackListener){
         this.productCallbackListener=productCallbackListener;
     }
     public interface ProductCallbackListener {
         void onSuccess(boolean isSuccess,List<Product> productLista);
+        void onFailure(boolean isFailure,Exception e);
+    }
+    public interface ProductDetailCallback {
+        void onSuccess(boolean isSuccess,Product product);
         void onFailure(boolean isFailure,Exception e);
     }
 }

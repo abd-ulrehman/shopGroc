@@ -69,6 +69,9 @@
             <action
                 android:id="@+id/action_navigation_cart_to_itemDisplayFragment"
                 app:destination="@id/itemDisplayFragment" />
+            <action
+                android:id="@+id/action_navigation_cart_to_map_fragment"
+                app:destination="@id/map_fragment" />
         </fragment>
         <fragment
             android:id="@+id/navigation_search"
@@ -88,6 +91,9 @@
             <action
                 android:id="@+id/action_navigation_profile_to_LoginFragment"
                 app:destination="@+id/loginFragment" />
+            <action
+                android:id="@+id/action_navigation_profile_to_order_History"
+                app:destination="@id/order_History" />
         </fragment>
         <fragment
             android:id="@+id/navigation_dashboard"
@@ -107,6 +113,21 @@
                 android:id="@+id/action_itemDisplayFragment_to_navigation_cart"
                 app:destination="@id/navigation_cart" />
         </fragment>
+        <fragment
+            android:id="@+id/map_fragment"
+            android:name="com.example.shopgroc.fragment.user.place_order_fragment"
+            android:label="fragment_map_fragment"
+            tools:layout="@layout/fragment_place_order_fragment" />
+        <fragment
+            android:id="@+id/order_History"
+            android:name="com.example.shopgroc.fragment.user.Order_History"
+            android:label="fragment_order__history"
+            tools:layout="@layout/fragment_order__history" />
+        <fragment
+            android:id="@+id/orderDetailFragment"
+            android:name="com.example.shopgroc.OrderDetailFragment"
+            android:label="fragment_order_detail"
+            tools:layout="@layout/fragment_order_detail" />
     </navigation>
     <fragment
         android:id="@+id/storeLoginFragment"

@@ -51,15 +51,25 @@ public class Constant {
         public static final String ORDER_DELIVERY_STATUS="deliveryStatus";
         public static final String ORDER_TIME="orderTime";
         public static final String ORDER_ORDER="orders";
+        public static final String ORDER_LOCATION = "location";
+        public static final String ORDER_NUMBER = "orderNumber";
+        public static final String ORDER_ID = "id";
 
 
         public static final String ORDERED_PRODUCT_ID="productId";
         public static final String ORDERED_PRODUCT_QUANTITY="productQuantity";
+        public static final String ORDERED_PRODUCT_NAME="productName";
         public static final String ORDERED_PRODUCT_PRICE="productPrice";
 
     }
 
     public static class DeliveryStatus{
         public static final int ORDER_PENDING=0;
+
+        public static final String ORDER_PENDING_STATUS="Pending";
+    }
+
+    public static class DateFormats{
+        public static final String DATE_AT_TIME="dd/MM/yyyy 'at' hh:mm aa";
     }
 }
