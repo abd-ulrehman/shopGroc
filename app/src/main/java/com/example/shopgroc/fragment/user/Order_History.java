@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -32,6 +33,7 @@ public class Order_History extends Fragment {
     RecyclerView recyclerViewOrderHistory;
     OrderAdapter orderAdapter;
     LinearLayoutManager linearLayoutManager;
+    CardView cardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +57,7 @@ public class Order_History extends Fragment {
         navigationController = Navigation.findNavController(view);
 
         recyclerViewOrderHistory = view.findViewById(R.id.orderHistory);
+        cardView = view.findViewById(R.id.orderCardView);
         linearLayoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false);
         orderAdapter = new OrderAdapter();
         recyclerViewOrderHistory.setLayoutManager(linearLayoutManager);
@@ -75,4 +78,5 @@ public class Order_History extends Fragment {
             }
         });
     }
+
 }

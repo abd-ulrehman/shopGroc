@@ -13,7 +13,6 @@ import java.util.List;
 
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_DELIVERY_CHARGE;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_DELIVERY_STATUS;
-import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_ID;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_LOCATION;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_NUMBER;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_PRODUCTS;
@@ -32,13 +31,13 @@ public class Order implements Serializable {
     public Order() {
     }
     public Order(int orderPending, double deliveryCharges, Timestamp orderTime,
-                 List<OrderedProduct> orderedProductList, GeoPoint point,String orderId){
+                 List<OrderedProduct> orderedProductList, GeoPoint point,String orderNumber){
         this.orderStatus = orderPending;
         this.orderDeliveryCharges = deliveryCharges;
         this.orderTime = orderTime;
         this.orderedProductList = orderedProductList;
         this.geoPoint = point;
-        this.orderNumber = orderId;
+        this.orderNumber = orderNumber;
     }
 
     public Order(int orderStatus, double deliveryCharges, Timestamp orderTime,
@@ -111,7 +110,7 @@ public class Order implements Serializable {
         if(orderMap.get(ORDER_DELIVERY_CHARGE)!=null)setDeliveryCharges((Double) orderMap.get(ORDER_DELIVERY_CHARGE));
         if(orderMap.get(ORDER_DELIVERY_STATUS)!=null)setOrderStatus(Integer.parseInt(orderMap.get(ORDER_DELIVERY_STATUS).toString()));
         if(orderMap.get(ORDER_LOCATION)!=null)setGeoPoint((GeoPoint) orderMap.get(ORDER_LOCATION));
-        if(orderMap.get(ORDER_NUMBER)!=null) setOrderNumber((String) orderMap.get(ORDER_NUMBER));
+        if(orderMap.get(ORDER_NUMBER)!=null)setOrderNumber((String) orderMap.get(ORDER_NUMBER));
         if(orderMap.get(ORDER_TIME)!=null) {
             Timestamp time=(Timestamp) orderMap.get(ORDER_TIME);
             Log.i("TimeDateAT","time: "+time.toString());
@@ -132,10 +131,9 @@ public class Order implements Serializable {
         map.put(ORDER_DELIVERY_STATUS,orderStatus);
         map.put(ORDER_TIME,orderTime);
         map.put(ORDER_LOCATION,geoPoint);
-        map.put(ORDER_ID, orderNumber);
+        map.put(ORDER_NUMBER, orderNumber);
         return map;
     }
-
 
     public String getOrderNumber() {
         return orderNumber;
@@ -144,4 +142,5 @@ public class Order implements Serializable {
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
+
 }

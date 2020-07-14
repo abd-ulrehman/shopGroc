@@ -80,4 +80,9 @@ public class LandingFragment extends Fragment implements View.OnClickListener, C
     public void hideBottomNav(boolean hide) {
         hideBottomNav(true);
     }
+
+    @Override
+    public void hideBottomNavStore(boolean hide) {
+        hideBottomNavStore(false);
+    }
 }

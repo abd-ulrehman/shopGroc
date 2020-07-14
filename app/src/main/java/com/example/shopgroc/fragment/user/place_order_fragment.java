@@ -18,7 +18,6 @@ import com.example.shopgroc.R;
 import com.example.shopgroc.controller.OrderController;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
 import com.example.shopgroc.manager.CartManager;
-import com.example.shopgroc.model.Order;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -31,8 +30,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.firestore.GeoPoint;
-
-import java.util.Random;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -114,12 +111,6 @@ public class place_order_fragment extends Fragment implements View.OnClickListen
             return;
         }
         if(id == R.id.orderConfirmButton){
-            Random rnd = new Random();
-            int n = 100000 + rnd.nextInt(900000);
-            String orderNumber="GS-"+n;
-
-            Order order=CartManager.getInstance().getOrderData();
-            order.setOrderNumber(orderNumber);
 
             OrderController.getInstance().placeOrder(getContext(),CartManager.getInstance().getOrderData());
         }

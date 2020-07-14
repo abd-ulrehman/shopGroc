@@ -104,5 +104,4 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.cartItemList = cartItemList;
         notifyDataSetChanged();
     }
-
 }

@@ -81,9 +81,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     private void getProductList(){
         ProductController.getInstance().getProduct(new ProductController.ProductCallbackListener() {
             @Override
-            public void onSuccess(boolean isSuccess, List<Product> productLista) {
-                productAdapterBeverages.setProductList(productLista);
-                productAdapterDrinks.setProductList(productLista);
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterBeverages.setProductList(productList);
+                productAdapterDrinks.setProductList(productList);
             }
 
             @Override

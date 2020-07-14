@@ -10,6 +10,7 @@ import com.google.firebase.firestore.GeoPoint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_PENDING;
 
@@ -89,7 +90,11 @@ public class CartManager {
     public Order getOrderData(){
 
         List<OrderedProduct> orderedProductList=getOrderedProductList();
-        return new Order(ORDER_PENDING, 50, Timestamp.now(),orderedProductList,geoPoint,"");
+        Random rnd = new Random();
+        int n = 100000 + rnd.nextInt(900000);
+        String orderNumber="SG-"+n;
+
+        return new Order(ORDER_PENDING, 50, Timestamp.now(),orderedProductList,geoPoint,orderNumber);
 
     }
     public void addInToTotal(double total){
@@ -114,7 +119,7 @@ public class CartManager {
 
             for (int i=0;i<getItemList().size();i++){
                 CartItem item=getItemList().get(i);
-                list.add(new OrderedProduct(item.getProduct().getId(),item.getQuantity(),item.getProduct().getPrice(), geoPoint));
+                list.add(new OrderedProduct(item.getProduct().getId(),item.getProduct().getTitle(),item.getQuantity(),item.getProduct().getPrice(), geoPoint));
             }
 
         }

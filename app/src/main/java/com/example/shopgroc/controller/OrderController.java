@@ -28,7 +28,7 @@ public class OrderController {
 
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static OrderController instance = null;
-    private OrderController(){}
+    public OrderController(){}
     public static OrderController getInstance(){
         if(instance == null) instance=new OrderController();
         return instance;

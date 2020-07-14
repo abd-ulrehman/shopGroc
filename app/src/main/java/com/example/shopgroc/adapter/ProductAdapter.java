@@ -34,13 +34,14 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         CardView cardView;
         ImageView displayImage;
-        TextView textViewTitle;
+        TextView textViewTitle,textViewCategory;
 
         public MyViewHolder(@NonNull View view) {
             super(view);
             cardView = view.findViewById(R.id.cardView);
             displayImage = view.findViewById(R.id.displayImage);
             textViewTitle = view.findViewById(R.id.textViewTitle);
+            textViewCategory = view.findViewById(R.id.textViewCategory);
         }
     }
 
@@ -63,6 +64,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //            Drawable drawable = myViewHolder.displayImage.getContext().getResources().getDrawable(product.getImage());
 //            myViewHolder.displayImage.setImageDrawable(drawable);
             myViewHolder.textViewTitle.setText(product.getTitle());
+//            myViewHolder.textViewCategory.setText(product.getCategory());
 
             myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override

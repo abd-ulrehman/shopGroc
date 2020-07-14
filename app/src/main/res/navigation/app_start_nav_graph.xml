@@ -122,10 +122,14 @@
             android:id="@+id/order_History"
             android:name="com.example.shopgroc.fragment.user.Order_History"
             android:label="fragment_order__history"
-            tools:layout="@layout/fragment_order__history" />
+            tools:layout="@layout/fragment_order__history" >
+            <action
+                android:id="@+id/action_order_History_to_orderDetailFragment"
+                app:destination="@id/orderDetailFragment" />
+        </fragment>
         <fragment
             android:id="@+id/orderDetailFragment"
-            android:name="com.example.shopgroc.OrderDetailFragment"
+            android:name="com.example.shopgroc.fragment.user.OrderDetailFragment"
             android:label="fragment_order_detail"
             tools:layout="@layout/fragment_order_detail" />
     </navigation>
@@ -140,10 +144,10 @@
     </fragment>
     <navigation
         android:id="@+id/StoreHomeScreenNavigation"
-        app:startDestination="@id/storeDashboard">
+        app:startDestination="@id/store_navigation_dashboard">
 
         <fragment
-            android:id="@+id/storeDashboard"
+            android:id="@+id/store_navigation_dashboard"
             android:name="com.example.shopgroc.fragment.store.StoreDashboard"
             android:label="fragment_store_dashboard"
             tools:layout="@layout/fragment_store_dashboard" >
@@ -161,13 +165,23 @@
             tools:layout="@layout/fragment_add_item_to_store" >
             <action
                 android:id="@+id/action_addItemToStore_to_storeDashboard"
-                app:destination="@id/storeDashboard" />
+                app:destination="@id/store_navigation_dashboard" />
         </fragment>
         <fragment
             android:id="@+id/itemDisplayFragment2"
             android:name="com.example.shopgroc.fragment.user.ItemDisplayFragment"
             android:label="fragment_item_display"
             tools:layout="@layout/fragment_item_display" />
+        <fragment
+            android:id="@+id/store_navigation_orders"
+            android:name="com.example.shopgroc.store_order_fragment"
+            android:label="fragment_store_order_fragment"
+            tools:layout="@layout/fragment_store_order_fragment" />
+        <fragment
+            android:id="@+id/store_navigation_more"
+            android:name="com.example.shopgroc.store_navigation_more"
+            android:label="fragment_store_navigation_more"
+            tools:layout="@layout/fragment_store_navigation_more" />
     </navigation>
 
 

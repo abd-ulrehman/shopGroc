@@ -5,6 +5,7 @@ public class Constant {
         public static final String BUNDLE = "bundle";
         public static final String PRODUCT = "product";
         public static final String CART_ITEM = "cartItem";
+        public static final String ORDER = "order";
     }
 
     public static class SharedPrefKey{
@@ -65,11 +66,18 @@ public class Constant {
 
     public static class DeliveryStatus{
         public static final int ORDER_PENDING=0;
+        public static final int ORDER_COMPLETE=1;
+        public static final int ORDER_CANCEL=2;
 
         public static final String ORDER_PENDING_STATUS="Pending";
+        public static final String ORDER_COMPLETE_STATUS="complete";
+        public static final String ORDER_CANCEL_STATUS="cancel";
     }
 
     public static class DateFormats{
         public static final String DATE_AT_TIME="dd/MM/yyyy 'at' hh:mm aa";
+    }
+    public static class Date{
+        public static final String DATE = "EEE, MMM d, yyyy";
     }
 }
