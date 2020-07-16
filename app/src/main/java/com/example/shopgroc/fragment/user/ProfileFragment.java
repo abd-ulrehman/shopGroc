@@ -36,6 +36,10 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +52,7 @@ import java.util.UUID;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 1001 ;
     ChildToParentCallback varChildToParentCallback;
-    TextView buttonLogout, userName , buttonOrders;
+    TextView buttonLogout, userName , buttonOrders, buttonUserProfile;
     NavController navController;
     SharedUtility sharedUtility;
     User user;
@@ -64,17 +68,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
+
     }
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(false);
+        varChildToParentCallback.hideStoreBottomNav(true);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         user = SharedUtility.getInstance(view.getContext()).getUser();
+        EventBus.getDefault().register(this);
         InIt(view);
     }
 
@@ -84,9 +91,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         userName = view.findViewById(R.id.userName);
         userImage = view.findViewById(R.id.userImage);
         buttonOrders = view.findViewById(R.id.orders);
+        buttonUserProfile = view.findViewById(R.id.userProfile);
         buttonLogout.setOnClickListener(this);
         userImage.setOnClickListener(this);
         buttonOrders.setOnClickListener(this);
+        buttonUserProfile.setOnClickListener(this);
 
         if (user!=null) {
             userName.setText(user.getName());
@@ -94,6 +103,25 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             ImageController.getInstance().loadImage(userImage,ref);
         }
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEventBus userData) {
+        user = userData.getBusData();
+        userName.setText(userData.getBusData().getName());
+        Toast.makeText(getActivity(), userData.getBusData().getName(), Toast.LENGTH_SHORT).show();
+    }
+//    @Subscribe
+//    public void onEvent(MessageEventBus messageEventBus)
+//    {
+//        user = messageEventBus.getBusData();
+//        userName.setText("Abdul");
+//        Toast.makeText(getContext(), "Called For Profile Fragment", Toast.LENGTH_LONG).show();
+//    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -108,6 +136,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
         else if(id == R.id.orders){
             navController.navigate(R.id.action_navigation_profile_to_order_History);
+        }
+        else if(id == R.id.userProfile){
+            navController.navigate(R.id.action_navigation_profile_to_userProfileDisplay);
         }
     }
     private void chooseImage() {
@@ -179,4 +210,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     }
                 });
     }
+
 }
+

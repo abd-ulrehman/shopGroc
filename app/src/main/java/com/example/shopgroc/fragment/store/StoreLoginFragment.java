@@ -21,7 +21,7 @@ import com.google.android.material.textfield.TextInputEditText;
 /**
  * @author Abdul Rehman
  */
-public class StoreLoginFragment extends Fragment implements View.OnClickListener,ChildToParentCallback {
+public class StoreLoginFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "StoreLoginFragment";
 
@@ -61,15 +61,6 @@ public class StoreLoginFragment extends Fragment implements View.OnClickListener
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(true);
-    }
-
-    @Override
-    public void hideBottomNav(boolean hide) {
-        hideBottomNav(true);
-    }
-
-    @Override
-    public void hideBottomNavStore(boolean hide) {
-        hideBottomNav(false);
+        varChildToParentCallback.hideStoreBottomNav(true);
     }
 }

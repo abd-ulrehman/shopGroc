@@ -6,6 +6,7 @@ public class Constant {
         public static final String PRODUCT = "product";
         public static final String CART_ITEM = "cartItem";
         public static final String ORDER = "order";
+        public static final String USER_ORDER = "userOrder";
     }
 
     public static class SharedPrefKey{
@@ -38,6 +39,7 @@ public class Constant {
         public static final String USER_TABLE= "User";
         public static final String PRODUCT_TABLE= "Product";
         public static final String ORDER_TABLE = "Orders";
+        public static final String STORE_ORDER_TABLE = "storeOrders";
     }
 
     public static class DatabaseKey{
@@ -54,7 +56,7 @@ public class Constant {
         public static final String ORDER_ORDER="orders";
         public static final String ORDER_LOCATION = "location";
         public static final String ORDER_NUMBER = "orderNumber";
-        public static final String ORDER_ID = "id";
+        public static final String USER_ID = "userId";
 
 
         public static final String ORDERED_PRODUCT_ID="productId";

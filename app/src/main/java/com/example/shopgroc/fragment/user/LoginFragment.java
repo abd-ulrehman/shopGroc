@@ -31,7 +31,7 @@ import static com.example.shopgroc.utility.Constant.Messege.EMPTY_PASSWORD_ERROR
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment implements View.OnClickListener, LoginController.LoginCallbackListener {
+public class LoginFragment extends Fragment implements View.OnClickListener, LoginController.LoginCallbackListener,ChildToParentCallback {
 
 
     private static final String TAG = "LoginFragment";
@@ -149,6 +149,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(true);
+        varChildToParentCallback.hideStoreBottomNav(true);
     }
 
     @Override
@@ -165,5 +166,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     public void onFailure(boolean isFailure, Exception e) {
         setViewInProgress(false);
         Log.e(TAG,"Failed to Login user: "+e.getMessage());
+    }
+
+    @Override
+    public void hideBottomNav(boolean hide) {
+        hideBottomNav(true);
+    }
+
+    @Override
+    public void hideStoreBottomNav(boolean hide) {
+        hideStoreBottomNav(true);
     }
 }

@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author  Abdul Rehman
  */
-public class DashboardFragment extends Fragment implements View.OnClickListener,ProductAdapter.ProductClickListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener,ProductAdapter.ProductClickListener,ChildToParentCallback {
 
 
     LinearLayout itemCardView;
@@ -49,6 +49,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(false);
+        varChildToParentCallback.hideStoreBottomNav(true);
     }
 
     @Override
@@ -115,5 +116,15 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onProductClick(Bundle bundle) {
         navigationController.navigate(R.id.action_navigation_dashboard_to_itemDisplayFragment,bundle);
+    }
+
+    @Override
+    public void hideBottomNav(boolean hide) {
+        hideBottomNav(false);
+    }
+
+    @Override
+    public void hideStoreBottomNav(boolean hide) {
+        hideStoreBottomNav(true);
     }
 }

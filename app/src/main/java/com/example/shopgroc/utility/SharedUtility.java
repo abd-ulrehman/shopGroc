@@ -40,7 +40,7 @@ public class SharedUtility {
         return user!=null;
     }
 
-    public void setUser(User user){
+    public SharedUtility setUser(User user){
 
         editor.putString(USER_ID,user.getId());
         editor.putString(USER_NAME,user.getName());
@@ -51,6 +51,7 @@ public class SharedUtility {
 
         editor.commit();
 
+        return null;
     }
 
     public User getUser(){

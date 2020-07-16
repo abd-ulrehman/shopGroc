@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,7 +33,8 @@ import static com.example.shopgroc.utility.Constant.DataType.PRODUCT;
 public class ItemDisplayFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "ItemDisplayFragment";
 
-    Button buttonPlus, buttonMinus, buttonAddToCart,buttonShopNow, buttonUpdateCart;
+    Button buttonPlus, buttonMinus,buttonUpdateCart;
+    ImageButton buttonAddToCart;
     TextView counter;
     int itemCount=0, maxLength = 10 , minLength = 0;
     Product product;
@@ -78,7 +80,6 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
         buttonPlus = view.findViewById(R.id.buttonPlus);
         counter = view.findViewById(R.id.itemCount);
         buttonAddToCart = view.findViewById(R.id.buttonAddToCart);
-        buttonShopNow = view.findViewById(R.id.btnShopNow);
         cartButtonContainer = view.findViewById(R.id.cartDisplayButtons);
 
         setButtonVisibility(updateButtonVisibility);
@@ -129,6 +130,7 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
 //            Log.i(TAG, "onClick: " + item.getProduct().getId());
             if(cartManager.hasItem(item))cartManager.updateItem(item);
             else cartManager.addToCart(item);
+            Navigation.findNavController(v).navigate(R.id.action_itemDisplayFragment_to_navigation_dashboard);
         }
         else if(id==R.id.buttonUpdateCart){
             CartManager.getInstance().getItemQuantity(cartItem);

@@ -22,6 +22,7 @@ public class CartManager {
     private double totalPrice = 0;
     int totalQuantity;
     GeoPoint geoPoint;
+    private String userId;
 
     private CartManager(){}
     public static CartManager getInstance(){
@@ -45,6 +46,14 @@ public class CartManager {
             }
         }
 
+        if (cartItemList.isEmpty()) cartListener.onCartEmpty();
+        else cartListener.onCartHasData();
+        if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
+    }
+    public void deleteCartItems(){
+        for(int i=0; i<cartItemList.size(); i++){
+                cartItemList.remove(i);
+        }
         if (cartItemList.isEmpty()) cartListener.onCartEmpty();
         else cartListener.onCartHasData();
         if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
@@ -93,8 +102,7 @@ public class CartManager {
         Random rnd = new Random();
         int n = 100000 + rnd.nextInt(900000);
         String orderNumber="SG-"+n;
-
-        return new Order(ORDER_PENDING, 50, Timestamp.now(),orderedProductList,geoPoint,orderNumber);
+        return new Order(ORDER_PENDING, 50, Timestamp.now(),orderedProductList,geoPoint,orderNumber,userId);
 
     }
     public void addInToTotal(double total){
@@ -130,6 +138,14 @@ public class CartManager {
         this.cartListener=cartListener;
     }
     public void setCartItemCountListener(CartItemCountListener cartItemCountListener){this.cartItemCountListener = cartItemCountListener;}
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public interface CartListener{
         void onCartEmpty();

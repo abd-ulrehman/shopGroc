@@ -17,6 +17,7 @@ import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_LOCATION;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_NUMBER;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_PRODUCTS;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_TIME;
+import static com.example.shopgroc.utility.Constant.DatabaseKey.USER_ID;
 
 public class Order implements Serializable {
     private String id;
@@ -26,18 +27,20 @@ public class Order implements Serializable {
     private List<OrderedProduct> orderedProductList;
     private String orderNumber;
     private GeoPoint geoPoint;
+    private String userId;
 
 
     public Order() {
     }
     public Order(int orderPending, double deliveryCharges, Timestamp orderTime,
-                 List<OrderedProduct> orderedProductList, GeoPoint point,String orderNumber){
+                 List<OrderedProduct> orderedProductList, GeoPoint point,String orderNumber, String id){
         this.orderStatus = orderPending;
         this.orderDeliveryCharges = deliveryCharges;
         this.orderTime = orderTime;
         this.orderedProductList = orderedProductList;
         this.geoPoint = point;
         this.orderNumber = orderNumber;
+        this.userId = id;
     }
 
     public Order(int orderStatus, double deliveryCharges, Timestamp orderTime,
@@ -111,6 +114,7 @@ public class Order implements Serializable {
         if(orderMap.get(ORDER_DELIVERY_STATUS)!=null)setOrderStatus(Integer.parseInt(orderMap.get(ORDER_DELIVERY_STATUS).toString()));
         if(orderMap.get(ORDER_LOCATION)!=null)setGeoPoint((GeoPoint) orderMap.get(ORDER_LOCATION));
         if(orderMap.get(ORDER_NUMBER)!=null)setOrderNumber((String) orderMap.get(ORDER_NUMBER));
+        if(orderMap.get(USER_ID)!=null)setOrderNumber((String) orderMap.get(USER_ID));
         if(orderMap.get(ORDER_TIME)!=null) {
             Timestamp time=(Timestamp) orderMap.get(ORDER_TIME);
             Log.i("TimeDateAT","time: "+time.toString());
@@ -125,13 +129,13 @@ public class Order implements Serializable {
         for (OrderedProduct product:orderedProductList){
             prodList.add(product.getOrderedProductMap());
         }
-
         map.put(ORDER_PRODUCTS,prodList);
         map.put(ORDER_DELIVERY_CHARGE,orderDeliveryCharges);
         map.put(ORDER_DELIVERY_STATUS,orderStatus);
         map.put(ORDER_TIME,orderTime);
         map.put(ORDER_LOCATION,geoPoint);
         map.put(ORDER_NUMBER, orderNumber);
+        map.put(USER_ID, userId);
         return map;
     }
 
@@ -143,4 +147,11 @@ public class Order implements Serializable {
         this.orderNumber = orderNumber;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

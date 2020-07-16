@@ -1,5 +1,6 @@
 package com.example.shopgroc.fragment.store;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shopgroc.R;
 import com.example.shopgroc.adapter.ProductAdapter;
 import com.example.shopgroc.controller.ProductController;
+import com.example.shopgroc.interfaces.ChildToParentCallback;
 import com.example.shopgroc.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,6 +35,7 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
     RecyclerView recyclerViewBeverages;
     LinearLayoutManager linearLayoutManagerBeverages;
     NavController navigationController;
+    ChildToParentCallback varChildToParentCallback;
 
     FloatingActionButton addItem;
 
@@ -92,5 +95,11 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
     @Override
     public void onProductClick(Bundle bundle) {
         navigationController.navigate(R.id.action_storeDashboard_to_itemDisplayFragment2,bundle);
+    }
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        varChildToParentCallback = (ChildToParentCallback)context;
+        varChildToParentCallback.hideBottomNav(true);
+        varChildToParentCallback.hideStoreBottomNav(false);
     }
 }

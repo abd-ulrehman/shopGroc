@@ -94,6 +94,9 @@
             <action
                 android:id="@+id/action_navigation_profile_to_order_History"
                 app:destination="@id/order_History" />
+            <action
+                android:id="@+id/action_navigation_profile_to_userProfileDisplay"
+                app:destination="@id/userProfileDisplay" />
         </fragment>
         <fragment
             android:id="@+id/navigation_dashboard"
@@ -112,12 +115,19 @@
             <action
                 android:id="@+id/action_itemDisplayFragment_to_navigation_cart"
                 app:destination="@id/navigation_cart" />
+            <action
+                android:id="@+id/action_itemDisplayFragment_to_navigation_dashboard"
+                app:destination="@id/navigation_dashboard" />
         </fragment>
         <fragment
             android:id="@+id/map_fragment"
             android:name="com.example.shopgroc.fragment.user.place_order_fragment"
             android:label="fragment_map_fragment"
-            tools:layout="@layout/fragment_place_order_fragment" />
+            tools:layout="@layout/fragment_place_order_fragment" >
+            <action
+                android:id="@+id/action_map_fragment_to_order_Confermation"
+                app:destination="@id/order_Confermation" />
+        </fragment>
         <fragment
             android:id="@+id/order_History"
             android:name="com.example.shopgroc.fragment.user.Order_History"
@@ -132,6 +142,24 @@
             android:name="com.example.shopgroc.fragment.user.OrderDetailFragment"
             android:label="fragment_order_detail"
             tools:layout="@layout/fragment_order_detail" />
+        <fragment
+            android:id="@+id/userProfileDisplay"
+            android:name="com.example.shopgroc.fragment.user.UserProfileDisplay"
+            android:label="fragment_user_profile_display"
+            tools:layout="@layout/fragment_user_profile_display" >
+            <action
+                android:id="@+id/action_userProfileDisplay_to_navigation_profile"
+                app:destination="@id/navigation_profile" />
+        </fragment>
+        <fragment
+            android:id="@+id/order_Confermation"
+            android:name="com.example.shopgroc.fragment.user.Order_Confermation"
+            android:label="fragment_order__confermation"
+            tools:layout="@layout/fragment_order__confermation" >
+            <action
+                android:id="@+id/action_order_Confermation_to_navigation_dashboard"
+                app:destination="@id/navigation_dashboard" />
+        </fragment>
     </navigation>
     <fragment
         android:id="@+id/storeLoginFragment"
@@ -174,14 +202,23 @@
             tools:layout="@layout/fragment_item_display" />
         <fragment
             android:id="@+id/store_navigation_orders"
-            android:name="com.example.shopgroc.store_order_fragment"
+            android:name="com.example.shopgroc.fragment.store.store_order_fragment"
             android:label="fragment_store_order_fragment"
-            tools:layout="@layout/fragment_store_order_fragment" />
+            tools:layout="@layout/fragment_store_order_fragment" >
+            <action
+                android:id="@+id/action_store_navigation_orders_to_openUserOrder"
+                app:destination="@id/openUserOrder" />
+        </fragment>
         <fragment
             android:id="@+id/store_navigation_more"
-            android:name="com.example.shopgroc.store_navigation_more"
+            android:name="com.example.shopgroc.fragment.store.store_navigation_more"
             android:label="fragment_store_navigation_more"
             tools:layout="@layout/fragment_store_navigation_more" />
+        <fragment
+            android:id="@+id/openUserOrder"
+            android:name="com.example.shopgroc.fragment.store.openUserOrder"
+            android:label="fragment_open_user_order"
+            tools:layout="@layout/fragment_open_user_order" />
     </navigation>
 
 

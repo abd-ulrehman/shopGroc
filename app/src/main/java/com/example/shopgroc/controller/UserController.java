@@ -1,16 +1,25 @@
 package com.example.shopgroc.controller;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.shopgroc.fragment.user.MessageEventBus;
 import com.example.shopgroc.model.User;
+import com.example.shopgroc.utility.SharedUtility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.Map;
 
 import static com.example.shopgroc.utility.Constant.DatabaseTableKey.USER_TABLE;
 
@@ -73,7 +82,29 @@ public class UserController {
             });
         }
     }
+    public void updateUser(Map<String,Object> data, final Context context){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        database.collection("User").document(currentUser.getUid()).update(data);
+        final DocumentReference documentReference = database.collection(USER_TABLE).document(currentUser.getUid());
+//            Log.i(TAG,"document Reference is --------- " + documentReference);
 
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists() && document.getData() != null) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        User user = new User();
+                        user.setId(document.getId());
+                        user.setUserMap(document.getData());
+                        SharedUtility.getInstance(context).setUser(user);
+                        EventBus.getDefault().post(new MessageEventBus(user));
+                    }
+                }
+            }
+        });
+    }
     public interface UserCallbackListener {
         void onSuccess(boolean isSuccess,User user);
         void onFailure(boolean isFailure,Exception e);

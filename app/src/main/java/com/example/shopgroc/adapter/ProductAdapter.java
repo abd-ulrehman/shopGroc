@@ -64,7 +64,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //            Drawable drawable = myViewHolder.displayImage.getContext().getResources().getDrawable(product.getImage());
 //            myViewHolder.displayImage.setImageDrawable(drawable);
             myViewHolder.textViewTitle.setText(product.getTitle());
-//            myViewHolder.textViewCategory.setText(product.getCategory());
+//            myViewHolder.textViewCategory.setText(product.getCategory()+"");
 
             myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override

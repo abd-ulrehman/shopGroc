@@ -18,6 +18,7 @@ import com.example.shopgroc.R;
 import com.example.shopgroc.controller.OrderController;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
 import com.example.shopgroc.manager.CartManager;
+import com.example.shopgroc.model.Order;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -111,8 +112,11 @@ public class place_order_fragment extends Fragment implements View.OnClickListen
             return;
         }
         if(id == R.id.orderConfirmButton){
-
-            OrderController.getInstance().placeOrder(getContext(),CartManager.getInstance().getOrderData());
+            Order order = CartManager.getInstance().getOrderData();
+            OrderController.getInstance().placeOrder(getContext(),order);
+            OrderController.getInstance().placeOrderStore(getContext(),order);
+            CartManager.getInstance().deleteCartItems();
+            Navigation.findNavController(v).navigate(R.id.action_map_fragment_to_order_Confermation);
         }
         if(id == R.id.selectLocationButton){
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();

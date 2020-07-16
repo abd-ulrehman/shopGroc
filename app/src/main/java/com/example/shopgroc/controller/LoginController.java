@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.shopgroc.manager.CartManager;
 import com.example.shopgroc.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,6 +58,7 @@ public class LoginController {
             @Override
             public void onSuccess(boolean isSuccess, User user) {
                 if (loginCallbackListener!=null)loginCallbackListener.onSuccess(isSuccess,user);
+                CartManager.getInstance().setUserId(user.getId());
             }
 
             @Override
