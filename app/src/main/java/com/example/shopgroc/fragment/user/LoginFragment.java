@@ -150,6 +150,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(true);
         varChildToParentCallback.hideStoreBottomNav(true);
+        varChildToParentCallback.hideRiderBottomNav(true);
     }
 
     @Override
@@ -176,5 +177,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     @Override
     public void hideStoreBottomNav(boolean hide) {
         hideStoreBottomNav(true);
+    }
+
+    @Override
+    public void hideRiderBottomNav(boolean hide) {
+        hideRiderBottomNav(true);
     }
 }

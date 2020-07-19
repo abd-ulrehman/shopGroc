@@ -18,13 +18,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Order Id"
                 android:textSize="16dp"
                 android:textColor="@color/colorBlack"
                 android:id="@+id/customerOrderId"
                 android:layout_weight="0.5"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textSize="16dp"
+                android:textColor="@color/colorBlack"
+                android:id="@+id/customerOrderStatus"
+                android:layout_weight="0.5"
+                android:gravity="right"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Order Date"
-                android:textSize="16dp"
+                android:textSize="10dp"
                 android:id="@+id/customerOrderDate"
                 android:layout_weight="0.5"/>
             <TextView
@@ -42,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="Order Price"
                 android:textSize="16dp"
+                android:textColor="@color/colorBlack"
                 android:id="@+id/customerOrderPrice"
                 android:gravity="right"
                 android:layout_weight="0.5"/>

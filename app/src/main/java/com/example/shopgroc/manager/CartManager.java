@@ -44,6 +44,7 @@ public class CartManager {
                 removeFromTotal(item.getProduct().getPrice() * item.getQuantity());
                 break;
             }
+            if (cartListener!=null) cartListener.onCartHasData();
         }
 
         if (cartItemList.isEmpty()) cartListener.onCartEmpty();
@@ -51,9 +52,7 @@ public class CartManager {
         if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());
     }
     public void deleteCartItems(){
-        for(int i=0; i<cartItemList.size(); i++){
-                cartItemList.remove(i);
-        }
+        cartItemList.clear();
         if (cartItemList.isEmpty()) cartListener.onCartEmpty();
         else cartListener.onCartHasData();
         if (cartItemCountListener!=null) cartItemCountListener.onCountUpdate(getCartItemCount());

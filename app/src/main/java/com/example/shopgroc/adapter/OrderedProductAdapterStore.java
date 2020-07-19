@@ -37,13 +37,13 @@ public class OrderedProductAdapterStore extends RecyclerView.Adapter <RecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof OrderedProductAdapter.OrderedProductViewHolder){
-            OrderedProductAdapter.OrderedProductViewHolder orderedProductViewHolder = (OrderedProductAdapter.OrderedProductViewHolder) holder;
+        if(holder instanceof OrderedProductAdapterStore.OrderedProductViewHolder){
+            OrderedProductAdapterStore.OrderedProductViewHolder orderedProductViewHolder = (OrderedProductAdapterStore.OrderedProductViewHolder) holder;
             final OrderedProduct orderProduct = orderList.get(position);
-            orderedProductViewHolder.orderProductName.setText(orderProduct.getProductName());
-            orderedProductViewHolder.orderProductPrice.setText((int) orderProduct.getProductPrice()+"");
-            orderedProductViewHolder.orderProductQuantity.setText((int) orderProduct.getProductQuantity()+"");
-            orderedProductViewHolder.serialNumber.setText(position+1+"");
+            orderedProductViewHolder.customerOrderProductName.setText(orderProduct.getProductName());
+            orderedProductViewHolder.customerOrderProductPrice.setText((int) orderProduct.getProductPrice()+"");
+            orderedProductViewHolder.customerOrderProductQuantity.setText((int) orderProduct.getProductQuantity()+"");
+            orderedProductViewHolder.customerOrderSerialNumber.setText(position+1+"");
         }
     }
     @Override

@@ -75,15 +75,29 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         recyclerViewBeverages.setAdapter(productAdapterBeverages);
         recyclerViewDrinks.setAdapter(productAdapterDrinks);
         itemCardView.setOnClickListener(this);
-        getProductList();
+        getProductListBeverages();
+        getProductListDrinks();
         getOrders();
     }
 
-    private void getProductList(){
-        ProductController.getInstance().getProduct(new ProductController.ProductCallbackListener() {
+    private void getProductListBeverages(){
+        ProductController.getInstance().getProductBeverages(new ProductController.ProductCallbackListener() {
             @Override
             public void onSuccess(boolean isSuccess, List<Product> productList) {
                 productAdapterBeverages.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+    private void getProductListDrinks(){
+        ProductController.getInstance().getProductDrinks(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
                 productAdapterDrinks.setProductList(productList);
             }
 
@@ -95,7 +109,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     }
 
     private void getOrders(){
-        OrderController.getInstance().getUserOrders(getActivity(), new OrderController.OrderCallback() {
+        OrderController.getInstance().getUserOrders(getContext(),new OrderController.OrderCallback() {
             @Override
             public void onSuccess(boolean isSuccess, List<Order> orderList) {
 
@@ -126,5 +140,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     @Override
     public void hideStoreBottomNav(boolean hide) {
         hideStoreBottomNav(true);
+    }
+
+    @Override
+    public void hideRiderBottomNav(boolean hide) {
+
     }
 }

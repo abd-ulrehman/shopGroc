@@ -70,5 +70,7 @@ public class NotificationFragment extends Fragment {
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(false);
+        varChildToParentCallback.hideStoreBottomNav(true);
+        varChildToParentCallback.hideRiderBottomNav(true);
     }
 }

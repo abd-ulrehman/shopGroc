@@ -1,5 +1,7 @@
 package com.example.shopgroc.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,8 +88,9 @@ public class Product implements Serializable {
             title= (String) map.get(PRODUCT_TITLE);
         }
 
-        if (map.get(PRODUCT_PRICE)!=null){
-            price= (double) map.get(PRODUCT_PRICE);
+        if (String.valueOf(map.get(PRODUCT_PRICE))!=null){
+            price= Double.parseDouble(String.valueOf(map.get(PRODUCT_PRICE)));
+            Log.i("Product", "setProductMap: " + price);
         }
 
         if (map.get(PRODUCT_CATEGORY)!=null){

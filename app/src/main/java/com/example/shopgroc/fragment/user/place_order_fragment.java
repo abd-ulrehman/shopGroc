@@ -113,7 +113,7 @@ public class place_order_fragment extends Fragment implements View.OnClickListen
         }
         if(id == R.id.orderConfirmButton){
             Order order = CartManager.getInstance().getOrderData();
-            OrderController.getInstance().placeOrder(getContext(),order);
+//            OrderController.getInstance().placeOrder(getContext(),order);
             OrderController.getInstance().placeOrderStore(getContext(),order);
             CartManager.getInstance().deleteCartItems();
             Navigation.findNavController(v).navigate(R.id.action_map_fragment_to_order_Confermation);

@@ -40,4 +40,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/bottom_navigation_store" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/riderBottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_navigation_rider" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

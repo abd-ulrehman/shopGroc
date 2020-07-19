@@ -5,60 +5,35 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
+import com.example.shopgroc.adapter.SearchItemAdapter;
+import com.example.shopgroc.controller.ProductController;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
+import com.example.shopgroc.model.Product;
+
+import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @author Abdul Rehman
  */
-public class SearchFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class SearchFragment extends Fragment implements View.OnClickListener, SearchItemAdapter.ProductClickListener,ChildToParentCallback {
     ChildToParentCallback varChildToParentCallback;
-
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    SearchItemAdapter searchItemAdapter;
+    TextView searchItem;
+    Button searchButton;
+    RecyclerView recyclerView;
+    LinearLayoutManager linearLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,9 +41,73 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        InIt(view);
+    }
+
+    private void InIt(View view) {
+        searchItem = view.findViewById(R.id.searchItem);
+        searchButton = view.findViewById(R.id.searchButton);
+        recyclerView = view.findViewById(R.id.searchRecycler);
+        linearLayoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        searchItemAdapter = new SearchItemAdapter();
+        searchItemAdapter.setClickListener(this);
+        recyclerView.setAdapter(searchItemAdapter);
+        searchButton.setOnClickListener(this);
+    }
+
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(false);
+        varChildToParentCallback.hideStoreBottomNav(true);
+        varChildToParentCallback.hideRiderBottomNav(true);
+    }
+
+    private void searchProductList(String searchKeyword){
+        ProductController.getInstance().getSearchItem(searchKeyword,new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                searchItemAdapter.setProductList(productList);
+            }
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+                Toast.makeText(getContext(), "No Item Found", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if(id == R.id.searchButton){
+            if(searchItem.getText().toString().isEmpty()){
+                Toast.makeText(getContext(), "Please Enter Something in Search Bar", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                searchProductList(searchItem.getText().toString());
+            }
+        }
+    }
+
+    @Override
+    public void onProductClick(Bundle bundle) {
+
+    }
+    @Override
+    public void hideBottomNav(boolean hide) {
+
+    }
+    @Override
+    public void hideStoreBottomNav(boolean hide) {
+
+    }
+    @Override
+    public void hideRiderBottomNav(boolean hide) {
+
     }
 }

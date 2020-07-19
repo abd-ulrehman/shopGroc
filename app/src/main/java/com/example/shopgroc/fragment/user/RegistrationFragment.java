@@ -58,6 +58,8 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(true);
+        varChildToParentCallback.hideStoreBottomNav(true);
+        varChildToParentCallback.hideRiderBottomNav(true);
     }
 
     @Override

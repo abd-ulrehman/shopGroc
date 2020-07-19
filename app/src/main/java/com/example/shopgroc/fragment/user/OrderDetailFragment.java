@@ -66,9 +66,7 @@ public class OrderDetailFragment extends BaseFragment {
         long milliSecond=order.getOrderTime().getSeconds()*1000;
         String date = getDate(milliSecond);
         textViewDate.setText(date);
-//        textViewTotalAmount.setText(""+getOrderAmount(order.getOrderedProductList()));
-//        textViewShipmentCharges.setText((int) order.getDeliveryCharges());
-//        textViewShipmentCharges.setText((int) order.getDeliveryCharges());
+        textViewTotalAmount.setText(""+getOrderAmount(order.getOrderedProductList()));
     }
 
 //    private void getProductList() {

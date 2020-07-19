@@ -7,9 +7,10 @@
     tools:context=".fragment.store.StoreDashboard">
 
     <TextView
+        android:id="@+id/storeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Store Name"
+        android:text="Rainbow"
         android:textSize="30dp"
         android:gravity="center"
         android:paddingTop="10dp"
@@ -73,15 +74,13 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewDrinks"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:scrollbars="none" />
 
-                <include
-                    android:id="@+id/shimmerCategory"
-                    layout="@layout/item_recycler" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/fastFood"

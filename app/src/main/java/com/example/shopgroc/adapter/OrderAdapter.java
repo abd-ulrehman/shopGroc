@@ -24,6 +24,8 @@ import static com.example.shopgroc.utility.Constant.DataType.ORDER;
 import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_CANCEL_STATUS;
 import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_COMPLETE;
 import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_COMPLETE_STATUS;
+import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_CONFIRMED;
+import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_CONFIRMED_STATUS;
 import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_PENDING;
 import static com.example.shopgroc.utility.Constant.DeliveryStatus.ORDER_PENDING_STATUS;
 import static com.example.shopgroc.utility.Utility.getDate;
@@ -74,6 +76,8 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }if(order.getOrderStatus() == 1){
             myViewHolder.orderStatus.setTextColor(Color.rgb(32, 199, 54));
         }if(order.getOrderStatus() == 2){
+            myViewHolder.orderStatus.setTextColor(Color.rgb(133, 155, 255));
+        }if(order.getOrderStatus() == 3){
             myViewHolder.orderStatus.setTextColor(Color.rgb(186, 44, 39));
         }
         myViewHolder.orderCardView.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +111,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public String getOrderStatus(int status){
         if (status==ORDER_PENDING)return ORDER_PENDING_STATUS;
         else if(status==ORDER_COMPLETE) return ORDER_COMPLETE_STATUS;
+        else if(status==ORDER_CONFIRMED) return ORDER_CONFIRMED_STATUS;
         else return ORDER_CANCEL_STATUS;
     }
 }

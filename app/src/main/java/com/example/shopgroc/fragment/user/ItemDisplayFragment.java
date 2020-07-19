@@ -94,7 +94,7 @@ public class ItemDisplayFragment extends BaseFragment implements View.OnClickLis
 
 //        displayImage.setImageDrawable(drawable);
         textViewTitle.setText(product.getTitle());
-        textViewPrice.setText(product.getPrice()+" Pkr");
+        textViewPrice.setText((int) product.getPrice()+"");
         textViewDescription.setText(product.getDescription());
         StorageReference ref = storageReference.child("productImage/"+product.getImage());
         ImageController.getInstance().loadImage(displayImage,ref);

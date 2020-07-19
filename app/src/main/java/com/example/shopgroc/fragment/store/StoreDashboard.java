@@ -31,18 +31,14 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
 
 
     private static final String TAG = "storeDashbpard";
-    ProductAdapter productAdapterBeverages;
-    RecyclerView recyclerViewBeverages;
-    LinearLayoutManager linearLayoutManagerBeverages;
+    ProductAdapter productAdapterBeverages,productAdapterDrinks;
+    RecyclerView recyclerViewBeverages,recyclerViewDrinks;
+    LinearLayoutManager linearLayoutManagerBeverages,linearLayoutManagerDrinks;
     NavController navigationController;
     ChildToParentCallback varChildToParentCallback;
 
     FloatingActionButton addItem;
 
-    int[] imageList = {R.drawable.cup_cake,R.drawable.drink_3,R.drawable.drink_pepsi,R.drawable.food_burger};
-    String[] title = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
-    String[] description = {"Cup Cake", "Dink" , "Pepsi", "Burger"};
-    Float[] price = {200F,400F,120F,150F};
     ProductController productController = ProductController.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +56,7 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
     private void InIt(View view) {
         navigationController = Navigation.findNavController(view);
         recyclerViewBeverages = view.findViewById(R.id.recyclerViewBeverages);
+        recyclerViewDrinks = view.findViewById(R.id.recyclerViewDrinks);
         addItem = view.findViewById(R.id.addItem);
 
         linearLayoutManagerBeverages = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
@@ -67,15 +64,33 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
         productAdapterBeverages.setClickListener(this);
         recyclerViewBeverages.setLayoutManager(linearLayoutManagerBeverages);
         recyclerViewBeverages.setAdapter(productAdapterBeverages);
+        linearLayoutManagerDrinks = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        productAdapterDrinks = new ProductAdapter();
+        productAdapterDrinks.setClickListener(this);
+        recyclerViewDrinks.setLayoutManager(linearLayoutManagerDrinks);
+        recyclerViewDrinks.setAdapter(productAdapterDrinks);
         addItem.setOnClickListener(this);
-        getProductList();
+        getProductListBeverages();
+        getProductListDrinks();
     }
 
-    private void getProductList(){
-        ProductController.getInstance().getProduct(new ProductController.ProductCallbackListener() {
+    private void getProductListBeverages(){
+        ProductController.getInstance().getProductBeverages(new ProductController.ProductCallbackListener() {
             @Override
             public void onSuccess(boolean isSuccess, List<Product> productLista) {
                 productAdapterBeverages.setProductList(productLista);
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }private void getProductListDrinks(){
+        ProductController.getInstance().getProductDrinks(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productLista) {
+                productAdapterDrinks.setProductList(productLista);
             }
 
             @Override
@@ -94,12 +109,13 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
 
     @Override
     public void onProductClick(Bundle bundle) {
-        navigationController.navigate(R.id.action_storeDashboard_to_itemDisplayFragment2,bundle);
+        navigationController.navigate(R.id.action_store_navigation_dashboard_to_itemDisplayFragmentStore,bundle);
     }
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(true);
         varChildToParentCallback.hideStoreBottomNav(false);
+        varChildToParentCallback.hideRiderBottomNav(true);
     }
 }

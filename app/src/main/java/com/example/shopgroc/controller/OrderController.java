@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
@@ -94,34 +95,60 @@ public class OrderController {
         });
     }
 
-    public void getUserOrders(Context context, final OrderCallback orderCallback){
-        String userId=SharedUtility.getInstance(context).getUser().getId();
-        database.collection(ORDER_TABLE).document(userId).collection(ORDER_ORDER)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<Order> orderList=new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d(TAG, document.getId() + " => " + document.getData());
-                        Order order=new Order();
-                        HashMap<String,Object> obj = new HashMap<>(document.getData());
-                        order.setOrder(obj);
-                        order.setId(document.getId());
-                        Log.i("OrderObj","order obj: "+new Gson().toJson(order));
+//    public void getUserOrders(Context context, final OrderCallback orderCallback){
+//        final String userId=SharedUtility.getInstance(context).getUser().getId();
+//        final Task<QuerySnapshot> future =  database.collection(STORE_ORDER_TABLE).get();
+//        future.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    List<Order> orderList=new ArrayList<>();
+//                    String[] orderIds = new String[task.getResult().size()];
+//                    String orderId;
+//                    int i=0;
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        orderId = document.getId();
+//                        orderIds[i++] = orderId;
+//                    }
+//                    if(orderIds!=null)
+//                        getOrderByIdForUser(userId,orderIds,orderCallback);
+//                } else {
+//                    Log.d(TAG, "Error getting document Id: ", task.getException());
+//
+//                    if (orderCallback!=null) orderCallback.onFailure(true,task.getException());
+//                }
+//            }
+//        });
+//    }
 
-                        orderList.add(order);
+    public void getUserOrders(Context context,final OrderCallback orderCallback) {
+        final String userId=SharedUtility.getInstance(context).getUser().getId();
+        final ArrayList<Order> orderList = new ArrayList<>();
+            Query query = database.collection(STORE_ORDER_TABLE).whereEqualTo("userId",userId);
+                    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+
+                        for(DocumentSnapshot document : task.getResult()) {
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                            Order order = new Order();
+                            HashMap<String, Object> obj = new HashMap<>(document.getData());
+                            order.setOrder(obj);
+                            order.setId(document.getId());
+                            Log.i("OrderObj", "order obj: " + new Gson().toJson(order));
+
+                            orderList.add(order);
+                        }
+                        if (orderCallback != null) orderCallback.onSuccess(true, orderList);
+
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+
+                        if (orderCallback != null) orderCallback.onFailure(true, task.getException());
                     }
-
-                    if (orderCallback!=null) orderCallback.onSuccess(true,orderList);
-
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-
-                    if (orderCallback!=null) orderCallback.onFailure(true,task.getException());
                 }
-            }
-        });
+            });
     }
 
     public void getOrders(final OrderCallback orderCallback) {
@@ -179,6 +206,60 @@ public class OrderController {
             }
         });
     }
+    }
+
+//    public void getRiderOrders(Context context, final OrderCallback orderCallback){
+//        final Task<QuerySnapshot> future =  database.collection(STORE_ORDER_TABLE).get();
+//        future.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    List<Order> orderList=new ArrayList<>();
+//                    String[] orderIds = new String[task.getResult().size()];
+//                    String orderId;
+//                    int i=0;
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        orderId = document.getId();
+//                        orderIds[i++] = orderId;
+//                    }
+//                    if(orderIds!=null)
+//                        getOrderByIdForRider(orderIds,orderCallback);
+//                } else {
+//                    Log.d(TAG, "Error getting document Id: ", task.getException());
+//
+//                    if (orderCallback!=null) orderCallback.onFailure(true,task.getException());
+//                }
+//            }
+//        });
+//    }
+
+    public void getRiderOrders(final OrderCallback orderCallback) {
+        final ArrayList<Order> orderList = new ArrayList<>();
+        Query query = database.collection(STORE_ORDER_TABLE).whereEqualTo("deliveryStatus",2);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for(DocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                        Order order = new Order();
+                        HashMap<String, Object> obj = new HashMap<>(document.getData());
+                        order.setOrder(obj);
+                        order.setId(document.getId());
+                        Log.i("OrderObj", "order obj: " + new Gson().toJson(order));
+
+                        orderList.add(order);
+                    }
+                    if (orderCallback != null) orderCallback.onSuccess(true, orderList);
+
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+
+                    if (orderCallback != null) orderCallback.onFailure(true, task.getException());
+                }
+            }
+        });
     }
 
 //    public Order getDummyOrder(){

@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
     private static final String TAG = "MainActivity";
     BottomNavigationView bottomNavigation;
     BottomNavigationView storeBottomNavigation;
+    BottomNavigationView riderBottomNavigation;
     NavController navController;
     NavController navControllerStore;
     SharedUtility sharedUtility;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
         cartManager.setCartItemCountListener(this);
         bottomNavigation=findViewById(R.id.bottomNavigation);
         storeBottomNavigation=findViewById(R.id.storeBottomNavigation);
+        riderBottomNavigation=findViewById(R.id.riderBottomNavigation);
 
         //Setting badge for item count
         BottomNavigationMenuView bottomNavigationMenuView = (BottomNavigationMenuView) bottomNavigation.getChildAt(0);
@@ -117,6 +119,11 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
     @Override
     public void hideStoreBottomNav(boolean hide) {
         storeBottomNavigation.setVisibility(hide? GONE:VISIBLE);
+    }
+
+    @Override
+    public void hideRiderBottomNav(boolean hide) {
+        riderBottomNavigation.setVisibility(hide? GONE:VISIBLE);
     }
 
 

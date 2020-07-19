@@ -7,6 +7,7 @@ public class Constant {
         public static final String CART_ITEM = "cartItem";
         public static final String ORDER = "order";
         public static final String USER_ORDER = "userOrder";
+        public static final String RIDER_REQUEST_ORDER = "orderRequest";
     }
 
     public static class SharedPrefKey{
@@ -17,6 +18,24 @@ public class Constant {
         public static final String USER_PHONE="phone";
         public static final String USER_ADDRESS="address";
         public static final String USER_IMAGE="userImage";
+
+
+
+        public static final String RIDER_ID="riderId";
+        public static final String RIDER_NAME="riderName";
+        public static final String RIDER_EMAIL="riderEmail";
+        public static final String RIDER_PHONE="riderPhone";
+        public static final String RIDER_ADDRESS="riderAddress";
+        public static final String RIDER_VEHICLE="riderVehicle";
+        public static final String RIDER_CNIC="riderCNIC";
+        public static final String RIDER_LICENSE="riderIicense";
+
+
+
+
+        public static final String STORE_ID="storeId";
+        public static final String STORE_NAME="storeName";
+        public static final String STORE_EMAIL="storeEmail";
 
         public static final String PRODUCT_TITLE="productTitle";
         public static final String PRODUCT_PRICE="productPrice";
@@ -33,6 +52,9 @@ public class Constant {
         public static final String PHONE_FORMAT_ERROR = "Incorrect Phone!";
         public static final String PHONE_INCOMPLETE_ERROR = "Incomplete Phone!";
         public static final String EMPTY_ADDRESS_ERROR = "Address must not be empty!";
+        public static final String LICENSE_ERROR = "License Error";
+        public static final String CNIC_ERROR = "CNIC Error";
+        public static final String VEHICLE_ERROR = "Vehicle No Error";
     }
 
     public static class DatabaseTableKey{
@@ -40,6 +62,8 @@ public class Constant {
         public static final String PRODUCT_TABLE= "Product";
         public static final String ORDER_TABLE = "Orders";
         public static final String STORE_ORDER_TABLE = "storeOrders";
+        public static final String STORE_TABLE = "Store";
+        public static final String RIDER_TABLE = "Rider";
     }
 
     public static class DatabaseKey{
@@ -48,6 +72,10 @@ public class Constant {
         public static final String USER_PHONE="phone";
         public static final String USER_ADDRESS="address";
         public static final String USER_IMAGE="image";
+
+        public static final String STORE_NAME="storeName";
+        public static final String STORE_EMAIL="storeEmail";
+        public static final String STORE_PASSWORD="storePassword";
 
         public static final String ORDER_PRODUCTS="products";
         public static final String ORDER_DELIVERY_CHARGE="deliveryCharges";
@@ -69,11 +97,13 @@ public class Constant {
     public static class DeliveryStatus{
         public static final int ORDER_PENDING=0;
         public static final int ORDER_COMPLETE=1;
-        public static final int ORDER_CANCEL=2;
+        public static final int ORDER_CONFIRMED=2;
+        public static final int ORDER_CANCEL=3;
 
         public static final String ORDER_PENDING_STATUS="Pending";
         public static final String ORDER_COMPLETE_STATUS="complete";
         public static final String ORDER_CANCEL_STATUS="cancel";
+        public static final String ORDER_CONFIRMED_STATUS="confirmed";
     }
 
     public static class DateFormats{

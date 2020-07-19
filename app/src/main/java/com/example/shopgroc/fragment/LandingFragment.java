@@ -75,6 +75,7 @@ public class LandingFragment extends Fragment implements View.OnClickListener, C
         varChildToParentCallback = (ChildToParentCallback)context;
         varChildToParentCallback.hideBottomNav(true);
         varChildToParentCallback.hideStoreBottomNav(true);
+        varChildToParentCallback.hideRiderBottomNav(true);
     }
 
     @Override
@@ -85,5 +86,10 @@ public class LandingFragment extends Fragment implements View.OnClickListener, C
     @Override
     public void hideStoreBottomNav(boolean hide) {
         hideBottomNav(true);
+    }
+
+    @Override
+    public void hideRiderBottomNav(boolean hide) {
+
     }
 }

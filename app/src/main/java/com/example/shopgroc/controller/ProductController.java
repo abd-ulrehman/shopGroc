@@ -13,6 +13,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -24,6 +26,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static com.example.shopgroc.utility.Constant.DatabaseTableKey.PRODUCT_TABLE;
@@ -97,8 +100,30 @@ public class ProductController {
                     }
                 });
     }
-    public void getProduct(final ProductCallbackListener productCallbackListener){
-        database.collection(PRODUCT_TABLE).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void getProductBeverages(final ProductCallbackListener productCallbackListener){
+        database.collection(PRODUCT_TABLE).whereEqualTo("productCategory" , "Beverages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Product> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = new Product();
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        HashMap<String,Object> obj = new HashMap<>(document.getData());
+                        product.setProductMap(obj);
+                        product.setId(document.getId());
+                        list.add(product);
+                    }
+                    if (productCallbackListener!= null)productCallbackListener.onSuccess(true,list);
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                    if (productCallbackListener!=null)productCallbackListener.onFailure(true,task.getException());
+                }
+            }
+        });
+    }
+    public void getProductDrinks(final ProductCallbackListener productCallbackListener){
+        database.collection(PRODUCT_TABLE).whereEqualTo("productCategory" , "Drinks").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -128,6 +153,50 @@ public class ProductController {
     public void setProductCallbackListener(ProductCallbackListener productCallbackListener){
         this.productCallbackListener=productCallbackListener;
     }
+
+    public void updateProduct(final String id, final Map<String, Object> productData) {
+        database.collection(PRODUCT_TABLE).document(id).update(productData);
+        final DocumentReference documentReference = database.collection(PRODUCT_TABLE).document(id);
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                List<Product> list = new ArrayList<>();
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    Product product = new Product();
+                    HashMap<String,Object> obj = new HashMap<>(document.getData());
+                    product.setProductMap(obj);
+                    product.setId(document.getId());
+                    list.add(product);
+                }
+            }
+        });
+
+    }
+
+    public void getSearchItem(String searchKeyword, final ProductCallbackListener productCallbackListener) {
+        database.collection(PRODUCT_TABLE).whereEqualTo("productTitle" , searchKeyword).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Product> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = new Product();
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        HashMap<String,Object> obj = new HashMap<>(document.getData());
+                        product.setProductMap(obj);
+                        product.setId(document.getId());
+                        list.add(product);
+                    }
+                    if (productCallbackListener!= null)productCallbackListener.onSuccess(true,list);
+                } else {
+                    if (productCallbackListener!=null)productCallbackListener.onFailure(true,task.getException());
+                }
+            }
+        });
+    }
+
     public interface ProductCallbackListener {
         void onSuccess(boolean isSuccess,List<Product> productLista);
         void onFailure(boolean isFailure,Exception e);

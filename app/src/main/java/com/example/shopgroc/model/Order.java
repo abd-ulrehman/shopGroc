@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_DELIVERY_CHARGE;
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_DELIVERY_STATUS;
@@ -114,7 +115,7 @@ public class Order implements Serializable {
         if(orderMap.get(ORDER_DELIVERY_STATUS)!=null)setOrderStatus(Integer.parseInt(orderMap.get(ORDER_DELIVERY_STATUS).toString()));
         if(orderMap.get(ORDER_LOCATION)!=null)setGeoPoint((GeoPoint) orderMap.get(ORDER_LOCATION));
         if(orderMap.get(ORDER_NUMBER)!=null)setOrderNumber((String) orderMap.get(ORDER_NUMBER));
-        if(orderMap.get(USER_ID)!=null)setOrderNumber((String) orderMap.get(USER_ID));
+        if(orderMap.get(USER_ID)!=null)setUserId((String) orderMap.get(USER_ID));
         if(orderMap.get(ORDER_TIME)!=null) {
             Timestamp time=(Timestamp) orderMap.get(ORDER_TIME);
             Log.i("TimeDateAT","time: "+time.toString());
@@ -153,5 +154,8 @@ public class Order implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setOrderMap(Map<String, Object> data) {
     }
 }

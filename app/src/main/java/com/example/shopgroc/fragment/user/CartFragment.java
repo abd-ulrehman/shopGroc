@@ -61,6 +61,11 @@ public class CartFragment extends BaseFragment implements CartManager.CartListen
         textViewEmptyCart = view.findViewById(R.id.textViewEmptyCart);
         recyclerViewCart = view.findViewById(R.id.recyclerViewCart);
         buttonOrder = view.findViewById(R.id.buttonOrder);
+        if(CartManager.getInstance().getCartItemCount() == 0){
+            buttonOrder.setEnabled(false);
+            textViewEmptyCart.setVisibility(View.VISIBLE);
+        }
+        else textViewEmptyCart.setVisibility(View.GONE);
 
         cartAdapter = new CartAdapter();
         cartAdapter.setCartItemList(cartManager.getItemList());
@@ -76,6 +81,17 @@ public class CartFragment extends BaseFragment implements CartManager.CartListen
             }
         });
 
+    }
+
+    @Override
+    public void onCartEmpty() {
+        buttonOrder.setEnabled(false);
+    }
+
+    @Override
+    public void onCartHasData() {
+
+        textViewEmptyCart.setVisibility(View.VISIBLE);
     }
 
 //    @Override
@@ -100,24 +116,4 @@ public class CartFragment extends BaseFragment implements CartManager.CartListen
 //        }
 //    }
 
-    private void setEmptyView(boolean isEmpty){
-        textViewEmptyCart.setVisibility(isEmpty?View.VISIBLE:View.GONE);
-
-        buttonOrder.setAlpha(isEmpty?0.5f:1.0f);
-        buttonOrder.setEnabled(!isEmpty);
-
-    }
-
-    @Override
-    public void onCartEmpty() {
-        if (!isAdded())return;
-        setEmptyView(true);
-
-    }
-
-    @Override
-    public void onCartHasData() {
-        if (isAdded())return;
-        setEmptyView(false);
-    }
 }
