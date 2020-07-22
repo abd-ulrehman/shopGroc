@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/map_key"/>
-        <activity android:name=".activity.EmptyActivity"></activity>
+        <activity android:name=".activity.EmptyActivity">
+        </activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.user.place_order_fragment"
+    tools:context=".fragment.user.PlaceOrderFragment"
     android:orientation="vertical"
     android:layout_marginRight="16dp"
     android:layout_marginLeft="16dp">
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         app:cardElevation="3dp">

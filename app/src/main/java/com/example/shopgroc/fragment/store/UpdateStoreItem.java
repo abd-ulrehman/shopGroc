@@ -35,7 +35,7 @@ import static com.example.shopgroc.utility.Constant.SharedPrefKey.PRODUCT_TITLE;
 /**
  * @author Abdul Rehman
  */
-public class updateStoreItem extends BaseFragment implements View.OnClickListener {
+public class UpdateStoreItem extends BaseFragment implements View.OnClickListener {
     public static final String TAG = "AddItemToStore";
     NavController navigationController;
     ProductController productController = ProductController.getInstance();

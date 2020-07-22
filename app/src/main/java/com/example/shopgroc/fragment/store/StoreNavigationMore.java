@@ -1,10 +1,10 @@
-package com.example.shopgroc.fragment.user;
+package com.example.shopgroc.fragment.store;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,15 +15,15 @@ import com.example.shopgroc.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * @author Abdul Rehman
  */
-public class Order_Confermation extends Fragment {
-    Button buttonGoDashboard;
+public class StoreNavigationMore extends Fragment {
+    TextView storeName,logoutStore;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order__confermation, container, false);
+        return inflater.inflate(R.layout.fragment_store_navigation_more, container, false);
     }
 
     @Override
@@ -33,11 +33,13 @@ public class Order_Confermation extends Fragment {
     }
 
     private void InIt(View view) {
-        buttonGoDashboard = view.findViewById(R.id.buttonGoDashboard);
-        buttonGoDashboard.setOnClickListener(new View.OnClickListener() {
+        storeName = view.findViewById(R.id.storeName);
+        logoutStore = view.findViewById(R.id.logoutStore);
+        storeName.setText("Rainbow");
+        logoutStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_order_Confermation_to_navigation_dashboard);
+                Navigation.findNavController(v).navigate(R.id.storeLoginFragment);
             }
         });
     }

@@ -35,9 +35,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     LinearLayout itemCardView;
     NavController navigationController;
     ChildToParentCallback varChildToParentCallback;
-    RecyclerView recyclerViewBeverages, recyclerViewDrinks;
-    ProductAdapter productAdapterBeverages,productAdapterHouseHolds,productAdapterGrocery,productAdapterDrinks;
-    LinearLayoutManager linearLayoutManagerBeverages, linearLayoutManagerDrinks;
+    RecyclerView recyclerViewBeverages, recyclerViewDrinks, recyclerViewDairy, recyclerViewPersonalCare, recyclerViewCleaners, recyclerViewBakingGoods;
+    ProductAdapter productAdapterBeverages,productAdapterDrinks,productAdapterDairy,productAdapterPersonalCare,productAdapterCleaners,productAdapterBakingGoods;
+    LinearLayoutManager linearLayoutManagerBeverages, linearLayoutManagerDrinks, linearLayoutManagerDairy, linearLayoutManagerPersonalCare, linearLayoutManagerCleaners, linearLayoutManagerBakingGoods;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,20 +64,104 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         recyclerViewBeverages = view.findViewById(R.id.recyclerViewBeverages);
         recyclerViewDrinks = view.findViewById(R.id.recyclerViewDrinks);
+        recyclerViewDairy = view.findViewById(R.id.recyclerViewDairy);
+        recyclerViewPersonalCare = view.findViewById(R.id.recyclerViewPersonalCare);
+        recyclerViewCleaners = view.findViewById(R.id.recyclerViewCleaners);
+        recyclerViewBakingGoods = view.findViewById(R.id.recyclerViewBakingGoods);
         linearLayoutManagerBeverages = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         linearLayoutManagerDrinks = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerDairy = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerPersonalCare = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerCleaners = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerBakingGoods = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         productAdapterBeverages = new ProductAdapter();
         productAdapterDrinks = new ProductAdapter();
+        productAdapterDairy = new ProductAdapter();
+        productAdapterCleaners = new ProductAdapter();
+        productAdapterPersonalCare = new ProductAdapter();
+        productAdapterBakingGoods = new ProductAdapter();
         productAdapterBeverages.setClickListener(this);
         productAdapterDrinks.setClickListener(this);
         recyclerViewBeverages.setLayoutManager(linearLayoutManagerBeverages);
         recyclerViewDrinks.setLayoutManager(linearLayoutManagerDrinks);
+        recyclerViewDairy.setLayoutManager(linearLayoutManagerDairy);
+        recyclerViewPersonalCare.setLayoutManager(linearLayoutManagerPersonalCare);
+        recyclerViewCleaners.setLayoutManager(linearLayoutManagerCleaners);
+        recyclerViewBakingGoods.setLayoutManager(linearLayoutManagerBakingGoods);
+
         recyclerViewBeverages.setAdapter(productAdapterBeverages);
         recyclerViewDrinks.setAdapter(productAdapterDrinks);
-        itemCardView.setOnClickListener(this);
+        recyclerViewDairy.setAdapter(productAdapterDairy);
+        recyclerViewCleaners.setAdapter(productAdapterCleaners);
+        recyclerViewPersonalCare.setAdapter(productAdapterPersonalCare);
+        recyclerViewBakingGoods.setAdapter(productAdapterBakingGoods);
         getProductListBeverages();
         getProductListDrinks();
+        getProductListDairy();
+        getProductListCleaners();
+        getProductListPersonalCare();
+        getProductListBakingGoods();
         getOrders();
+    }
+
+    private void getProductListBakingGoods() {
+        ProductController.getInstance().getProductBakingGoods(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterBakingGoods.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+
+    private void getProductListPersonalCare() {
+        ProductController.getInstance().getProductPersonalCare(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterPersonalCare.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+
+    private void getProductListCleaners() {
+        ProductController.getInstance().getProductCleaners(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterCleaners.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+
+    private void getProductListDairy() {
+        ProductController.getInstance().getProductDairy(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterDairy.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
     }
 
     private void getProductListBeverages(){

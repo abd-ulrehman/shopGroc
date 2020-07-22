@@ -21,6 +21,9 @@
         <item>Select a Category</item>
         <item>Drinks</item>
         <item>Beverages</item>
-        <item>Food</item>
+        <item>Dairy</item>
+        <item>Personal Care</item>
+        <item>Cleaners </item>
+        <item>Dry/Baking Goods</item>
     </string-array>
 </resources>

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.navigation.Navigation;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.fragment.user.BaseFragment;
@@ -37,10 +38,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static com.example.shopgroc.utility.Constant.DataType.USER_ORDER;
+import static com.example.shopgroc.utility.Constant.DatabaseTableKey.STORE_ORDER_TABLE;
 
 
 /**
@@ -102,11 +106,9 @@ public class ConfirmOrderByRider extends BaseFragment implements View.OnClickLis
     private void InIt(View view) {
         customerAddress = view.findViewById(R.id.customerAddress);
         customerTotalBill = view.findViewById(R.id.customerTotalBill);
-        orderCancelButton = view.findViewById(R.id.cancelCustomerRequest);
-        orderConfirmButton = view.findViewById(R.id.confirmCustomerRequest);
+        orderConfirmButton = view.findViewById(R.id.deliverCustomerRequest);
         customerAddress.setText(getAddress(order.getGeoPoint().getLatitude(),order.getGeoPoint().getLongitude()));
         customerTotalBill.setText(""+getOrderAmount(order.getOrderedProductList()));
-        orderCancelButton.setOnClickListener(this);
         orderConfirmButton.setOnClickListener(this);
     }
 
@@ -130,11 +132,11 @@ public class ConfirmOrderByRider extends BaseFragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(id == R.id.confirmCustomerRequest){
-
-        }
-        else if(id == R.id.cancelCustomerRequest){
-
+        if(id == R.id.deliverCustomerRequest){
+            Map<String, Object> docData = new HashMap<>();
+            docData.put("deliveryStatus", 4);
+            database.collection(STORE_ORDER_TABLE).document(order.getId()).update(docData);
+            Navigation.findNavController(v).navigate(R.id.action_confirmOrderByRider_to_rider_navigation_request);
         }
     }
     @Override

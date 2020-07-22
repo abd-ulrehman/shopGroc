@@ -99,11 +99,13 @@ public class Constant {
         public static final int ORDER_COMPLETE=1;
         public static final int ORDER_CONFIRMED=2;
         public static final int ORDER_CANCEL=3;
+        public static final int ORDER_DELIVERED=4;
 
         public static final String ORDER_PENDING_STATUS="Pending";
-        public static final String ORDER_COMPLETE_STATUS="complete";
-        public static final String ORDER_CANCEL_STATUS="cancel";
-        public static final String ORDER_CONFIRMED_STATUS="confirmed";
+        public static final String ORDER_COMPLETE_STATUS="Complete";
+        public static final String ORDER_CANCEL_STATUS="Cancel";
+        public static final String ORDER_CONFIRMED_STATUS="Confirmed";
+        public static final String ORDER_DELIVERED_STATUS="Delivered";
     }
 
     public static class DateFormats{

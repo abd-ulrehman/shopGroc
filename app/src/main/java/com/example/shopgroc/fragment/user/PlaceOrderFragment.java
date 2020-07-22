@@ -39,7 +39,7 @@ import static android.app.Activity.RESULT_OK;
  * @author Abdul Rehman
  */
 // implements OnMapReadyCallback
-public class place_order_fragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
+public class PlaceOrderFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
 
     private ChildToParentCallback varChildToParentCallback;
     Location currentLocation;

@@ -14,6 +14,19 @@
         tools:context=".fragment.user.RegistrationFragment"
         android:orientation="vertical"
         android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ShopGroc"
+            android:gravity="center"
+            android:textSize="40dp"
+            android:textColor="@color/colorPrimaryDark"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rider"
+            android:gravity="center"
+            android:layout_marginBottom="50dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -60,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:singleLine="true"
-                />
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -75,22 +88,13 @@
             android:padding="15dp"
             android:textSize="18sp"
             android:background="@drawable/app_default_button_background"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="click to register: "/>
             <TextView
                 android:id="@+id/signupRider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/signupRider"/>
-        </LinearLayout>
+                android:text="@string/signupRider"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"/>
 
     </LinearLayout>
     <include layout="@layout/in_progress_view"/>

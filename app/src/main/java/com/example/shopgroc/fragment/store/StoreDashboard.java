@@ -31,9 +31,9 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
 
 
     private static final String TAG = "storeDashbpard";
-    ProductAdapter productAdapterBeverages,productAdapterDrinks;
-    RecyclerView recyclerViewBeverages,recyclerViewDrinks;
-    LinearLayoutManager linearLayoutManagerBeverages,linearLayoutManagerDrinks;
+    ProductAdapter productAdapterBeverages,productAdapterDrinks,productAdapterDairy,productAdapterPersonalCare,productAdapterCleaners,productAdapterBakingGoods;
+    RecyclerView recyclerViewBeverages,recyclerViewDrinks,recyclerViewDairy, recyclerViewPersonalCare, recyclerViewCleaners, recyclerViewBakingGoods;
+    LinearLayoutManager linearLayoutManagerBeverages,linearLayoutManagerDrinks,linearLayoutManagerDairy, linearLayoutManagerPersonalCare, linearLayoutManagerCleaners, linearLayoutManagerBakingGoods;
     NavController navigationController;
     ChildToParentCallback varChildToParentCallback;
 
@@ -57,21 +57,109 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
         navigationController = Navigation.findNavController(view);
         recyclerViewBeverages = view.findViewById(R.id.recyclerViewBeverages);
         recyclerViewDrinks = view.findViewById(R.id.recyclerViewDrinks);
+        recyclerViewDairy = view.findViewById(R.id.recyclerViewDairy);
+        recyclerViewPersonalCare = view.findViewById(R.id.recyclerViewPersonalCare);
+        recyclerViewCleaners = view.findViewById(R.id.recyclerViewCleaners);
+        recyclerViewBakingGoods = view.findViewById(R.id.recyclerViewBakingGoods);
         addItem = view.findViewById(R.id.addItem);
 
         linearLayoutManagerBeverages = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerDrinks = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerDairy = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerPersonalCare = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerCleaners = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManagerBakingGoods = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+
         productAdapterBeverages = new ProductAdapter();
+        productAdapterDrinks = new ProductAdapter();
+        productAdapterDairy = new ProductAdapter();
+        productAdapterCleaners = new ProductAdapter();
+        productAdapterPersonalCare = new ProductAdapter();
+        productAdapterBakingGoods = new ProductAdapter();
         productAdapterBeverages.setClickListener(this);
         recyclerViewBeverages.setLayoutManager(linearLayoutManagerBeverages);
-        recyclerViewBeverages.setAdapter(productAdapterBeverages);
-        linearLayoutManagerDrinks = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
-        productAdapterDrinks = new ProductAdapter();
-        productAdapterDrinks.setClickListener(this);
         recyclerViewDrinks.setLayoutManager(linearLayoutManagerDrinks);
+        recyclerViewDairy.setLayoutManager(linearLayoutManagerDairy);
+        recyclerViewPersonalCare.setLayoutManager(linearLayoutManagerPersonalCare);
+        recyclerViewCleaners.setLayoutManager(linearLayoutManagerCleaners);
+        recyclerViewBakingGoods.setLayoutManager(linearLayoutManagerBakingGoods);
+
+
+
+        productAdapterDrinks.setClickListener(this);
+
+        recyclerViewBeverages.setAdapter(productAdapterBeverages);
         recyclerViewDrinks.setAdapter(productAdapterDrinks);
+        recyclerViewDairy.setAdapter(productAdapterDairy);
+        recyclerViewCleaners.setAdapter(productAdapterCleaners);
+        recyclerViewPersonalCare.setAdapter(productAdapterPersonalCare);
+        recyclerViewBakingGoods.setAdapter(productAdapterBakingGoods);
         addItem.setOnClickListener(this);
         getProductListBeverages();
         getProductListDrinks();
+        getProductListDairy();
+        getProductListCleaners();
+        getProductListPersonalCare();
+        getProductListBakingGoods();
+    }
+    private void getProductListBakingGoods() {
+        ProductController.getInstance().getProductBakingGoods(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterBakingGoods.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+
+    private void getProductListPersonalCare() {
+        ProductController.getInstance().getProductPersonalCare(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterPersonalCare.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+
+    private void getProductListCleaners() {
+        ProductController.getInstance().getProductCleaners(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterCleaners.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+
+    private void getProductListDairy() {
+        ProductController.getInstance().getProductDairy(new ProductController.ProductCallbackListener() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<Product> productList) {
+                productAdapterDairy.setProductList(productList);
+
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
     }
 
     private void getProductListBeverages(){
@@ -86,7 +174,8 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
 
             }
         });
-    }private void getProductListDrinks(){
+    }
+    private void getProductListDrinks(){
         ProductController.getInstance().getProductDrinks(new ProductController.ProductCallbackListener() {
             @Override
             public void onSuccess(boolean isSuccess, List<Product> productLista) {

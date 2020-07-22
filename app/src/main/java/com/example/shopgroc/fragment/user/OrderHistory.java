@@ -1,4 +1,4 @@
-package com.example.shopgroc.fragment.rider;
+package com.example.shopgroc.fragment.user;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,36 +8,45 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
-import com.example.shopgroc.adapter.RequestAdapterRider;
+import com.example.shopgroc.adapter.OrderAdapter;
 import com.example.shopgroc.controller.OrderController;
-import com.example.shopgroc.fragment.user.BaseFragment;
 import com.example.shopgroc.interfaces.ChildToParentCallback;
 import com.example.shopgroc.model.Order;
 
 import java.util.List;
 
 
-/**@author Abdul Rehman
+/**
+ * @author Abdul Rehman
  */
-public class rider_navigation_request extends BaseFragment {
-
+public class OrderHistory extends Fragment {
     NavController navigationController;
-    RecyclerView recyclerView;
-    RequestAdapterRider requestAdapterRider;
+    ChildToParentCallback varChildToParentCallback;
+    RecyclerView recyclerViewOrderHistory;
+    OrderAdapter orderAdapter;
     LinearLayoutManager linearLayoutManager;
-    Order order;
+    CardView cardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rider_navigation_request, container, false);
+        return inflater.inflate(R.layout.fragment_order__history, container, false);
+    }
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        varChildToParentCallback = (ChildToParentCallback)context;
+        varChildToParentCallback.hideBottomNav(false);
+        varChildToParentCallback.hideStoreBottomNav(true);
+        varChildToParentCallback.hideRiderBottomNav(true);
     }
 
     @Override
@@ -49,19 +58,20 @@ public class rider_navigation_request extends BaseFragment {
     private void InIt(View view) {
         navigationController = Navigation.findNavController(view);
 
-        recyclerView = view.findViewById(R.id.userRequests);
+        recyclerViewOrderHistory = view.findViewById(R.id.orderHistory);
+        cardView = view.findViewById(R.id.orderCardView);
         linearLayoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false);
-        requestAdapterRider = new RequestAdapterRider();
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(requestAdapterRider);
+        orderAdapter = new OrderAdapter();
+        recyclerViewOrderHistory.setLayoutManager(linearLayoutManager);
+        recyclerViewOrderHistory.setAdapter(orderAdapter);
         getOrderList();
     }
 
     private void getOrderList() {
-        OrderController.getInstance().getRiderOrders(new OrderController.OrderCallback() {
+        OrderController.getInstance().getUserOrders(getContext(),new OrderController.OrderCallback() {
             @Override
             public void onSuccess(boolean isSuccess, List<Order> orderList) {
-                requestAdapterRider.setOrderList(orderList);
+                orderAdapter.setOrderList(orderList);
             }
 
             @Override
@@ -71,12 +81,4 @@ public class rider_navigation_request extends BaseFragment {
         });
     }
 
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        ChildToParentCallback varChildToParentCallback = (ChildToParentCallback) context;
-        varChildToParentCallback.hideBottomNav(true);
-        varChildToParentCallback.hideStoreBottomNav(true);
-        varChildToParentCallback.hideRiderBottomNav(false);
-    }
 }
-

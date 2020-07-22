@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
     BottomNavigationView riderBottomNavigation;
     NavController navController;
     NavController navControllerStore;
+    NavController navControllerRider;
     SharedUtility sharedUtility;
     TextView textViewCount;
     int mCartItemCount = 10;
@@ -55,8 +56,10 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
 
         navController= Navigation.findNavController(this,R.id.nav_host_fragment);
         navControllerStore= Navigation.findNavController(this,R.id.nav_host_fragment);
+        navControllerRider= Navigation.findNavController(this,R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigation, navController);
         NavigationUI.setupWithNavController(storeBottomNavigation, navControllerStore);
+        NavigationUI.setupWithNavController(riderBottomNavigation, navControllerRider);
 
         if (sharedUtility.isLoggedIn()){
 
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
         super.onBackPressed();
         hideBottomNavigation();
         hideStoreBottomNavigation();
+        hideRiderBottomNavigation();
         Log.i(TAG, "onBackPressed: " + "current location Id" + navController.getCurrentDestination().getId() + "navigation search id" + R.id.navigation_dashboard);
         if(navController.getCurrentDestination().getId() == R.id.itemDisplayFragment ){
             finish();
@@ -106,8 +110,30 @@ public class MainActivity extends AppCompatActivity implements ChildToParentCall
             storeBottomNavigation.setVisibility(GONE);
         }
     }
+    private void hideRiderBottomNavigation() {
+        if(navControllerRider.getCurrentDestination().getId() == R.id.rider_navigation_more ||
+                navControllerRider.getCurrentDestination().getId() == R.id.rider_navigation_request){
+            riderBottomNavigation.setVisibility(VISIBLE);
+        }
+        else {
+            riderBottomNavigation.setVisibility(GONE);
+        }
+    }
 
-
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("MyString", "Welcome back to Android");
+        // etc.
+    }
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        boolean myBoolean = savedInstanceState.getBoolean("MyBoolean");
+        double myDouble = savedInstanceState.getDouble("myDouble");
+        int myInt = savedInstanceState.getInt("MyInt");
+        String myString = savedInstanceState.getString("MyString");
+    }
 
     @Override
     public void hideBottomNav(boolean hide) {

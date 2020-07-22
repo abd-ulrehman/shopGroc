@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopgroc.R;
 import com.example.shopgroc.adapter.OrderedProductAdapterStore;
+import com.example.shopgroc.controller.OrderController;
 import com.example.shopgroc.fragment.user.BaseFragment;
 import com.example.shopgroc.model.Order;
 import com.example.shopgroc.model.OrderedProduct;
@@ -32,14 +34,14 @@ import static com.example.shopgroc.utility.Utility.getDate;
 /**
  * @author Abdul Rehman
  */
-public class openUserOrder extends BaseFragment implements View.OnClickListener {
+public class OpenUserOrder extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "openUserOrder";
     Order order;
     TextView customerOrderNo,customerOrderDate,customerOrderTotalAmount;
     Button cancelUserOrderButton,confirmUserOrderButton;
     RecyclerView recyclerViewCustomerOrderDetail;
     OrderedProductAdapterStore orderedProductAdapterStore;
-    LinearLayoutManager linearLayoutManager;
+    LinearLayoutManager linearLayoutManagerStore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,23 +57,21 @@ public class openUserOrder extends BaseFragment implements View.OnClickListener 
     }
 
     private void InIt(View view) {
+        getOrderList();
         customerOrderTotalAmount= view.findViewById(R.id.customerOrderTotalAmount);
         customerOrderNo= view.findViewById(R.id.customerOrderNo);
         customerOrderDate= view.findViewById(R.id.customerOrderDate);
         recyclerViewCustomerOrderDetail = view.findViewById(R.id.recyclerViewCustomerOrderDetail);
-        cancelUserOrderButton= view.findViewById(R.id.cancelUserOrderButton);
-        confirmUserOrderButton= view.findViewById(R.id.confirmUserOrderButton);
-
-        recyclerViewCustomerOrderDetail.setNestedScrollingEnabled(false);
+        linearLayoutManagerStore = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false);
         orderedProductAdapterStore = new OrderedProductAdapterStore();
         orderedProductAdapterStore.setOrderList(order.getOrderedProductList());
-        linearLayoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false);
-        recyclerViewCustomerOrderDetail.setLayoutManager(linearLayoutManager);
+        recyclerViewCustomerOrderDetail.setLayoutManager(linearLayoutManagerStore);
         recyclerViewCustomerOrderDetail.setAdapter(orderedProductAdapterStore);
-
+        cancelUserOrderButton= view.findViewById(R.id.cancelUserOrderButton);
+        confirmUserOrderButton= view.findViewById(R.id.confirmUserOrderButton);
+        recyclerViewCustomerOrderDetail.setNestedScrollingEnabled(false);
         long milliSecond=order.getOrderTime().getSeconds()*1000;
         String date = getDate(milliSecond);
-
         customerOrderNo.setText(order.getOrderNumber());
         customerOrderDate.setText(date);
         customerOrderTotalAmount.setText(""+getOrderAmount(order.getOrderedProductList()));
@@ -81,6 +81,21 @@ public class openUserOrder extends BaseFragment implements View.OnClickListener 
         confirmUserOrderButton.setOnClickListener(this);
 
     }
+
+    private void getOrderList() {
+        OrderController.getInstance().getOrderedProducts(order.getOrderNumber(),new OrderController.OrderedProductCallback() {
+            @Override
+            public void onSuccess(boolean isSuccess, List<OrderedProduct> orderList) {
+                orderedProductAdapterStore.setOrderList(orderList);
+            }
+
+            @Override
+            public void onFailure(boolean isFailure, Exception e) {
+
+            }
+        });
+    }
+
     public double getOrderAmount(List<OrderedProduct> orderedProductList){
         double amount=0.0;
 
@@ -104,6 +119,7 @@ public class openUserOrder extends BaseFragment implements View.OnClickListener 
             docData.put("deliveryStatus", 3);
             Log.i(TAG, "onClick: "+ order.getUserId());
             database.collection(STORE_ORDER_TABLE).document(order.getId()).update(docData);
+            Navigation.findNavController(v).navigate(R.id.openUserOrder);
         }
         if(id == R.id.confirmUserOrderButton){
             Log.i(TAG, "onClick: Order Canceled");
@@ -111,6 +127,7 @@ public class openUserOrder extends BaseFragment implements View.OnClickListener 
             docData.put("deliveryStatus", 2);
             Log.i(TAG, "onClick: "+ order.getUserId());
             database.collection(STORE_ORDER_TABLE).document(order.getId()).update(docData);
+            Navigation.findNavController(v).navigate(R.id.action_openUserOrder_to_store_navigation_dashboard);
         }
     }
 }

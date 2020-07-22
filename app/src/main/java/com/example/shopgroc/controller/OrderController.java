@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.shopgroc.model.Order;
+import com.example.shopgroc.model.OrderedProduct;
 import com.example.shopgroc.utility.SharedUtility;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.shopgroc.utility.Constant.DatabaseKey.ORDER_ORDER;
 import static com.example.shopgroc.utility.Constant.DatabaseTableKey.ORDER_TABLE;
@@ -120,6 +122,36 @@ public class OrderController {
 //            }
 //        });
 //    }
+    public void getOrderedProducts(String orderNumber, final OrderedProductCallback orderCallback) {
+        final ArrayList<OrderedProduct> orderList = new ArrayList<>();
+        database.collection(STORE_ORDER_TABLE).whereEqualTo("orderNumber",orderNumber).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for(DocumentSnapshot document : task.getResult()){
+                    if (document.exists()) {
+                        Map<String, Object> map = document.getData();
+                        for (Map.Entry<String, Object> entry : map.entrySet()) {
+                            if (entry.getKey().equals("products")) {
+                                OrderedProduct order = new OrderedProduct();
+                                HashMap<String, Object> obj = new HashMap<>(document.getData());
+                                order.setOrderedProduct(obj);
+                                order.setProductId(document.getId());
+                                orderList.add(order);
+                            }
+                        }
+                    }
+                }
+                    if (orderCallback != null) orderCallback.onSuccess(true, orderList);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+
+                    if (orderCallback != null) orderCallback.onFailure(true, task.getException());
+                }
+            }
+        });
+    }
 
     public void getUserOrders(Context context,final OrderCallback orderCallback) {
         final String userId=SharedUtility.getInstance(context).getUser().getId();
@@ -153,7 +185,7 @@ public class OrderController {
 
     public void getOrders(final OrderCallback orderCallback) {
 
-        final Task<QuerySnapshot> future =  database.collection(STORE_ORDER_TABLE).get();
+        final Task<QuerySnapshot> future =  database.collection(STORE_ORDER_TABLE).whereEqualTo("deliveryStatus",0).get();
         future.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -274,6 +306,10 @@ public class OrderController {
 
     public interface OrderCallback{
         void onSuccess(boolean isSuccess,List<Order> orderList);
+        void onFailure(boolean isFailure,Exception e);
+    }
+    public interface OrderedProductCallback{
+        void onSuccess(boolean isSuccess,List<OrderedProduct> orderList);
         void onFailure(boolean isFailure,Exception e);
     }
 

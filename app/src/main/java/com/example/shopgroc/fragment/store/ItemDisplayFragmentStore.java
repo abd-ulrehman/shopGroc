@@ -28,7 +28,7 @@ import static com.example.shopgroc.utility.Constant.DatabaseTableKey.PRODUCT_TAB
 /**
  *@author Abdul Rehman
  */
-public class itemDisplayFragmentStore extends BaseFragment implements View.OnClickListener {
+public class ItemDisplayFragmentStore extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "ItemDisplayFragmentStore";
     FirebaseFirestore database = FirebaseFirestore.getInstance();
 

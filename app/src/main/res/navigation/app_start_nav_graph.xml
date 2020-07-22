@@ -125,7 +125,7 @@
         </fragment>
         <fragment
             android:id="@+id/map_fragment"
-            android:name="com.example.shopgroc.fragment.user.place_order_fragment"
+            android:name="com.example.shopgroc.fragment.user.PlaceOrderFragment"
             android:label="fragment_map_fragment"
             tools:layout="@layout/fragment_place_order_fragment" >
             <action
@@ -134,7 +134,7 @@
         </fragment>
         <fragment
             android:id="@+id/order_History"
-            android:name="com.example.shopgroc.fragment.user.Order_History"
+            android:name="com.example.shopgroc.fragment.user.OrderHistory"
             android:label="fragment_order__history"
             tools:layout="@layout/fragment_order__history" >
             <action
@@ -157,7 +157,7 @@
         </fragment>
         <fragment
             android:id="@+id/order_Confermation"
-            android:name="com.example.shopgroc.fragment.user.Order_Confermation"
+            android:name="com.example.shopgroc.fragment.user.OrderConfirmation"
             android:label="fragment_order__confermation"
             tools:layout="@layout/fragment_order__confermation" >
             <action
@@ -201,7 +201,7 @@
         </fragment>
         <fragment
             android:id="@+id/store_navigation_orders"
-            android:name="com.example.shopgroc.fragment.store.store_order_fragment"
+            android:name="com.example.shopgroc.fragment.store.StoreOrderFragment"
             android:label="fragment_store_order_fragment"
             tools:layout="@layout/fragment_store_order_fragment" >
             <action
@@ -210,12 +210,12 @@
         </fragment>
         <fragment
             android:id="@+id/store_navigation_more"
-            android:name="com.example.shopgroc.fragment.store.store_navigation_more"
+            android:name="com.example.shopgroc.fragment.store.StoreNavigationMore"
             android:label="fragment_store_navigation_more"
             tools:layout="@layout/fragment_store_navigation_more" />
         <fragment
             android:id="@+id/openUserOrder"
-            android:name="com.example.shopgroc.fragment.store.openUserOrder"
+            android:name="com.example.shopgroc.fragment.store.OpenUserOrder"
             android:label="fragment_open_user_order"
             tools:layout="@layout/fragment_open_user_order" >
             <action
@@ -224,7 +224,7 @@
         </fragment>
         <fragment
             android:id="@+id/itemDisplayFragmentStore"
-            android:name="com.example.shopgroc.fragment.store.itemDisplayFragmentStore"
+            android:name="com.example.shopgroc.fragment.store.ItemDisplayFragmentStore"
             android:label="fragment_item_display_store"
             tools:layout="@layout/fragment_item_display_store" >
 
@@ -234,7 +234,7 @@
         </fragment>
         <fragment
             android:id="@+id/updateStoreItem2"
-            android:name="com.example.shopgroc.fragment.store.updateStoreItem"
+            android:name="com.example.shopgroc.fragment.store.UpdateStoreItem"
             android:label="fragment_update_store_item"
             tools:layout="@layout/fragment_update_store_item" >
             <action
@@ -271,7 +271,7 @@
 
         <fragment
             android:id="@+id/rider_navigation_request"
-            android:name="com.example.shopgroc.fragment.rider.rider_navigation_request"
+            android:name="com.example.shopgroc.fragment.rider.RiderNavigationRequests"
             android:label="fragment_rider_navigation_request"
             tools:layout="@layout/fragment_rider_navigation_request" >
             <action
@@ -280,13 +280,17 @@
         </fragment>
         <fragment
             android:id="@+id/rider_navigation_more"
-            android:name="com.example.shopgroc.fragment.rider.rider_navigation_more"
+            android:name="com.example.shopgroc.fragment.rider.RiderNavigationMore"
             android:label="fragment_rider_navigation_more"
             tools:layout="@layout/fragment_rider_navigation_more" />
         <fragment
             android:id="@+id/confirmOrderByRider"
             android:name="com.example.shopgroc.fragment.rider.ConfirmOrderByRider"
             android:label="fragment_confirm_order_by_rider"
-            tools:layout="@layout/fragment_confirm_order_by_rider" />
+            tools:layout="@layout/fragment_confirm_order_by_rider" >
+            <action
+                android:id="@+id/action_confirmOrderByRider_to_rider_navigation_request"
+                app:destination="@id/rider_navigation_request" />
+        </fragment>
     </navigation>
 </navigation>

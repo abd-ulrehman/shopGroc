@@ -144,6 +144,94 @@ public class ProductController {
             }
         });
     }
+    public void getProductDairy(final ProductCallbackListener productCallbackListener){
+        database.collection(PRODUCT_TABLE).whereEqualTo("productCategory" , "Dairy").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Product> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = new Product();
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        HashMap<String,Object> obj = new HashMap<>(document.getData());
+                        product.setProductMap(obj);
+                        product.setId(document.getId());
+                        list.add(product);
+                    }
+                    if (productCallbackListener!= null)productCallbackListener.onSuccess(true,list);
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                    if (productCallbackListener!=null)productCallbackListener.onFailure(true,task.getException());
+                }
+            }
+        });
+    }
+    public void getProductPersonalCare(final ProductCallbackListener productCallbackListener){
+        database.collection(PRODUCT_TABLE).whereEqualTo("productCategory" , "Personal Care").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Product> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = new Product();
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        HashMap<String,Object> obj = new HashMap<>(document.getData());
+                        product.setProductMap(obj);
+                        product.setId(document.getId());
+                        list.add(product);
+                    }
+                    if (productCallbackListener!= null)productCallbackListener.onSuccess(true,list);
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                    if (productCallbackListener!=null)productCallbackListener.onFailure(true,task.getException());
+                }
+            }
+        });
+    }
+    public void getProductCleaners(final ProductCallbackListener productCallbackListener){
+        database.collection(PRODUCT_TABLE).whereEqualTo("productCategory" , "Cleaners").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Product> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = new Product();
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        HashMap<String,Object> obj = new HashMap<>(document.getData());
+                        product.setProductMap(obj);
+                        product.setId(document.getId());
+                        list.add(product);
+                    }
+                    if (productCallbackListener!= null)productCallbackListener.onSuccess(true,list);
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                    if (productCallbackListener!=null)productCallbackListener.onFailure(true,task.getException());
+                }
+            }
+        });
+    }
+    public void getProductBakingGoods(final ProductCallbackListener productCallbackListener){
+        database.collection(PRODUCT_TABLE).whereEqualTo("productCategory" , "Dry/Baking Goods").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Product> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = new Product();
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        HashMap<String,Object> obj = new HashMap<>(document.getData());
+                        product.setProductMap(obj);
+                        product.setId(document.getId());
+                        list.add(product);
+                    }
+                    if (productCallbackListener!= null)productCallbackListener.onSuccess(true,list);
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                    if (productCallbackListener!=null)productCallbackListener.onFailure(true,task.getException());
+                }
+            }
+        });
+    }
 
 
     public void getProductDetail(String productId,Product product){

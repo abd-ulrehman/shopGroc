@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/viewPagerHeader"
+        android:layout_marginBottom="55dp"
         android:layout_marginTop="50dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,7 +84,6 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/fastFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -95,7 +95,94 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="16dp"
-                    android:text="Fast Food"
+                    android:text="Dairy"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewDairy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:scrollbars="none" />
+
+                <!--                        <include-->
+                <!--                            android:id="@+id/shimmerCategory"-->
+                <!--                            layout="@layout/item_recycler" />-->
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Personal Care"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewPersonalCare"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:scrollbars="none" />
+
+                <!--                        <include-->
+                <!--                            android:id="@+id/shimmerCategory"-->
+                <!--                            layout="@layout/item_recycler" />-->
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Cleaners"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewCleaners"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:scrollbars="none" />
+
+                <!--                        <include-->
+                <!--                            android:id="@+id/shimmerCategory"-->
+                <!--                            layout="@layout/item_recycler" />-->
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Dry/Baking Goods"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -103,14 +190,11 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/titleCategory"
+                    android:id="@+id/recyclerViewBakingGoods"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:scrollbars="none" />
 
-                <include
-                    android:id="@+id/shimmerCategory"
-                    layout="@layout/item_recycler" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

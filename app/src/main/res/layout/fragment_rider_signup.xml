@@ -10,10 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
@@ -28,7 +25,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="540dp">
+            android:layout_height="500dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -76,6 +73,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/riderEmail"
+                android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -216,15 +214,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:inputType="textPassword"
                 android:textColor="@android:color/black" />
         </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom">
 
         <Button
@@ -238,7 +237,7 @@
             android:text="Register"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
-    </RelativeLayout>
+    </LinearLayout>
 
 
     <include layout="@layout/in_progress_view"/>

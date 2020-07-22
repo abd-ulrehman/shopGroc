@@ -47,9 +47,10 @@ public class RiderLoginFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        InInt(view);
         mAuth = FirebaseAuth.getInstance();
         loginControllerRider.setLoginCallbackListenerRider(this);
+        InInt(view);
+
     }
 
     private void InInt(View view) {

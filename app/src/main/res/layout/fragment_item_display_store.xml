@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.store.itemDisplayFragmentStore">
+    tools:context=".fragment.store.ItemDisplayFragmentStore">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/itemDetails"
