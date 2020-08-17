@@ -87,6 +87,10 @@ public class StoreDashboard extends Fragment implements View.OnClickListener, Pr
 
 
         productAdapterDrinks.setClickListener(this);
+        productAdapterDairy.setClickListener(this);
+        productAdapterCleaners.setClickListener(this);
+        productAdapterPersonalCare.setClickListener(this);
+        productAdapterBakingGoods.setClickListener(this);
 
         recyclerViewBeverages.setAdapter(productAdapterBeverages);
         recyclerViewDrinks.setAdapter(productAdapterDrinks);

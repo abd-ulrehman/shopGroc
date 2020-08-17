@@ -82,6 +82,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         productAdapterBakingGoods = new ProductAdapter();
         productAdapterBeverages.setClickListener(this);
         productAdapterDrinks.setClickListener(this);
+        productAdapterDairy.setClickListener(this);
+        productAdapterCleaners.setClickListener(this);
+        productAdapterPersonalCare.setClickListener(this);
+        productAdapterBakingGoods.setClickListener(this);
         recyclerViewBeverages.setLayoutManager(linearLayoutManagerBeverages);
         recyclerViewDrinks.setLayoutManager(linearLayoutManagerDrinks);
         recyclerViewDairy.setLayoutManager(linearLayoutManagerDairy);

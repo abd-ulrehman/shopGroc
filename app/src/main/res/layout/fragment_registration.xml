@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="Phone"
+            android:hint="@string/phone_example_300xxxxxxx"
             android:singleLine="true"
             android:textColorHint="@android:color/black"
             app:boxStrokeColor="@color/colorPrimaryDark"

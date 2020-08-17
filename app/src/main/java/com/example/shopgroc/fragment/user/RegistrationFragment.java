@@ -183,7 +183,7 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onFailure(boolean isFailure, Exception e) {
-        setViewInProgress(true);
+        setViewInProgress(false);
         Log.e(TAG,"Failed to register user: "+e.getMessage());
     }
 }
